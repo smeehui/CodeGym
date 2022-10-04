@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Simple Form</title>
+    </head>
+    <style>
+        .wufoo {
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Tahoma,
+                sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        .short {
+            width: 40px;
+        }
+        .medium {
+            width: 120px;
+        }
+        .long {
+            width: 240px;
+        }
+        form {
+            border: 1 solid #bcd6ee;
+            box-shadow: 5px 5px 10px 10px #bcd6ee;
+            width: 260px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <body>
+        <form method="get" action="simpleform.html">
+            <h2 class="woofoo">Order form</h2>
+            <p class="wufoo">What would you like to buy?</p>
+            <br />
+            <select name="select" id="slc">
+                <option value="a">A</option>
+                <option value="b">B</option>
+                <option value="c">C</option>
+            </select>
+            <br />
+            <p class="wufoo">How many would you like to order?</p>
+            <br />
+            <input class="wufoo" type="radio" name="radio" id="r1" />1-$10
+            <br />
+            <input class="wufoo" type="radio" name="radio" id="r2" />2-$20
+            <br />
+            <input class="wufoo" type="radio" name="radio" id="r3" />3-$30
+            <br />
+            <br />
+            <p class="woofoo">Name <span style="color: red">*</span></p>
+            <input
+                class="medium"
+                type="text"
+                name="fname"
+                id="fname"
+                placeholder="FirstName"
+            />
+            <input
+                class="medium"
+                type="text"
+                name="lname"
+                id="lname"
+                placeholder="LastName"
+            />
+            <br />
+            <p class="woofoo">Email</p>
+            <br />
+            <input class="long" type="email" name="email" id="email" />
+            <br />
+            <p class="woofoo">Phone Number</p>
+            <input class="short" type="number" name="phone1" id="phone1" />
+            <span>-</span>
+            <input class="short" type="number" name="phone1" id="phone1" />
+            <span>-</span>
+            <input class="short" type="number" name="phone1" id="phone1" />
+            <br />
+            <input type="submit" value="Submit" />
+        </form>
+    </body>
+</html>
