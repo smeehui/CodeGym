@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=" />
+    <title>Check Negative of Positive</title>
+</head>
+
+<body></body>
+<script>
+    let num = parseInt(prompt("Enter a number", 0));
+    let isPositive = num > 0;
+    switch (isPositive) {
+        case true:
+            alert(1);
+            break;
+        case false:
+            if (num === 0) alert(0);
+            else alert(-1);
+            break;
+        default:
+            break;
+    }
+</script>
+
+</html>
