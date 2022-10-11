@@ -43,7 +43,8 @@
         margin-bottom: 4px;
     }
     
-    li span>span {
+    li span>label {
+        font-weight: normal !important;
         margin-left: 20px;
     }
     
@@ -114,10 +115,10 @@
                         </select>
                     </li>
                     <li>
-                        <label for="age" class="w-f"
+                        <label for="income" class="w-f"
                             >What is your yearly income range?</label
                         >
-                        <select name="age" id="age" style="width: 50%">
+                        <select name="income" id="income" style="width: 50%">
                             <option value="0 - $25,000">0 - $25,000</option>
                             <option value="$25,001-$50,000">
                                 $25,001-$50,000
@@ -129,36 +130,34 @@
                         </select>
                     </li>
                     <li>
-                        <label for="gender" class="w-f">Gender Identity</label>
+                        <label class="w-f">Gender Identity</label>
+                    <span class="w-f">
+                            <input type="radio" name="gender" id="male" /><label
+                                for="male"
+                                >Male</label
+                            >
+                        </span>
                     <span class="w-f">
                             <input
                                 type="radio"
                                 name="gender"
-                                id="gender"
-                            /><span>Male</span>
-                    </span>
+                                id="fmale"
+                            /><label for="fmale">Female</label>
+                        </span>
+                    <span class="w-f">
+                            <input type="radio" name="gender" id="bio" /><label
+                                for="bio"
+                                >Nonbinary</label
+                            >
+                        </span>
                     <span class="w-f">
                             <input
                                 type="radio"
                                 name="gender"
-                                id="gender"
-                            /><span>Female</span>
-                    </span>
-                    <span class="w-f">
-                            <input
-                                type="radio"
-                                name="gender"
-                                id="gender"
-                            /><span>Nonbinary</span>
-                    </span>
-                    <span class="w-f">
-                            <input
-                                type="radio"
-                                name="gender"
-                                id="gender"
-                            /><span>Other</span>
-                    <br />
-                    <span>
+                                id="other"
+                            /><label for="other">Other</label>
+                            <br />
+                            <span>
                                 <input
                                     style="margin-top: 4px"
                                     type="text"
@@ -168,40 +167,42 @@
                     </span>
                 </li>
                 <li>
-                    <label for="product" class="w-f">Which of the following products have your purchased
+                    <label class="w-f">Which of the following products have your purchased
                             in the last 2 months. Please check all that apply.
                         </label>
                     <span class="w-f">
                             <input
                                 type="checkbox"
                                 name="product"
-                                id="product"
-                            /><span>Product 1</span>
-                    </span>
+                                id="pro1"
+                            /><label for="pro1">Product 1</label>
+                        </span>
                     <span class="w-f">
                             <input
                                 type="checkbox"
                                 name="product"
-                                id="product"
-                            /><span>Product 2</span>
-                    </span>
+                                id="pro2"
+                            /><label for="pro2">Product 2</label>
+                        </span>
                     <span class="w-f">
                             <input
                                 type="checkbox"
                                 name="product"
-                                id="product"
-                            /><span>Product 3</span>
-                    </span>
+                                id="pro3"
+                            /><label for="pro3">Product 3</label>
+                        </span>
                 </li>
                 <li>
                     <label for="money" class="w-f">What would you pay for the new product?</label
                         >
                         <span
                             ><span>$</span>
-                            <input style="width: 60px" type="text" /><span
+                            <input style="width: 60px" type="number" /><span
                                 >-</span
                             ><span
-                                ><input style="width: 40px" type="text" /></span
+                                ><input
+                                    style="width: 40px"
+                                    type="number" /></span
                         ></span>
                         <br />
                         <span style="padding-left: 20px"
@@ -217,26 +218,26 @@
                             <input
                                 type="radio"
                                 name="frequency"
-                                id="frequency"
-                            /><span>Daily</span>
-                        </span>
-                        <span class="w-f">
+                                id="fre1"
+                            /><label for="fre1">Daily</label>
+                    </span>
+                    <span class="w-f">
                             <input
                                 type="radio"
                                 name="frequency"
-                                id="frequency"
-                            /><span>Weekly</span>
+                                id="fre2"
+                            /><label for="fre2">Weekly</label>
                         </span>
-                        <span class="w-f">
+                    <span class="w-f">
                             <input
                                 type="radio"
                                 name="frequency"
-                                id="frequency"
-                            /><span>Monthly</span>
+                                id="fre3"
+                            /><label for="fre3">Monthly</label>
                         </span>
-                    </li>
-                    <li>
-                        <label for="feature" class="w-f">
+                </li>
+                <li>
+                    <label for="feature" class="w-f">
                             What features would you like to see in the new
                             product.</label
                         >
@@ -262,7 +263,11 @@
                                 <th>Strongly Agree</th>
                             </tr>
                             <tr>
-                                <td>Our products are priced fairly.</td>
+                                <td>
+                                    <label for="agr"
+                                        >Our products are priced fairly.</label
+                                    >
+                                </td>
                                 <td>
                                     <input type="radio" name="agr" id="" /><span
                                         >1</span
@@ -285,7 +290,11 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Our products are high quality.</td>
+                                <td>
+                                    <label for="agr1"
+                                        >Our products are high quality.</label
+                                    >
+                                </td>
                                 <td>
                                     <input
                                         type="radio"
@@ -317,45 +326,32 @@
                             </tr>
                             <tr>
                                 <td>
-                                    You would recommend our product to a friend
-                                    or coworker.
-                                </td>
-                                <td>
-                                    <input
-                                        type="radio"
-                                        name="agr2"
-                                        id=""
-                                    /><span>1</span>
-                                </td>
-                                <td>
-                                    <input
-                                        type="radio"
-                                        name="agr2"
-                                        id=""
-                                    /><span>2</span>
-                                </td>
-                                <td>
-                                    <input
-                                        type="radio"
-                                        name="agr2"
-                                        id=""
-                                    /><span>3</span>
-                                </td>
-                                <td>
-                                    <input
-                                        type="radio"
-                                        name="agr2"
-                                        id=""
-                                    /><span>4</span>
-                                </td>
-                            </tr>
-                        </table>
-                    </li>
-                    <li>
-                        <input type="submit" value="Submit" />
-                    </li>
-                </ul>
-            </form>
-        </div>
-    </body>
+                                    <label for="agr2">
+                                        You would recommend our product to a
+                                        friend or coworker.
+                                    </label>
+                    </td>
+                    <td>
+                        <input type="radio" name="agr2" id="" /><span>1</span>
+                    </td>
+                    <td>
+                        <input type="radio" name="agr2" id="" /><span>2</span>
+                    </td>
+                    <td>
+                        <input type="radio" name="agr2" id="" /><span>3</span>
+                    </td>
+                    <td>
+                        <input type="radio" name="agr2" id="" /><span>4</span>
+                    </td>
+                    </tr>
+                    </table>
+                </li>
+                <li>
+                    <input type="submit" value="Submit" />
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+
 </html>
