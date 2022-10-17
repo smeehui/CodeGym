@@ -29,7 +29,6 @@
     }
     
     #no {
-        position: fixed;
         width: 180px;
         right: 320px;
     }
@@ -54,6 +53,7 @@
             Math.random() *
             document.getElementsByTagName("body")[0].clientHeight,
         );
+        no.style.position = "fixed";
         no.style.top = randomY + "px";
         no.style.left = randomX + "px";
     };
