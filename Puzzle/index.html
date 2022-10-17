@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puzzle</title>
+</head>
+<style>
+    table {
+        margin-left: auto;
+        margin-right: auto;
+        width: 450px;
+    }
+    
+    table>tr {
+        height: 100px;
+    }
+    
+    img {
+        height: 100px;
+        display: block;
+        width: 100%;
+    }
+    
+    .win {
+        box-shadow: 0 0 10px 10px red;
+    }
+</style>
+
+<body>
+    <table id="tbl" style="border-collapse: collapse; border: 1px solid white">
+        <tbody>
+            <tr>
+                <td>
+                    <img data-id="1" src="./images/1.1.jpg" alt="im1" data-check="1" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img data-id="2" src="./images/2.2.jpg" alt="im2" data-check="2" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img data-id="3" src="./images/3.3.jpg" alt="im3" data-check="3" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img data-id="4" src="./images/2.4.jpg" alt="im4" data-check="2" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img data-id="5" src="./images/1.5.jpg" alt="im5" data-check="1" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+    const images = Array.from(document.getElementsByTagName("img"));
+    images.forEach((img) => {
+        img.onclick = click;
+    });
+
+    let nums = [1, 2, 3];
+    let currIndex = 0;
+    let rand;
+
+    function click(e) {
+        let newIndex;
+        do {
+            newIndex = Math.floor(Math.random() * nums.length);
+        } while (newIndex === currIndex);
+        currIndex = newIndex;
+        rand = nums[currIndex];
+        e.target.src = `./images/${rand}.${e.target.dataset.id}.jpg`;
+        e.target.dataset.check = rand;
+        check();
+    }
+
+    function check() {
+        const isWin = images.every(
+            (image) => image.dataset.check === images[0].dataset.check,
+        );
+        tbl.classList.toggle("win", isWin);
+    }
+</script>
+
+</html>
