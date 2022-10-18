@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nested Loop</title>
+    <style>
+        tbody tr td {
+            border: 1px solid #000;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <table style="border-collapse: collapse">
+        <tbody></tbody>
+    </table>
+</body>
+<script>
+    let trs = "";
+    let tds = "";
+    for (let i = 1; i < 11; i++) {
+        for (let j = 1; j < 11; j++) {
+            trs += `<td >${i * j}</td>`;
+        }
+        trs += `<tr>${tds}</tr>`;
+    }
+    document.getElementsByTagName("table")[0].innerHTML = trs;
+</script>
+
+</html>
