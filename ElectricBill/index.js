@@ -36,10 +36,15 @@ function printRs(kWh) {
     kWh = Math.ceil(kWh);
     let bill = (billCalc(kWh) * (10 / 100) + billCalc(kWh)) * 1000;
     console.log(
-        bill.toLocaleString("vi-VN", {
-            style: "currency",
-            currency: "VND",
-        }),
+        `Số tiền cần trả với số kWh: ${kWh} một tháng là ${bill.toLocaleString(
+            "vi-VN",
+            {
+                style: "currency",
+                currency: "VND",
+            },
+        )}`,
     );
 }
+
+// Số tiền với 500kWh
 printRs(500);
