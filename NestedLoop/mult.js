@@ -1,9 +1,9 @@
 let trs = "";
 
-for (let i = 2; i <= 9; i++) {
+for (let i = 1; i <= 10; i++) {
     trs += "<tr> ";
-    for (let j = 1; j <= 10; j++) {
-        trs += `<td>${i} x ${j} = ${i * j}</td>`;
+    for (let j = 2; j <= 9; j++) {
+        trs += `<td>${j} x ${i} = ${i * j}</td>`;
     }
     trs += "</tr>";
 }
