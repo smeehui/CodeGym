@@ -4,11 +4,18 @@
     const sumInt = () => {
         let count = 0;
         let result = 0;
+        let n = 7;
+        let isDivisible = true;
         while (count < 30) {
-            if (count % 7 == 0) {
-                result += count;
+            isDivisible = false;
+            if (n % 7 == 0) {
+                isDivisible = true;
             }
-            count++;
+            if (isDivisible) {
+                result += n;
+                count++;
+            }
+            n++;
         }
         message.innerText = result;
     };

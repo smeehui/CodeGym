@@ -1,0 +1,27 @@
+<input type="number" placeholder="Enter loan amount" id="loanVl" />
+<input type="number" placeholder="Enter monts" id="monthsVl" />
+<input type="number" placeholder="Enter rate" id="rateVl" />
+<button id="calc">Calc</button>
+<h1 id="message"></h1>
+<script>
+    calc.onclick = () => {
+        let loan = Number(loanVl.value);
+        let months = Number(monthsVl.value);
+        let rate = Number(rateVl.value) / 100;
+        let count = 1;
+        let fLoan;
+        let mid = loan;
+        do {
+            mid = calcLoan(mid, rate);
+            fLoan = mid;
+            count++;
+        } while (count <= months);
+        message.innerText = fLoan.toLocaleString("vi-VN", {
+            style: "currency",
+            currency: "VND",
+        });
+    };
+    const calcLoan = (loan, rate) => {
+        return loan + loan * rate;
+    };
+</script>
