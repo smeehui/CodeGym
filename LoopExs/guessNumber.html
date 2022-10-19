@@ -1,0 +1,20 @@
+<button id="play">Play</button> <button id="replay">Replay</button>
+<script>
+    play.onclick = () => {
+        let startNum = Number(prompt("Enter start Num:"));
+        let endNum = Number(prompt("Enter end Num:"));
+        if (startNum > endNum) return;
+        for (let i = 0; i < 3; i++) {
+            let guessNum = Number(prompt(`Enter guess Number ${i} time:`));
+            let rand = Math.floor(
+                Math.random() * (endNum - startNum) + startNum,
+            );
+            if (guessNum === rand) {
+                alert("Right number");
+                break;
+            }
+        }
+    };
+
+    replay.onclick = () => window.location.reload();
+</script>

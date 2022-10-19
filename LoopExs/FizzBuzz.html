@@ -1,0 +1,23 @@
+<button onclick="printInt()">Print</button>
+<div id="message"></div>
+<script>
+    const printInt = () => {
+        let count = 1;
+        let fizz = "Fizz";
+        let buzz = "Buzz";
+        while (count <= 100) {
+            let string = "";
+            string =
+                count % 3 === 0 && count % 5 === 0
+                    ? fizz + buzz
+                    : count % 3 === 0
+                    ? fizz
+                    : count % 5 === 0
+                    ? buzz
+                    : count;
+            message.innerHTML += string + "<br/>";
+
+            count++;
+        }
+    };
+</script>

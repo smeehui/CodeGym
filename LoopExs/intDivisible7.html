@@ -1,0 +1,15 @@
+<button id="btn" onclick="sumInt()">Print</button>
+<h1 id="message"></h1>
+<script>
+    const sumInt = () => {
+        let count = 0;
+        let result = 0;
+        while (count < 30) {
+            if (count % 7 == 0) {
+                result += count;
+            }
+            count++;
+        }
+        message.innerText = result;
+    };
+</script>
