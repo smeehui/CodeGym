@@ -8,13 +8,13 @@
         while (count <= 100) {
             let string = "";
             string =
-                count % 3 === 0 && count % 5 === 0
-                    ? fizz + buzz
-                    : count % 3 === 0
-                    ? fizz
-                    : count % 5 === 0
-                    ? buzz
-                    : count;
+                count % 3 === 0 && count % 5 === 0 ?
+                fizz + buzz :
+                count % 3 === 0 ?
+                fizz :
+                count % 5 === 0 ?
+                buzz :
+                count;
             message.innerHTML += string + "<br/>";
 
             count++;
