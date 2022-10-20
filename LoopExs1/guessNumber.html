@@ -6,7 +6,7 @@
         if (startNum > endNum) return;
         let rand = Math.floor(Math.random() * (endNum - startNum) + startNum);
         for (let i = 0; i < 3; i++) {
-            let guessNum = Number(prompt(`Enter guess Number ${i} time:`));
+            let guessNum = Number(prompt(`Enter guess Number ${i + 1} time:`));
             if (guessNum > rand) {
                 alert("Enter lower number");
             } else if (guessNum < rand) {
@@ -15,6 +15,9 @@
             if (guessNum === rand) {
                 alert("Right number");
                 break;
+            }
+            if (i === 2) {
+                alert("Out of turn");
             }
         }
     };
