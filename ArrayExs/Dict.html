@@ -1,0 +1,17 @@
+<input type="text" placeholder="English" name="" id="textInp" />
+<button id="btn">Translate</button>
+<p id="message"></p>
+<script>
+    let eng = ["banana", "apple", "orange", "pen", "pencil", "book"];
+    let vie = ["chuối", "táo", "cam", "bút", "bút chì", "sách"];
+
+    btn.onclick = () => {
+        const text = textInp.value;
+        for (let i = 0; i < vie.length; i++) {
+            if (text === eng[i]) {
+                message.innerText = vie[i];
+                break;
+            }
+        }
+    };
+</script>
