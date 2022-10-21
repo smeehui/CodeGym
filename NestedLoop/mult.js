@@ -7,4 +7,4 @@ for (let i = 1; i <= 10; i++) {
     }
     trs += "</tr>";
 }
-document.getElementsByTagName("tbody")[0].innerHTML = trs;
+document.getElementsByTagName("tbody")[0].innerHTML += trs;
