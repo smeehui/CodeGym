@@ -24,10 +24,19 @@
     </div>
 </body>
 <script>
+    const string = "I LOVE YOU SO MUCH, MAN! ";
+    const arrStr = string.split("");
     let count = 0;
-    textArea.onkeydown = () => {
-        count += 1;
-        textArea.value = "a";
+    textArea.onkeydown = (e) => {
+        if (e.key !== "Backspace") {
+            e.preventDefault();
+            textArea.value += arrStr[count++];
+            count = count === arrStr.length ? 0 : count;
+        } else if (textArea.value === "") {
+            count = 0;
+        } else {
+            count--;
+        }
     };
 </script>
 
