@@ -1,0 +1,67 @@
+<input type="number" id="inp" placeholder="Enter length of each side" />
+<button id="btn">Print</button>
+<pre id="tableOutput" style="font-size: 2rem"></pre>
+<p>1. Tính tổng các số chẵn trong ma trận</p>
+<p id="message1"></p>
+<p>2. Tính tổng các số chẵn trong chéo chính</p>
+<p id="message2"></p>
+<p>3. Tính tổng các giá trị trên đường chéo phụ</p>
+<p id="message3"></p>
+<p>6. Hiển trị ma trận tam giác dưới</p>
+<p id="message4" style="font-size: 1.5rem; font-weight: 700"></p>
+<p>6. Hiển trị ma trận tam giác trên</p>
+<p id="message5" style="font-size: 1.5rem; font-weight: 700"></p>
+<script>
+    btn.onclick = function () {
+        let size = Number(inp.value);
+        let bigArr = new Array(size);
+
+        let row = "";
+        let max = 90;
+        let min = 10;
+        for (let i = 0; i < bigArr.length; i++) {
+            bigArr[i] = new Array(size);
+        }
+        for (let i = 0; i < bigArr.length; i++) {
+            for (let j = 0; j < bigArr[i].length; j++) {
+                bigArr[i][j] = Math.floor(
+                    Math.random() * (max - min + 1) + min,
+                );
+                row += bigArr[i][j] + " ";
+            }
+            row += "</br>";
+        }
+        tableOutput.innerHTML = row;
+        let sumEvens = 0;
+        let sumMainCross = 0;
+        let sumSubCross = 0;
+        let triDownRow = "";
+        let triUpRow = "";
+        for (let i = 0; i < bigArr.length; i++) {
+            for (let j = 0; j < bigArr[i].length; j++) {
+                //   Sum evens
+                if (bigArr[i][j] % 2 === 0) {
+                    sumEvens += bigArr[i][j];
+                }
+                //  Main cross
+                if (i === j) {
+                    sumMainCross += bigArr[i][j];
+                }
+                if (j <= i) {
+                    triDownRow += bigArr[i][j] + " ";
+                }
+                if (j >= i) {
+                    triUpRow += bigArr[i][j] + " ";
+                }
+            }
+            triDownRow += "</br>";
+            triUpRow += "</br>";
+            sumSubCross += bigArr[i][bigArr.length - 1 - i];
+        }
+        message1.innerText = sumEvens;
+        message2.innerText = sumMainCross;
+        message3.innerText = sumSubCross;
+        message4.innerHTML = triDownRow;
+        message5.innerHTML = triUpRow;
+    };
+</script>
