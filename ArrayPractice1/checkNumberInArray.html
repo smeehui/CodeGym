@@ -1,0 +1,21 @@
+<h3 contenteditable="true">Numbers: <span id="numStr"></span></h3>
+<input type="number" placeholder="Enter a number" id="input" />
+<h4 id="message"></h4>
+<button id="btn">Print</button>
+<script>
+    const numArr = new Array(-1, 2, 3, 5, -87, 31, -99, 12, -3, 8);
+    numStr.innerText = numArr;
+    btn.onclick = () => {
+        const nums = numStr.innerText.split(",");
+        const newNum = Number(input.value);
+        let i = 0;
+        message.innerText = `${newNum} is not in the Array`;
+        while (i < nums.length) {
+            if (nums[i] == newNum) {
+                message.innerText = `${newNum} is in the Array`;
+                break;
+            }
+            i++;
+        }
+    };
+</script>

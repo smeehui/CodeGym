@@ -1,0 +1,26 @@
+<h3 contenteditable="true">Numbers:</h3>
+<h4>a: <span id="a"></span></h4>
+<h4>b: <span id="b"></span></h4>
+<h4>c: <span id="c"></span></h4>
+<h4 id="message"></h4>
+<button id="btn">Print</button>
+<script>
+    let aArr = [];
+    let bArr = [];
+    let cArr = [];
+    for (let i = 0; i < 20; i++) {
+        if (i < 10) {
+            aArr[i] = Math.floor(Math.random() * (500 + 1000) - 1000);
+            bArr[i] = Math.floor(Math.random() * (500 + 1000) - 1000);
+        }
+        cArr[i] = Math.floor(Math.random() * (500 + 1000) - 1000);
+    }
+    a.innerText = aArr;
+    b.innerText = bArr;
+    c.innerText = cArr;
+    btn.onclick = () => {
+        let newArr = cArr.concat(aArr);
+        newArr = newArr.concat(bArr);
+        message.innerText = newArr + `  (${newArr.length} numbers)`;
+    };
+</script>
