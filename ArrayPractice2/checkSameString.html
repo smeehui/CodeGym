@@ -1,0 +1,15 @@
+<input type="text" id="inp1" placeholder="String1..." />
+<input type="text" id="inp2" placeholder="String2..." />
+<h4 id="message"></h4>
+<button id="btn">Print</button>
+<script>
+    btn.onclick = () => {
+        const input1 = inp1.value;
+        const input2 = inp2.value;
+        if (input1 === input2) {
+            message.innerText = "Same";
+            return;
+        }
+        message.innerText = "Not same";
+    };
+</script>
