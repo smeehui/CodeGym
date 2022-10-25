@@ -1,0 +1,12 @@
+<script>
+    const num1 = Number(prompt("Enter number :"));
+    const num2 = Number(prompt("Enter number :"));
+    function swap(a, b) {
+        let temp = a;
+        a = b;
+        b = temp;
+        return [a, b];
+    }
+    let [a, b] = swap(num1, num2);
+    alert(`Before: a= ${num1}; b= ${num2} After: a = ${a}; b= ${b}`);
+</script>
