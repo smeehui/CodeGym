@@ -1,16 +1,30 @@
+<style>
+    * {
+        margin: 4px;
+        padding: 0;
+    }
+    .bold {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+</style>
+
 <input type="number" id="inp" placeholder="Enter length of each side" />
 <button id="btn">Print</button>
-<pre id="tableOutput" style="font-size: 2rem"></pre>
-<p>1. Tính tổng các số chẵn trong ma trận</p>
-<p id="message1"></p>
-<p>2. Tính tổng các số chẵn trong chéo chính</p>
-<p id="message2"></p>
-<p>3. Tính tổng các giá trị trên đường chéo phụ</p>
-<p id="message3"></p>
-<p>6. Hiển trị ma trận tam giác dưới</p>
-<p id="message4" style="font-size: 1.5rem; font-weight: 700"></p>
-<p>6. Hiển trị ma trận tam giác trên</p>
-<p id="message5" style="font-size: 1.5rem; font-weight: 700"></p>
+<p id="tableOutput" style="font-size: 2rem"></p>
+<div style="display: inline-table">
+    <h3>1. Tính tổng các số chẵn trong ma trận</h3>
+    <p id="message1" class="bold"></p>
+    <h3>2. Tính tổng các số chẵn trong chéo chính</h3>
+    <p id="message2" class="bold"></p>
+    <h3>3. Tính tổng các giá trị trên đường chéo phụ</h3>
+    <p id="message3" class="bold"></p>
+    <h3>6. Hiển trị ma trận tam giác dưới</h3>
+    <p id="message4" class="bold"></p>
+    <h3>6. Hiển trị ma trận tam giác trên</h3>
+    <p id="message5" class="bold"></p>
+</div>
+
 <script>
     btn.onclick = function () {
         let size = Number(inp.value);
@@ -27,7 +41,7 @@
                 bigArr[i][j] = Math.floor(
                     Math.random() * (max - min + 1) + min,
                 );
-                row += bigArr[i][j] + " ";
+                row += bigArr[i][j] + "  ";
             }
             row += "</br>";
         }
@@ -37,26 +51,33 @@
         let sumSubCross = 0;
         let triDownRow = "";
         let triUpRow = "";
+        let space = "";
         for (let i = 0; i < bigArr.length; i++) {
             for (let j = 0; j < bigArr[i].length; j++) {
                 //   Sum evens
                 if (bigArr[i][j] % 2 === 0) {
                     sumEvens += bigArr[i][j];
                 }
-                //  Main cross
-                if (i === j) {
+                //  Main cross even
+                if (i === j && bigArr[i][j] % 2 === 0) {
                     sumMainCross += bigArr[i][j];
                 }
+                // Down triangle
                 if (j <= i) {
                     triDownRow += bigArr[i][j] + " ";
+                }
+                // Up triangle
+                if (i !== 0 && j < i) {
+                    triUpRow += "&nbsp&nbsp&nbsp&nbsp&nbsp";
                 }
                 if (j >= i) {
                     triUpRow += bigArr[i][j] + " ";
                 }
             }
+            // Sub sub cross even
+            sumSubCross += bigArr[i][bigArr.length - 1 - i];
             triDownRow += "</br>";
             triUpRow += "</br>";
-            sumSubCross += bigArr[i][bigArr.length - 1 - i];
         }
         message1.innerText = sumEvens;
         message2.innerText = sumMainCross;
