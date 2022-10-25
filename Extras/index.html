@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Add Items</title>
+    </head>
+    <body>
+        <div>
+            <input type="text" id="inpName" />
+            <button style="cursor: pointer" id="add">Add</button>
+        </div>
+        <h3>Danh sách thành viên CLB bóng đá Codegym Huế</h3>
+        <ol id="list"></ol>
+    </body>
+    <script>
+        const people = [];
+        add.onclick = () => {
+            if (inpName.value.trim()) {
+                people.push(inpName.value);
+                render(people);
+            }
+            inpName.focus();
+            inpName.value = "";
+        };
+        function render(people) {
+            const htmls = people.map((person) => {
+                return `<li>${person}</li>`;
+            });
+            list.innerHTML = htmls.join("");
+        }
+        render(people);
+    </script>
+</html>

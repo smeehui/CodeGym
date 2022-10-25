@@ -3,13 +3,39 @@
 <h4 id="message"></h4>
 <button id="btn">Print</button>
 <script>
+    let checked = [];
+    let checkArr = [];
     btn.onclick = () => {
-        const input1 = inp1.value;
-        const input2 = inp2.value;
-        if (input1 === input2) {
-            message.innerText = "Same";
-            return;
+        let isSame = true;
+        const strArr1 = inp1.value.split("");
+        const strArr2 = inp2.value.split("");
+        for (let i = 0; i < strArr1.length; i++) {
+            check(strArr1[i]);
         }
-        message.innerText = "Not same";
+        console.log(checkArr);
+        for (let i = 0; i < strArr1.length; i++) {
+            if (checkArr[i] !== strArr1[i]) {
+                isSame = false;
+                break;
+            }
+        }
+        message.innerText = isSame
+            ? "The two strings are equal"
+            : "The two strings are not equal";
+        checked = [];
+        checkArr = [];
+    };
+    const check = (elm) => {
+        const strArr1 = inp1.value.split("");
+        const strArr2 = inp2.value.split("");
+        if (strArr1.length !== strArr2.length) return;
+        for (let i = 0; i < strArr2.length; i++) {
+            if (elm === strArr2[i] && !checked.includes(strArr2[i])) {
+                checkArr.push(elm);
+            }
+            if (elm === strArr2[i]) {
+                checked.push(strArr2[i]);
+            }
+        }
     };
 </script>
