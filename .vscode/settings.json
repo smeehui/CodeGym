@@ -1,3 +1,4 @@
 {
-    "editor.fontFamily": "'Roboto Mono', monospace"
+    "editor.fontFamily": "'Roboto Mono', monospace",
+    "cSpell.ignoreWords": ["htmls"]
 }

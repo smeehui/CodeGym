@@ -14,13 +14,19 @@
             </caption>
             <thead>
                 <tr>
-                    <td colspan="2"><input type="text" /></td>
-                    <td><button>Add</button></td>
+                    <td colspan="2">
+                        <input
+                            type="text"
+                            style="width: 90%; height: 30px"
+                            id="prodName"
+                        />
+                    </td>
+                    <td><button id="addBtn" class="btn">Add</button></td>
                 </tr>
-                <tr>
+                <tr style="background-color: rgba(63, 143, 63, 0.781)">
                     <th>Product Name</th>
                     <th></th>
-                    <th></th>
+                    <th id="numberProd" style="color: rgb(99, 17, 17)"></th>
                 </tr>
             </thead>
             <tbody id="listProds"></tbody>
