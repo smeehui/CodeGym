@@ -17,13 +17,27 @@
 // Các chức năng không thể hoạt động nếu điện thoại chưa bật.
 
 class Mobile {
-    constructor(battery, typingMsg, inbox, sent, isOn) {
-        if (battery >= 0 && battery <= 100) {
-            this.battery = battery;
+    constructor(name) {
+        this.battery = Math.floor(Math.random() * 101);
+        this.name = name;
+        this.typingMsg = "";
+        this.inboxMsgs = [{ add: "", message: "" }];
+        this.sentMsgs = [{ add: "", message: "" }];
+        this.isOn = isOn;
+    }
+    checkStatus() {
+        if (this.isOn) {
+            console.log(`Phone is powered on`);
+        } else {
+            console.log(`Phone is powered off`);
         }
-        this.typingMsg = typingMsg;
-        this.inboxMsgs = inboxMsgs;
-        this.sentMsgs = sentMsgs;
+    }
+    turnOn() {
+        this.isOn = true;
+        console.log("Turned on phone");
+    }
+    turnOff() {
+        this.isOn == false;
+        console.log("Turned off phone");
     }
 }
-Msgs;
