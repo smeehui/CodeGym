@@ -1,6 +1,13 @@
-let num1 = [1, 2, 3, 4, 5];
-let num2 = num1;
-num2 = num1.slice(0, num1.length);
-num2.splice(1, 1);
-console.log(num2);
-console.log(num1);
+// Thiết kế hàm tên create Array, tao mảng 1 chiều có
+// kích cỡ 10 ptu và các giá trị ngẫu nhiên [10-50] hiển thị ra console
+
+// function createArray(size, min, max) {
+//     let arr = new Array(size);
+//     for (let i = 0; i < arr.length; i++) {
+//         arr[i] = Math.floor(Math.random() * (max - min + 1) + min);
+//     }
+//     console.log(arr);
+//     return arr;
+// }
+
+// createArray(20, 50, 500);
