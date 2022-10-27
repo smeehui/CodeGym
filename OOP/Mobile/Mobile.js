@@ -21,23 +21,115 @@ class Mobile {
         this.battery = Math.floor(Math.random() * 101);
         this.name = name;
         this.typingMsg = "";
-        this.inboxMsgs = [{ add: "", message: "" }];
-        this.sentMsgs = [{ add: "", message: "" }];
-        this.isOn = isOn;
+        this.isOn = false;
+        this.inboxMsgs = [];
+        this.sentMsgs = [];
+    }
+    getSentMsgs() {
+        return this.sentMsgs;
+    }
+    getInboxMsgs() {
+        return this.inboxMsgs;
     }
     checkStatus() {
-        if (this.isOn) {
-            console.log(`Phone is powered on`);
-        } else {
-            console.log(`Phone is powered off`);
+        if (!this.isOn) {
+            console.log(`${this.name} is powered off`);
+            return;
+        }
+        if (this.battery < 0) {
+            this.turnOff();
+            console.log(`${this.name} is low battery`);
         }
     }
     turnOn() {
-        this.isOn = true;
-        console.log("Turned on phone");
+        if (this.battery > 0) {
+            if (this.isOn) {
+                console.log(`${this.name} is already powered on`);
+            } else {
+                this.isOn = true;
+                console.log(`Turned on ${this.name}`);
+            }
+        } else {
+            console.log(`Low battery`);
+        }
     }
     turnOff() {
-        this.isOn == false;
-        console.log("Turned off phone");
+        if (this.isOn) {
+            this.isOn = false;
+            console.log(`Turned off ${this.name}`);
+        } else {
+            console.log(`${this.name} is already powered off`);
+        }
+    }
+    charge() {
+        if (!this.isOn) {
+            this.turnOn();
+            console.log("Phone is charging");
+            this.battery += 5;
+            console.log(`Phone battery is ${this.battery}`);
+            if (this.battery > 100) {
+                console.log("Phone is fully charged");
+            }
+        } else {
+            console.log("Phone is charging");
+            this.battery += 5;
+            console.log(`Phone battery is ${this.battery}`);
+        }
+    }
+    typeMsg(message) {
+        if (this.isOn) {
+            this.checkStatus();
+            this.typingMsg += message;
+            this.battery -= 10;
+            this.checkStatus();
+        } else {
+            console.log(`${this.name} is powered off`);
+        }
+    }
+    sendMsg(address) {
+        if (this.isOn) {
+            this.checkStatus();
+            console.log(`${this.name}: Message is sent to ${address.name}`);
+            address.receiveMsg(this.typingMsg, this.name);
+            this.sentMsgs.push({
+                sentTo: address.name,
+                message: this.typingMsg,
+            });
+            this.typingMsg = "";
+            this.battery -= 10;
+            this.checkStatus();
+        } else {
+            console.log(`${this.name} is powered off`);
+        }
+    }
+    receiveMsg(message, sentPhone) {
+        if (this.isOn) {
+            this.checkStatus();
+            console.log(
+                `${this.name}: A new message is received from ${sentPhone}:`,
+            );
+            console.log(message);
+            this.inboxMsgs.push({ receivedFrom: sentPhone, message: message });
+            this.battery -= 10;
+            this.checkStatus();
+        } else {
+            console.log(`${this.name} is powered off`);
+        }
     }
 }
+let iPhone = new Mobile("iPhone");
+let nokia = new Mobile("nokia");
+iPhone.turnOn();
+nokia.turnOn();
+iPhone.typeMsg("Ăn cơm chưa");
+iPhone.sendMsg(nokia);
+iPhone.typeMsg("Anh nhớ em");
+iPhone.sendMsg(nokia);
+iPhone.checkStatus();
+let timerID = setTimeout(() => {
+    nokia.typeMsg("Em ăn rồi nè");
+    nokia.sendMsg(iPhone);
+    nokia.typeMsg("Em cũng nhớ anh");
+    nokia.sendMsg(iPhone);
+    return clearTimeout(timerID);
+}, 5000);
