@@ -6,7 +6,9 @@ const DEFAULT_SPEED = 1;
 const DEFAULT_POSITION_X = 300;
 const DEFAULT_POSITION_Y = 580;
 const GAMEBOARD_WIDTH = myCv.clientWidth;
-const GAMEBOARD_HEIGHT = window.innerHeight;
+const GAMEBOARD_HEIGHT = myCv.clientHeight;
+const SQUARE_OBST = "square";
+const RECTANGL_OBST = "rect";
 class Car {
     constructor(posX, posY, speed) {
         this.posX = posX;
@@ -15,7 +17,7 @@ class Car {
         this.speed = speed;
     }
     buildImage() {
-        this.carImg = this.orientation + ".png";
+        this.Img = this.orientation + ".png";
     }
     display(ctx) {
         var image = new Image();
@@ -24,12 +26,9 @@ class Car {
         image.onload = function () {
             ctx.drawImage(image, xPosition, yPosition);
         };
-        image.src = "./image/" + this.carImg;
-        ctx.save();
-        console.dir(image);
+        image.src = "./images/" + this.Img;
     }
     move(orient) {
-        console.log(`X: ${this.posX},Y: ${this.posY}`);
         switch (orient) {
             case UP:
                 this.posY -= this.speed;
@@ -46,25 +45,45 @@ class Car {
             default:
                 break;
         }
+        if (this.posX < 0) {
+            this.posX = GAMEBOARD_WIDTH;
+        }
     }
     turn(orient) {
-        console.log(`X: ${this.posX},Y: ${this.posY}`);
-        // this.posX -= 38 * (1 / 4);
-        // this.posY += 66 * (3 / 4);
-
-        // switch (orient) {
-        //     case UP:
-        //     case DOWN:
-        //         this.posX += 18;
-        //         break;
-        //     case LEFT:
-        //     case RIGHT:
-        //         this.posY += 43;
-        //         break;
-        //     default:
-        //         break;
-        // }
-        // this.posY -= 86 / 2;
+        switch (orient) {
+            case UP:
+            case DOWN:
+                this.posX += (86 - 43) / 2;
+                this.posY -= (86 - 43) / 2;
+                break;
+            case LEFT:
+            case RIGHT:
+                this.posX -= (86 - 43) / 2;
+                this.posY += (86 - 43) / 2;
+                break;
+            default:
+                break;
+        }
+    }
+}
+class Obstacle extends Car {
+    constructor(posX) {
+        super();
+        this.posY = 0;
+        this.shape = SQUARE_OBST;
+        this.posX = posX;
+    }
+    buildObstacle() {
+        this.Img = this.shape + ".png";
+    }
+    fall() {
+        var intID = setInterval(() => {
+            this.posY += 20;
+            gameBoard.render();
+            if (this.posY > GAMEBOARD_HEIGHT) {
+                clearInterval(intID);
+            }
+        }, 200);
     }
 }
 class Board {
@@ -75,15 +94,44 @@ class Board {
             DEFAULT_POSITION_Y,
             DEFAULT_SPEED,
         );
-        // this.car = new Car(0, 0, 1);
+        this.amoutOfObstacles = 3;
     }
     start() {
         this.car.buildImage();
         this.car.display(this.ctx);
+        this.createObst();
+        this.fallObstacle();
     }
     render() {
+        this.showObstacles();
         this.ctx.clearRect(0, 0, GAMEBOARD_WIDTH, GAMEBOARD_HEIGHT);
         this.car.display(this.ctx);
+    }
+    randomPosition(min, max, buffer, maxcount) {
+        let randomBetween = (min, max) =>
+            Math.floor(Math.random() * (max - min + 1) + min);
+
+        function addLeaves(f, min, max, arr = []) {
+            if (arr.length < maxcount) {
+                arr.push(f);
+                if (min + buffer < f - buffer)
+                    addLeaves(
+                        randomBetween(min + buffer, f - buffer),
+                        min,
+                        f,
+                        arr,
+                    );
+                if (f + buffer < max - buffer)
+                    addLeaves(
+                        randomBetween(f + buffer, max - buffer),
+                        f,
+                        max,
+                        arr,
+                    );
+            }
+            return arr;
+        }
+        return addLeaves(randomBetween(min, max), min - buffer, max + buffer);
     }
     moveCar(event) {
         let orient = UP;
@@ -91,6 +139,7 @@ class Board {
             case 17:
                 this.car.speed =
                     this.car.speed === 1 ? 10 : this.car.speed === 10 ? 20 : 1;
+                return;
             case 38:
                 orient = UP;
                 break;
@@ -104,16 +153,40 @@ class Board {
                 orient = RIGHT;
                 break;
             default:
-                break;
+                return;
         }
         if (this.car.orientation === orient) {
             this.car.move(orient);
+            this.car.buildImage();
+            this.render();
         } else {
             this.car.orientation = orient;
             this.car.turn(orient);
+            this.car.buildImage();
+            this.render();
         }
-        this.car.buildImage();
-        this.render();
+    }
+    createObst() {
+        this.obstacles = [];
+        let positions = this.randomPosition(0, GAMEBOARD_WIDTH, 40, 10);
+        console.log(positions);
+        for (let i = 0; i < this.amoutOfObstacles; i++) {
+            this.obstacles[i] = new Obstacle(positions[i]);
+        }
+        for (let i = 0; i < this.amoutOfObstacles; i++) {
+            this.obstacles[i].buildObstacle();
+        }
+        console.log(this.obstacles);
+    }
+    showObstacles() {
+        for (let i = 0; i < this.amoutOfObstacles; i++) {
+            this.obstacles[i].display(this.ctx);
+        }
+    }
+    fallObstacle() {
+        for (let i = 0; i < this.amoutOfObstacles; i++) {
+            this.obstacles[i].fall();
+        }
     }
 }
 const ctx = myCv.getContext("2d");
