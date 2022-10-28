@@ -78,12 +78,12 @@ class Obstacle extends Car {
     }
     fall() {
         var intID = setInterval(() => {
-            this.posY += 20;
-            gameBoard.render();
+            this.posY += 1;
+            // gameBoard.render();
             if (this.posY > GAMEBOARD_HEIGHT) {
                 clearInterval(intID);
             }
-        }, 200);
+        }, 10);
     }
 }
 class Board {
@@ -94,7 +94,7 @@ class Board {
             DEFAULT_POSITION_Y,
             DEFAULT_SPEED,
         );
-        this.amoutOfObstacles = 3;
+        this.amoutOfObstacles = 10;
     }
     start() {
         this.car.buildImage();
@@ -186,6 +186,13 @@ class Board {
     fallObstacle() {
         for (let i = 0; i < this.amoutOfObstacles; i++) {
             this.obstacles[i].fall();
+        }
+    }
+    checkWin(posX, posY, intID) {
+        if (posY > this.car.posY) {
+            console.log(posX, posY, this.car.posX, this.car.posY);
+            alert("YOU DIED");
+            clearInterval(intID);
         }
     }
 }
