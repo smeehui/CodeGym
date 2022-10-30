@@ -3,20 +3,22 @@ class Apple {
         this.weight = 10;
     }
     decrease() {
-        this.weight--;
+        this.setWeight(this.weight - 1);
         this.isEmpty();
     }
     isEmpty() {
         if (this.weight === 0) {
-            console.log("Done");
             return true;
         } else {
-            console.log(this.weight + " weight remained");
+            this.getWeight();
             return false;
         }
     }
     getWeight() {
         return this.weight;
+    }
+    setWeight(weight) {
+        this.weight = weight;
     }
 }
 
@@ -28,10 +30,9 @@ class Human {
     }
     isMale() {
         if (this.gender === true) {
-            console.log("Male");
             return true;
         } else {
-            console.log("Female");
+            return false;
         }
     }
     setGender(gender) {
@@ -56,7 +57,7 @@ class Human {
         this.weight = weight;
     }
     eat(apple) {
-        console.log(`${this.name}: eated`);
+        this.setWeight(this.weight + 1);
         apple.decrease();
     }
 }
@@ -65,5 +66,11 @@ const eva = new Human("eva", false, 50);
 const apple = new Apple();
 while (apple.weight > 0) {
     adam.eat(apple);
+    document.write(
+        `Adam ate apple,<br> adam weight increase 1: ${adam.weight} unit(s), <br> apple weight is ${apple.weight} unit(s) remaining <br> <br><br>`,
+    );
     eva.eat(apple);
+    document.write(
+        `eva ate apple,<br> eva weight increase 1: ${eva.weight} unit(s), <br> apple weight is ${apple.weight} unit(s) remaining <br> <br><br>`,
+    );
 }
