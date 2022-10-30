@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Switch and Bulb</title>
+        <style>
+            #bulb-con {
+                margin-left: auto;
+                margin-right: auto;
+                width: 50px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                position: relative;
+            }
+            .bulb {
+                width: 50px;
+                height: 50px;
+                background-color: #000;
+                border-radius: 30px 30px 25px 25px;
+                transition: all 0.3s linear;
+            }
+            .dock {
+                position: absolute;
+                z-index: -1;
+                top: 46px;
+                background-color: rgb(90, 90, 90);
+                width: 30px;
+                height: 30px;
+            }
+            .active {
+                background-color: yellow;
+                box-shadow: 0 0 20px 20px rgb(255, 255, 90);
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <label for="switch-btn"
+                ><button id="switchBtn">Switch</button></label
+            >
+            <input type="checkbox" name="switch" id="switchChbox" hidden />
+            <button id="conctBtn">Connect</button>
+        </div>
+        <div id="bulb-con">
+            <div class="bulb"></div>
+            <div class="dock"></div>
+        </div>
+    </body>
+    <script>
+        class Switch {
+            constructor() {
+                this.status = false;
+            }
+            connectToBulb(bulb) {
+                this.bulb = bulb;
+                console.log("connected");
+            }
+            switchOff() {
+                this.status = false;
+                if (this.bulb) {
+                    this.bulb.turnOff();
+                }
+            }
+            switchOn() {
+                this.status = true;
+                if (this.bulb) {
+                    this.bulb.turnOn();
+                }
+            }
+        }
+        class Bulb {
+            constructor() {
+                this.status = false;
+            }
+            turnOff() {
+                this.status = false;
+            }
+            turnOn() {
+                this.status = true;
+            }
+        }
+        let switch1 = new Switch();
+        switchBtn.onclick = () => {
+            if (switch1.bulb) {
+                if (switch1.status) {
+                    switch1.switchOff();
+                } else {
+                    switch1.switchOn();
+                }
+                render(switch1.bulb.status);
+            } else alert("Bulb is not connected");
+        };
+        // Connect to bulb
+        conctBtn.onclick = () => {
+            let bulb = new Bulb();
+            switch1.connectToBulb(bulb);
+            alert("Connected");
+        };
+        // Show light
+        function render(status) {
+            document.querySelector(".bulb").classList.toggle("active", status);
+        }
+    </script>
+</html>
