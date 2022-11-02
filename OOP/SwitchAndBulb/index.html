@@ -47,6 +47,8 @@
         <div id="bulb-con">
             <div class="bulb"></div>
             <div class="dock"></div>
+            <br />
+            <p id="message" style="color: red; width: 100px"></p>
         </div>
     </body>
     <script>
@@ -91,13 +93,13 @@
                     switch1.switchOn();
                 }
                 render(switch1.bulb.status);
-            } else alert("Bulb is not connected");
+            } else message.innerText = "Bulb is not connected";
         };
         // Connect to bulb
         conctBtn.onclick = () => {
             let bulb = new Bulb();
             switch1.connectToBulb(bulb);
-            alert("Connected");
+            message.innerText = "Connected";
         };
         // Show light
         function render(status) {

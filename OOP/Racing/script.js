@@ -79,7 +79,6 @@ class Obstacle extends Car {
     fall() {
         var intID = setInterval(() => {
             this.posY += 1;
-            // gameBoard.render();
             if (this.posY > GAMEBOARD_HEIGHT) {
                 clearInterval(intID);
             }
@@ -99,7 +98,7 @@ class Board {
     start() {
         this.car.buildImage();
         this.car.display(this.ctx);
-        this.createObst();
+        this.createObs();
         this.fallObstacle();
     }
     render() {
@@ -166,7 +165,7 @@ class Board {
             this.render();
         }
     }
-    createObst() {
+    createObs() {
         this.obstacles = [];
         let positions = this.randomPosition(0, GAMEBOARD_WIDTH, 40, 10);
         console.log(positions);

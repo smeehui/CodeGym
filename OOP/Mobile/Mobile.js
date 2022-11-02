@@ -89,8 +89,7 @@ class Mobile {
     sendMsg(address) {
         if (this.isOn) {
             this.checkStatus();
-            console.log(`${this.name}: Message is sent to ${address.name}`);
-            address.receiveMsg(this.typingMsg, this.name);
+            viettel(this, this.typingMsg, address);
             this.sentMsgs.push({
                 sentTo: address.name,
                 message: this.typingMsg,
@@ -106,10 +105,13 @@ class Mobile {
         if (this.isOn) {
             this.checkStatus();
             console.log(
-                `${this.name}: A new message is received from ${sentPhone}:`,
+                `${this.name}: A new message is received from ${sentPhone.name}:`,
             );
             console.log(message);
-            this.inboxMsgs.push({ receivedFrom: sentPhone, message: message });
+            this.inboxMsgs.push({
+                receivedFrom: sentPhone.name,
+                message: message,
+            });
             this.battery -= 10;
             this.checkStatus();
         } else {
@@ -117,8 +119,16 @@ class Mobile {
         }
     }
 }
+function viettel(from, message, to) {
+    setTimeout(() => {
+        to.receiveMsg(message, from);
+    }, 2000);
+    console.log(`${from.name}: Message is sent to ${to.name}`);
+}
 let iPhone = new Mobile("iPhone");
 let nokia = new Mobile("nokia");
+console.log(iPhone.battery);
+console.log(nokia.battery);
 iPhone.turnOn();
 nokia.turnOn();
 iPhone.typeMsg("Ăn cơm chưa");
@@ -131,5 +141,7 @@ let timerID = setTimeout(() => {
     nokia.sendMsg(iPhone);
     nokia.typeMsg("Em cũng nhớ anh");
     nokia.sendMsg(iPhone);
+    console.log(iPhone);
+    console.log(nokia);
     return clearTimeout(timerID);
 }, 5000);
