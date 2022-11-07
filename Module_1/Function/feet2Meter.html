@@ -1,0 +1,15 @@
+<input id="meter" type="number" placeholder="Enter meter" />
+<input type="text" disabled id="resultF" />
+<button onclick="convertToFeet(Number(meter.value))" id="btnf">Convert</button>
+<hr />
+<input id="feet" type="number" placeholder="Enter feet" />
+<input type="text" disabled id="resultM" />
+<button onclick="convertToMeter(Number(feet.value))" id="btnm">Convert</button>
+<script>
+    const convertToFeet = (meter) => {
+        resultF.value = 3.279 * meter + " feet";
+    };
+    const convertToMeter = (feet) => {
+        resultM.value = 0.305 * feet + " meter";
+    };
+</script>

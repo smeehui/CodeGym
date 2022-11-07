@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day count</title>
+</head>
+
+<body>
+    <input id="month" type="text" placeholder="Nhập tháng:" />
+    <button onclick="count()">Count day</button>
+    <h1 id="message"></h1>
+</body>
+<script>
+    let inpMonth;
+    month.oninput = (e) => {
+        inpMonth = Number(e.target.value);
+    };
+    const count = () => {
+        switch (inpMonth) {
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                message.innerText = `Tháng ${inpMonth} có 31 ngày`;
+                break;
+            case 2:
+                message.innerText = `Tháng 2 có 28 hoặc 29 ngày`;
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                message.innerText = `Tháng ${inpMonth} có 30 ngày`;
+                break;
+            default:
+                message.style.color = "red";
+                message.innerText = `Nhập sai tháng`;
+                break;
+        }
+    };
+</script>
+
+</html>

@@ -1,0 +1,20 @@
+<button onclick="printFibo()">Print</button>
+<div id="message"></div>
+<script>
+    function printFibo() {
+        let count = 0;
+        let n = 0;
+        let sum = 0;
+        while (count < 20) {
+            sum += calcFibo(count);
+            count++;
+        }
+        message.innerText = sum;
+    }
+
+    function calcFibo(count) {
+        if (count === 0) return 0;
+        if (count === 1) return 1;
+        return calcFibo(count - 1) + calcFibo(count - 2);
+    }
+</script>

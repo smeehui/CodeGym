@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Type Slow</title>
+    </head>
+
+    <body>
+        <div
+            class="con"
+            style="
+                width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+                display: flex;
+                flex-direction: column;
+            "
+        >
+            <head>
+                Type Slowly
+            </head>
+            <textarea name="text" id="textArea" cols="30" rows="10"></textarea>
+        </div>
+    </body>
+    <script>
+        const string = "I LOVE YOU SO MUCH, MAN! ";
+        const arrStr = string.split("");
+        let count = 0;
+        let i = 0;
+        textArea.onkeydown = (e) => {
+            i++;
+            // count = count < 0 ? 0 : count;
+            if (arrStr[count]) {
+                if (e.key !== "Backspace") {
+                    e.preventDefault();
+                    textArea.value += arrStr[count];
+                    count++;
+                    count = count === arrStr.length ? 0 : count;
+                } else {
+                    i++;
+                    count--;
+                    console.log(count, i, arrStr.length);
+                }
+            } else {
+                count++;
+            }
+            if (textArea.value === "") {
+                count = 0;
+            }
+        };
+    </script>
+</html>

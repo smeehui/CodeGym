@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Survey</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    .w-f {
+        display: inline-block;
+        width: 100%;
+    }
+    
+    form header {
+        display: inline-block;
+        margin: 0 0 5px 0;
+        padding: 0 1% 1.1em 1%;
+        border-bottom: 1px dotted #ccc;
+    }
+    
+    form li {
+        margin: 0;
+        padding: 6px 1% 9px 1%;
+        clear: both;
+    }
+    
+    li label {
+        font-weight: 800;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+    
+    li>span {
+        margin-top: 4px;
+        margin-bottom: 4px;
+    }
+    
+    li span>label {
+        font-weight: normal !important;
+        margin-left: 20px;
+    }
+    
+    li:hover {
+        background-color: #ffffcf;
+    }
+    
+    table {
+        font-size: 13px;
+        display: inline-table !important;
+        border-collapse: collapse;
+    }
+    
+    table th {
+        height: 34px;
+        border: 1px solid #dedede;
+    }
+    
+    table th+th {
+        width: 15%;
+        text-align: center;
+    }
+    
+    table td {
+        border: 1px solid #dedede;
+    }
+    
+    table td+td {
+        padding: 4px;
+        text-align: center;
+    }
+    
+    table td+td>input {
+        width: 100%;
+    }
+    
+    tr:nth-child(odd) {
+        background-color: #e6e6e6;
+    }
+    
+    tr+tr:hover {
+        background-color: #ffffcf;
+    }
+    
+    .none-hov:hover {
+        background-color: transparent;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <form action="" class="w-f">
+            <header class="w-f">
+                <h2>Market Research Survey</h2>
+                <p>
+                    Please take a few moments to complete this satisfaction survey.
+                </p>
+            </header>
+            <ul style="list-style-type: none">
+                <li>
+                    <label for="age" class="w-f">What is your age range?</label
+                        >
+                        <select name="age" id="age" style="width: 50%">
+                            <option value="18-24">18-24</option>
+                            <option value="25-34">25-34</option>
+                            <option value="35-50">35-50</option>
+                            <option value="50+">50+</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="income" class="w-f"
+                            >What is your yearly income range?</label
+                        >
+                        <select name="income" id="income" style="width: 50%">
+                            <option value="0 - $25,000">0 - $25,000</option>
+                            <option value="$25,001-$50,000">
+                                $25,001-$50,000
+                            </option>
+                            <option value="$50,001-$100,000">
+                                $50,001-$100,000
+                            </option>
+                            <option value="$100,000">$100,000</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label class="w-f">Gender Identity</label>
+                    <span class="w-f">
+                            <input type="radio" name="gender" id="male" /><label
+                                for="male"
+                                >Male</label
+                            >
+                        </span>
+                    <span class="w-f">
+                            <input
+                                type="radio"
+                                name="gender"
+                                id="fmale"
+                            /><label for="fmale">Female</label>
+                        </span>
+                    <span class="w-f">
+                            <input type="radio" name="gender" id="bio" /><label
+                                for="bio"
+                                >Nonbinary</label
+                            >
+                        </span>
+                    <span class="w-f">
+                            <input
+                                type="radio"
+                                name="gender"
+                                id="other"
+                            /><label for="other">Other</label>
+                            <br />
+                            <span>
+                                <input
+                                    style="margin-top: 4px"
+                                    type="text"
+                                    name=""
+                                    id=""
+                            /></span>
+                    </span>
+                </li>
+                <li>
+                    <label class="w-f">Which of the following products have your purchased
+                            in the last 2 months. Please check all that apply.
+                        </label>
+                    <span class="w-f">
+                            <input
+                                type="checkbox"
+                                name="product"
+                                id="pro1"
+                            /><label for="pro1">Product 1</label>
+                        </span>
+                    <span class="w-f">
+                            <input
+                                type="checkbox"
+                                name="product"
+                                id="pro2"
+                            /><label for="pro2">Product 2</label>
+                        </span>
+                    <span class="w-f">
+                            <input
+                                type="checkbox"
+                                name="product"
+                                id="pro3"
+                            /><label for="pro3">Product 3</label>
+                        </span>
+                </li>
+                <li>
+                    <label for="money" class="w-f">What would you pay for the new product?</label
+                        >
+                        <span
+                            ><span>$</span>
+                            <input style="width: 60px" type="number" /><span
+                                >-</span
+                            ><span
+                                ><input
+                                    style="width: 40px"
+                                    type="number" /></span
+                        ></span>
+                        <br />
+                        <span style="padding-left: 20px"
+                            ><span>Dollar</span
+                            ><span style="padding-left: 40px">Cent</span></span
+                        >
+                    </li>
+                    <li>
+                        <label for="frequency" class="w-f"
+                            >How often would you use our new product?</label
+                        >
+                        <span class="w-f">
+                            <input
+                                type="radio"
+                                name="frequency"
+                                id="fre1"
+                            /><label for="fre1">Daily</label>
+                    </span>
+                    <span class="w-f">
+                            <input
+                                type="radio"
+                                name="frequency"
+                                id="fre2"
+                            /><label for="fre2">Weekly</label>
+                        </span>
+                    <span class="w-f">
+                            <input
+                                type="radio"
+                                name="frequency"
+                                id="fre3"
+                            /><label for="fre3">Monthly</label>
+                        </span>
+                </li>
+                <li>
+                    <label for="feature" class="w-f">
+                            What features would you like to see in the new
+                            product.</label
+                        >
+                        <textarea
+                            class="w-f"
+                            name="feature"
+                            id="feature"
+                            cols="30"
+                            rows="5"
+                        ></textarea>
+                    </li>
+                    <li class="none-hov">
+                        <label for="feature" class="w-f">
+                            Please rate your level of agreement with the
+                            following statements.</label
+                        >
+                        <table class="w-f">
+                            <tr>
+                                <th></th>
+                                <th>Strongly Disagree</th>
+                                <th>Disagree</th>
+                                <th>Agree</th>
+                                <th>Strongly Agree</th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="agr"
+                                        >Our products are priced fairly.</label
+                                    >
+                                </td>
+                                <td>
+                                    <input type="radio" name="agr" id="" /><span
+                                        >1</span
+                                    >
+                                </td>
+                                <td>
+                                    <input type="radio" name="agr" id="" /><span
+                                        >2</span
+                                    >
+                                </td>
+                                <td>
+                                    <input type="radio" name="agr" id="" /><span
+                                        >3</span
+                                    >
+                                </td>
+                                <td>
+                                    <input type="radio" name="agr" id="" /><span
+                                        >4</span
+                                    >
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="agr1"
+                                        >Our products are high quality.</label
+                                    >
+                                </td>
+                                <td>
+                                    <input
+                                        type="radio"
+                                        name="agr1"
+                                        id=""
+                                    /><span>1</span>
+                                </td>
+                                <td>
+                                    <input
+                                        type="radio"
+                                        name="agr1"
+                                        id=""
+                                    /><span>2</span>
+                                </td>
+                                <td>
+                                    <input
+                                        type="radio"
+                                        name="agr1"
+                                        id=""
+                                    /><span>3</span>
+                                </td>
+                                <td>
+                                    <input
+                                        type="radio"
+                                        name="agr1"
+                                        id=""
+                                    /><span>4</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="agr2">
+                                        You would recommend our product to a
+                                        friend or coworker.
+                                    </label>
+                    </td>
+                    <td>
+                        <input type="radio" name="agr2" id="" /><span>1</span>
+                    </td>
+                    <td>
+                        <input type="radio" name="agr2" id="" /><span>2</span>
+                    </td>
+                    <td>
+                        <input type="radio" name="agr2" id="" /><span>3</span>
+                    </td>
+                    <td>
+                        <input type="radio" name="agr2" id="" /><span>4</span>
+                    </td>
+                    </tr>
+                    </table>
+                </li>
+                <li>
+                    <input type="submit" value="Submit" />
+                </li>
+            </ul>
+        </form>
+    </div>
+</body>
+
+</html>

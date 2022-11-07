@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar</title>
+</head>
+<style>
+    .container {
+        width: 520px;
+        height: fit-content;
+        padding: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        box-shadow: 0 0 10px 10px rgb(150, 149, 149);
+    }
+    
+    table {
+        margin-left: auto;
+        margin-right: auto;
+        font-weight: 600;
+        width: 500px;
+        border-collapse: collapse;
+    }
+    
+    div header {
+        color: #0433ff;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+    }
+    
+    table th {
+        color: white;
+        background-color: orange;
+        border: 1px solid transparent;
+    }
+    
+    table th+th {
+        border-left: 2px solid rgb(255, 255, 255);
+    }
+    
+    .non-b {
+        border: 1px solid transparent;
+        border-bottom: 2px solid #aeaeae;
+    }
+    
+    table th:first-child {
+        background-color: #ff2600;
+    }
+    
+    table th:last-child {
+        background-color: #0433ff;
+    }
+    
+    tr td:first-child {
+        color: #ff2600;
+    }
+    
+    tr td:last-child {
+        color: #0433ff;
+    }
+    
+    td {
+        width: 71.43px;
+        height: fit-content;
+        line-height: 30px;
+        text-align: center;
+        position: relative;
+        border: 2px solid #aeaeae;
+    }
+    
+    .e {
+        font-size: 0.6rem;
+        position: absolute;
+        top: 10px;
+        left: 42px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <header>
+            <h2 style="margin-top: 0">Tháng 10 - October</h2>
+        </header>
+        <table>
+            <tr>
+                <th>C.Nhật</th>
+                <th>T.Hai</th>
+                <th>T.Ba</th>
+                <th>T.Tư</th>
+                <th>T.Năm</th>
+                <th>T.Sáu</th>
+                <th>T.Bảy</th>
+            </tr>
+            <tr>
+                <td class="non-b">Sun</td>
+                <td class="non-b">Mon</td>
+                <td class="non-b">Tue</td>
+                <td class="non-b">Wen</td>
+                <td class="non-b">Thu</td>
+                <td class="non-b">Fri</td>
+                <td class="non-b">Sat</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <span class="w">1</span>
+                    <span class="e">13</span>
+                </td>
+                <td>
+                    <span class="w">2</span>
+                    <span class="e">14</span>
+                </td>
+                <td>
+                    <span class="w">3</span>
+                    <span class="e">15</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="w">4</span>
+                    <span class="e">16</span>
+                </td>
+                <td>
+                    <span class="w">5</span>
+                    <span class="e">17</span>
+                </td>
+                <td>
+                    <span class="w">6</span>
+                    <span class="e">18</span>
+                </td>
+                <td>
+                    <span class="w">7</span>
+                    <span class="e">19</span>
+                </td>
+                <td>
+                    <span class="w">8</span>
+                    <span class="e">20</span>
+                </td>
+                <td>
+                    <span class="w">9</span>
+                    <span class="e">22</span>
+                </td>
+                <td>
+                    <span class="w">10</span>
+                    <span class="e">22</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="w">11</span>
+                    <span class="e">23</span>
+                </td>
+                <td>
+                    <span class="w">12</span>
+                    <span class="e">24</span>
+                </td>
+                <td>
+                    <span class="w">13</span>
+                    <span class="e">25</span>
+                </td>
+                <td>
+                    <span class="w">14</span>
+                    <span class="e">26</span>
+                </td>
+                <td>
+                    <span class="w">15</span>
+                    <span class="e">27</span>
+                </td>
+                <td>
+                    <span class="w">16</span>
+                    <span class="e">28</span>
+                </td>
+                <td>
+                    <span class="w">17</span>
+                    <span class="e">29</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="w">18</span>
+                    <span class="e">1.9</span>
+                </td>
+                <td>
+                    <span class="w">19</span>
+                    <span class="e">2</span>
+                </td>
+                <td>
+                    <span class="w">20</span>
+                    <span class="e">3</span>
+                </td>
+                <td>
+                    <span class="w">21</span>
+                    <span class="e">4</span>
+                </td>
+                <td>
+                    <span class="w">22</span>
+                    <span class="e">5</span>
+                </td>
+                <td>
+                    <span class="w">23</span>
+                    <span class="e">6</span>
+                </td>
+                <td>
+                    <span class="w">24</span>
+                    <span class="e">7</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="w">25</span>
+                    <span class="e">8</span>
+                </td>
+                <td>
+                    <span class="w">26</span>
+                    <span class="e">9</span>
+                </td>
+                <td>
+                    <span class="w">27</span>
+                    <span class="e">10</span>
+                </td>
+                <td>
+                    <span class="w">28</span>
+                    <span class="e">11</span>
+                </td>
+                <td>
+                    <span class="w">29</span>
+                    <span class="e">12</span>
+                </td>
+                <td>
+                    <span class="w">30</span>
+                    <span class="e">13</span>
+                </td>
+                <td>
+                    <span class="w">31</span>
+                    <span class="e">14</span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

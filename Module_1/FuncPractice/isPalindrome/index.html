@@ -1,0 +1,16 @@
+<script>
+    const string = prompt("Enter string").trim();
+    const isPalindrome = (string) => {
+        let count = 0;
+        let isPalindrome = true;
+        while (count < string.length - count) {
+            if (string[count] !== string[string.length - count - 1]) {
+                isPalindrome = false;
+                break;
+            }
+            count++;
+        }
+        return isPalindrome;
+    };
+    alert(`${string} is ${isPalindrome(string) ? "" : "not"} palindrome`);
+</script>

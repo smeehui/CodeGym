@@ -1,0 +1,17 @@
+<input type="text" name="" id="texts" /> <button id="btn">Insert</button>
+<p id="message"></p>
+<script>
+    btn.onclick = () => {
+        const textArr = texts.value.split("");
+        let i = 0;
+        while (i < textArr.length) {
+            if (textArr[i] === textArr[i].toUpperCase()) {
+                textArr[i] = textArr[i].toLowerCase();
+            } else if (textArr[i] === textArr[i].toLowerCase()) {
+                textArr[i] = textArr[i].toUpperCase();
+            }
+            i++;
+        }
+        message.innerText = textArr.join("");
+    };
+</script>

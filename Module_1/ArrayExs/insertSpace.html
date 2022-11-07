@@ -1,0 +1,15 @@
+<input type="number" name="" id="nums" /> <button id="btn">Insert</button>
+<p id="message"></p>
+<script>
+    btn.onclick = () => {
+        const numbers = String(nums.value).split("");
+        let i = 0;
+        while (i < numbers.length) {
+            if (numbers[i - 1] % 2 === 0 && numbers[i] % 2 === 0) {
+                numbers.splice(i, 0, "-");
+            }
+            i++;
+        }
+        message.innerText = numbers.join("");
+    };
+</script>

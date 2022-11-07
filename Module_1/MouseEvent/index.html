@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mouse Event</title>
+</head>
+
+<body>
+    <img id="ball" src="https://james.codegym.vn/pluginfile.php/64921/mod_assign/intro/1.png" alt="A ball" srcset="" />
+    <p>Click butotn bellow to move the image to the right</p>
+    <button id="btn">Click me</button>
+</body>
+<script>
+    let img = null;
+    const btn = document.getElementById("btn");
+    img = document.getElementById("ball");
+    const init = () => {
+        img = document.getElementById("ball");
+        img.style.position = "relative";
+        img.style.left = 0 + "px";
+    };
+    const moveToRight = () => {
+        img.style.left = parseInt(img.style.left) + 10 + "px";
+    };
+    btn.onclick = moveToRight;
+    window.onload = init;
+</script>
+
+</html>

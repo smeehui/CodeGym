@@ -1,0 +1,22 @@
+<input type="number" name="number" id="inpNum" />
+<button id="btn" onclick="isPrime(Number(inpNum.value))">Print</button>
+<h2 id="message"></h2>
+<script>
+    const isPrime = (num) => {
+        if (num < 0 || num === 0 || num === 1) {
+            message.innerText = `${num} is not a prime number`;
+            return;
+        }
+        if (num === 2) {
+            message.innerText = `${num} is a prime number`;
+            return;
+        }
+        for (let i = 2; i < num; i++) {
+            if (num % i === 0) {
+                message.innerText = `${num} is not a prime number`;
+                return;
+            }
+            message.innerText = `${num} is a prime number`;
+        }
+    };
+</script>

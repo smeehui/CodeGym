@@ -1,0 +1,23 @@
+<button onclick="printRect()">Print</button>
+<pre id="message"></pre>
+<script>
+    const printRect = () => {
+        var line = "";
+        for (let i = 0; i < 5; i++) {
+            let long = "";
+            let space = "";
+            for (let j = 0; j < 20; j++) {
+                long += "*";
+                if (i >= 1 && i < 4) {
+                    if (j >= 1 && j < 19) {
+                        space += " ";
+                    }
+                    long = `*${space}*`;
+                }
+            }
+            line += long + "<br/>";
+        }
+        console.log(line);
+        message.innerHTML = line;
+    };
+</script>

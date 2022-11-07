@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Good Fast Cheap</title>
+</head>
+<style>
+    table {
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 2 rem;
+    }
+</style>
+
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td>
+                    <input id="good" type="checkbox" />
+                </td>
+                <td>Good</td>
+            </tr>
+            <tr>
+                <td><input id="fast" type="checkbox" /></td>
+                <td>Fast</td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="cheap" type="checkbox" />
+                </td>
+                <td>Cheap</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+    good.onclick = () => {
+        if (fast.checked && cheap.checked) {
+            cheap.checked = false;
+        }
+    };
+    fast.onclick = () => {
+        if (good.checked && cheap.checked) {
+            good.checked = false;
+        }
+    };
+    cheap.onclick = () => {
+        if (fast.checked && good.checked) {
+            fast.checked = false;
+        }
+    };
+</script>
+
+</html>

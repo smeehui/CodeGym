@@ -1,0 +1,10 @@
+<h3 contenteditable="true">Array: <span id="numStr"></span></h3>
+<h4 id="message"></h4>
+<button id="btn">Print</button>
+<script>
+    const numArr = new Array(1, 2, "c", 5, "s", 31, "z", "b", 3, 8);
+    numStr.innerText = numArr;
+    btn.onclick = () => {
+        message.innerText = "Result is: " + numArr.reverse();
+    };
+</script>
