@@ -4,7 +4,7 @@ import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class Main {
+public class UsdToVnd {
     public static void main(String[] args) {
         System.out.println("Nhập vào số tiền USD cần đổi");
         Scanner sc = new Scanner(System.in);

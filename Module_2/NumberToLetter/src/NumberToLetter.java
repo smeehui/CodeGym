@@ -5,10 +5,11 @@ public class NumberToLetter {
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập vào số cần đọc:");
         int number = sc.nextInt();
-        if (number >= 0 && number < 10) System.out.println(lowerThanTen(number));
+        if (number<0 || number>=1000) System.out.println("Ngoài phạm vi đọc");
+        else if (number == 0) System.out.println("zero");
+        else if (number > 0 && number < 10) System.out.println(lowerThanTen(number));
         else if (number < 20) System.out.println(lowerThanTwenty(number % 10));
-        else if (number<1000) System.out.println(higherThanTwenty(number));
-        else System.out.println("Out of range");
+        else  System.out.println(higherThanTwenty(number));
     }
 
     private static String higherThanTwenty(int number) {
@@ -18,7 +19,7 @@ public class NumberToLetter {
             return words;
         }
         int hundreds = number / 100;
-        String hundredsLetter = lowerThanTen(hundreds) + " hundreds";
+        String hundredsLetter = lowerThanTen(hundreds) + " hundreds and ";
         int absoluteTens = (number % 100);
         String tensLetter;
         if (absoluteTens < 10) {
@@ -26,8 +27,7 @@ public class NumberToLetter {
         } else if (absoluteTens < 20) {
             tensLetter = lowerThanTwenty(absoluteTens % 10);
         } else tensLetter = lowerThanHundreds(absoluteTens);
-//        String ones = lowerThanTen((number % 100) % 10);
-        words = hundredsLetter + " " + tensLetter;
+        words = hundredsLetter + tensLetter;
         return words;
     }
 
@@ -37,10 +37,9 @@ public class NumberToLetter {
 
     private static String tensHigherThan20(int absoluteTens) {
         return switch (absoluteTens) {
-            case 0 -> "and";
             case 2 -> "twenty";
-            case 3 -> "thirdty";
-            case 4 -> "fourty";
+            case 3 -> "thirty";
+            case 4 -> "forty";
             case 5 -> "fifty";
             case 6 -> "sixty";
             case 7 -> "seventy";
@@ -55,7 +54,7 @@ public class NumberToLetter {
             case 0 -> "ten";
             case 1 -> "eleven";
             case 2 -> "twelve";
-            case 3 -> "thirdteen";
+            case 3 -> "thirteen";
             case 4 -> "fourteen";
             case 5 -> "fifteen";
             case 6 -> "sixteen";
