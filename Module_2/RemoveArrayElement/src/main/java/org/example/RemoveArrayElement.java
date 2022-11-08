@@ -34,7 +34,7 @@ public class RemoveArrayElement {
                array[j]=array[j+1];
            }
        }catch (Exception e){
-
+           System.out.println("Handle: nothing");
        }
         return array;
     }
