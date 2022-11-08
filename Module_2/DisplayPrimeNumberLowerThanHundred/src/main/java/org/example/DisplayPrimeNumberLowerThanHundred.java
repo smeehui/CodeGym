@@ -7,7 +7,6 @@ import java.util.List;
 public class DisplayPrimeNumberLowerThanHundred {
     public static void main(String[] args) {
         System.out.println("In ra 20 số nguyên tố đầu tiên");
-        int count = 0;
         var isPrime = false;
         Integer[] result = new Integer[]{};
         List<Integer> rsList = new ArrayList<>(Arrays.asList(result));
