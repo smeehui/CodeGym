@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class RemoveArrayElement {
     public static void main(String[] args) {
-        int [] array = {1,2,3,4,5,6,7,8,9,0};
+        int [] array = {1,2,3};
         System.out.println("Nhập giá trị phần tử muốn xoá:");
         Scanner sc = new Scanner(System.in);
         int value = sc.nextInt();
@@ -29,13 +29,10 @@ public class RemoveArrayElement {
     }
 
     private static int[] removeElement(int i, int[] array) {
-       try {
-           for (int j =i;j<array.length;j++){
-               array[j]=array[j+1];
+           for (int j =i;j<=array.length-1;j++){
+               if(i==array.length-1) array[i]=0;
+               else array[j]=array[j+1];
            }
-       }catch (Exception e){
-           System.out.println("Handle: nothing");
-       }
         return array;
     }
 }
