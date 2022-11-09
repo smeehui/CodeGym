@@ -49,11 +49,14 @@ public class QuadraticEquation {
     }
 
     String getEquation() {
-        return "Input equation: " + (this.getA() != 0.0 ? this.getA() + "x^2 " : "") + (this.getB() != 0.0 ? this.getB() + "x " : "+") + (this.getC() != 0.0 ? String.valueOf(this.getC()) : "") + " = 0";
+        return "Input equation: " + (this.getA() != 0.0 ? this.getA() + "x^2 " : "")
+                + (this.getB() != 0.0 ? this.getB() + "x " : "+")
+                + (this.getC() != 0.0 ? String.valueOf(this.getC()) : "")
+                + " = 0";
     }
 
     String calculateRoots() {
-        if(this.getA()==0) return "Invalid quadratic equation";
+        if (this.getA() == 0) return "Invalid quadratic equation";
         else if (this.getDiscriminant() < 0) return "The equation has no root";
         else if (this.getDiscriminant() == 0) return "The equation has two equal roots:" + this.getRoot1();
         else return "The equation has two different root:\n" + "r1: " + this.getRoot1() + "\nr2: " + this.getRoot2();

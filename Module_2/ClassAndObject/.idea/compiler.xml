@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Rectangle" />
         <module name="QuadraticEquation" />
+        <module name="StopWatch" />
       </profile>
     </annotationProcessing>
   </component>
