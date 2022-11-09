@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0eea4e76-d040-42e7-ac24-b1a7bcb9d579" name="Changes" comment="PT bậc hai">
-      <change beforePath="$PROJECT_DIR$/QuadraticEquation/src/main/java/huy/code/QuadraticEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/QuadraticEquation/src/main/java/huy/code/QuadraticEquation.java" afterDir="false" />
+    <list default="true" id="0eea4e76-d040-42e7-ac24-b1a7bcb9d579" name="Changes" comment="Java Fan class">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fan/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fan/src/main/java/huy/code/Fan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fan/src/main/java/huy/code/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fan/target/classes/huy/code/Fan.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fan/target/classes/huy/code/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,22 +49,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last_opened_file_path": "D:/Codegym/Module_2/ClassAndObject",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Codegym/Module_2/ClassAndObject&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Codegym\Module_2\ClassAndObject\QuadraticEquation\src" />
@@ -72,7 +81,8 @@
       <workItem from="1667960560352" duration="68000" />
       <workItem from="1667960698925" duration="35000" />
       <workItem from="1667960793520" duration="457000" />
-      <workItem from="1667961277479" duration="4514000" />
+      <workItem from="1667961277479" duration="7986000" />
+      <workItem from="1667977397751" duration="4461000" />
     </task>
     <task id="LOCAL-00001" summary="Rectangle class">
       <created>1667962353222</created>
@@ -88,7 +98,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667965768201</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="PT bậc hai">
+      <created>1667965808449</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667965808449</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Get elapsed time in millis seconds">
+      <created>1667969172805</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667969172805</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +133,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Rectangle class" />
     <MESSAGE value="PT bậc hai" />
-    <option name="LAST_COMMIT_MESSAGE" value="PT bậc hai" />
+    <MESSAGE value="Get elapsed time in millis seconds" />
+    <MESSAGE value="Java Fan class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Java Fan class" />
   </component>
 </project>

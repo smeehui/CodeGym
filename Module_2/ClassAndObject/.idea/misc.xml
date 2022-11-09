@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/Rectangle/pom.xml" />
         <option value="$PROJECT_DIR$/QuadraticEquation/pom.xml" />
+        <option value="$PROJECT_DIR$/StopWatch/pom.xml" />
+        <option value="$PROJECT_DIR$/Fan/pom.xml" />
       </list>
     </option>
   </component>

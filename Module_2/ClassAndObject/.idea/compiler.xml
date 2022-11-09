@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Rectangle" />
         <module name="QuadraticEquation" />
+        <module name="Fan" />
+        <module name="StopWatch" />
       </profile>
     </annotationProcessing>
   </component>

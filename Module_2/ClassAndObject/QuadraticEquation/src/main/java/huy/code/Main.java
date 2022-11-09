@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Solve quadratic equation:");
+        System.out.println("Solve quadratic equation:()");
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a:");
         double a = sc.nextDouble();
