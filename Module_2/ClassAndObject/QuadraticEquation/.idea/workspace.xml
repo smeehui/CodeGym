@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5602b94c-3d9c-46bb-8e8f-73ed16be63e3" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="0c34ef6b-cc63-49e3-aca4-b887321f793c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/huy/code/QuadraticEquation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/huy/code/QuadraticEquation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +26,7 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectId" id="2HI7R72kGtDKNlhq165K6tDhu6A" />
+  <component name="ProjectId" id="2HLjJKuUjeJyQM69T4n4VUouTQt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -36,34 +37,21 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Codegym/Module_2/ClassAndObject/Rectangle"
+    "last_opened_file_path": "D:/Codegym/Module_2/ClassAndObject/QuadraticEquation",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="Rectangle" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="Rectangle" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="5602b94c-3d9c-46bb-8e8f-73ed16be63e3" name="Changes" comment="" />
-      <created>1667960735079</created>
+      <changelist id="0c34ef6b-cc63-49e3-aca4-b887321f793c" name="Changes" comment="" />
+      <created>1668071185650</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1667960735079</updated>
-      <workItem from="1667960736447" duration="55000" />
-      <workItem from="1668411168438" duration="627000" />
+      <updated>1668071185650</updated>
+      <workItem from="1668071187289" duration="720000" />
     </task>
     <servers />
   </component>

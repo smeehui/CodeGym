@@ -6,10 +6,6 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Rectangle" />
-        <module name="QuadraticEquation" />
-        <module name="Fan" />
-        <module name="StaticClass" />
         <module name="StopWatch" />
       </profile>
     </annotationProcessing>

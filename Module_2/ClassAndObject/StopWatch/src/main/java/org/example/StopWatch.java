@@ -1,8 +1,6 @@
 package org.example;
 public class StopWatch {
-    private double startTime;
-    private double endTime;
-
+    private long startTime,endTime;
     public void start() {
         this.startTime = System.currentTimeMillis();
     }
@@ -11,14 +9,14 @@ public class StopWatch {
         this.endTime = System.currentTimeMillis();
     }
 
-    public double getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public double getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
-    public double getElapsedTime(){
+    public long getElapsedTime(){
         return this.getEndTime() - this.getStartTime();
     }
 }

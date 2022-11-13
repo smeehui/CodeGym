@@ -9,7 +9,6 @@ public class QuadraticEquation {
         this.setA(a);
         this.setB(b);
         this.setC(c);
-
     }
 
     public double getA() {
@@ -41,7 +40,7 @@ public class QuadraticEquation {
     }
 
     double getRoot1() {
-        return this.getDiscriminant() >= 0 ? (-this.b) + Math.sqrt(this.getDiscriminant()) : 0;
+        return this.getDiscriminant() >= 0 ? (-this.getB()) + Math.sqrt(this.getDiscriminant()) : 0;
     }
 
     double getRoot2() {
