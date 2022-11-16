@@ -9,7 +9,7 @@
         <module name="Rectangle" />
         <module name="QuadraticEquation" />
         <module name="Fan" />
-        <module name="StaticClass" />
+        <module name="StaticProperties" />
         <module name="StopWatch" />
       </profile>
     </annotationProcessing>

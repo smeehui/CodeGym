@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0eea4e76-d040-42e7-ac24-b1a7bcb9d579" name="Changes" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;Module_2/ClassAndObject/.idea/compiler.xml&#10;#&#9;Module_2/ClassAndObject/.idea/misc.xml&#10;#&#9;Module_2/ClassAndObject/.idea/workspace.xml">
+    <list default="true" id="0eea4e76-d040-42e7-ac24-b1a7bcb9d579" name="Changes" comment="Static Method">
+      <change afterPath="$PROJECT_DIR$/StaticProperties/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StaticProperties/src/main/java/huy/code/Car.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StaticProperties/src/main/java/huy/code/TestStaticProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StaticClass/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/StaticMethod/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StaticClass/src/main/java/huy/code/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/StaticMethod/src/main/java/huy/code/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StaticClass/src/main/java/huy/code/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/StaticMethod/src/main/java/huy/code/Student.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/StaticClass/src/main/java/huy/code/TestStaticMethod.java" beforeDir="false" afterPath="$PROJECT_DIR$/StaticMethod/src/main/java/huy/code/TestStaticMethod.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,24 +50,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last_opened_file_path": "D:/Web_Backend/CloneAnhKhoa/C0220I1/WBD/EmployeeManagement",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.javacompiler"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Web_Backend/CloneAnhKhoa/C0220I1/WBD/EmployeeManagement&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Codegym\Module_2\ClassAndObject" />
       <recent name="D:\Codegym\Module_2\ClassAndObject\QuadraticEquation\src" />
     </key>
   </component>
@@ -117,7 +128,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667982834298</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Static Method">
+      <created>1668569262976</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1668569262976</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Static Method">
+      <created>1668569274859</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1668569274859</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -142,6 +167,7 @@
     <MESSAGE value="Java Fan class" />
     <MESSAGE value="Java Fan Class" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;Module_2/ClassAndObject/.idea/compiler.xml&#10;#&#9;Module_2/ClassAndObject/.idea/misc.xml&#10;#&#9;Module_2/ClassAndObject/.idea/workspace.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;Module_2/ClassAndObject/.idea/compiler.xml&#10;#&#9;Module_2/ClassAndObject/.idea/misc.xml&#10;#&#9;Module_2/ClassAndObject/.idea/workspace.xml" />
+    <MESSAGE value="Static Method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Static Method" />
   </component>
 </project>
