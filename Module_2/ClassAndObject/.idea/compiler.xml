@@ -12,6 +12,7 @@
         <module name="Fan" />
         <module name="Shape" />
         <module name="Rectangle" />
+        <module name="Point" />
         <module name="Student" />
         <module name="StaticProperties" />
         <module name="StopWatch" />
