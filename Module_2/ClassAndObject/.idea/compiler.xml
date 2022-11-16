@@ -12,6 +12,7 @@
         <module name="Fan" />
         <module name="Shape" />
         <module name="Rectangle" />
+        <module name="Triangle" />
         <module name="Point" />
         <module name="MovablePoint" />
         <module name="Student" />

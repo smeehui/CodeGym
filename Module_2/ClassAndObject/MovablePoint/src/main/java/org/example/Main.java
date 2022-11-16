@@ -10,5 +10,7 @@ public class Main {
         System.out.println(point2);
         MovablePoint point3 = point2.move();
         System.out.println(point3);
+        Point point = new MovablePoint(1,2,3,4);
+        System.out.println(point);
     }
 }
