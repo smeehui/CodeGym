@@ -17,6 +17,7 @@
         <option value="$PROJECT_DIR$/Shape/pom.xml" />
         <option value="$PROJECT_DIR$/CircleExtend/pom.xml" />
         <option value="$PROJECT_DIR$/Point/pom.xml" />
+        <option value="$PROJECT_DIR$/MovablePoint/pom.xml" />
       </list>
     </option>
   </component>
