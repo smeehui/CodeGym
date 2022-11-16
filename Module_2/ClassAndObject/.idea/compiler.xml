@@ -9,6 +9,7 @@
         <module name="QuadraticEquation" />
         <module name="Circle" />
         <module name="Fan" />
+        <module name="Shape" />
         <module name="Rectangle" />
         <module name="Student" />
         <module name="StaticProperties" />
