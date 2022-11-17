@@ -7,8 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="ComparableInterface" />
-        <module name="Animal" />
         <module name="Resizable" />
+        <module name="Animal" />
+        <module name="Colorable" />
       </profile>
     </annotationProcessing>
   </component>
