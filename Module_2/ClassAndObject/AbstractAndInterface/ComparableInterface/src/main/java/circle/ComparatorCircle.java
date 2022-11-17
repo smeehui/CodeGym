@@ -1,0 +1,13 @@
+package circle;
+
+//import comparable.Comparator;
+import java.util.Comparator;
+
+public class ComparatorCircle implements Comparator<Circle> {
+    @Override
+    public int compare(Circle c1, Circle c2) {
+        if (c1.getRadius() > c2.getRadius()) return 1;
+        if (c1.getRadius() == c2.getRadius()) return 0;
+        return -1;
+    }
+}

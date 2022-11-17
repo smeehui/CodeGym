@@ -10,6 +10,10 @@ public class Circle extends Geometric {
     public Circle(double radius) {
     this.setRadius(radius);
     }
+    public Circle(double radius, String color, boolean isFilled) {
+        super(color, isFilled);
+        this.setRadius(radius);
+    }
 
     public double getRadius() {
         return radius;
@@ -27,5 +31,8 @@ public class Circle extends Geometric {
     @Override
     public double getPerimeter() {
         return 2*Math.PI*this.getRadius();
+    }
+    public  String toString(){
+        return "Circle with radius: "+ this.getRadius();
     }
 }
