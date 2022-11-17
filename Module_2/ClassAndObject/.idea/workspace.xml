@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0eea4e76-d040-42e7-ac24-b1a7bcb9d579" name="Changes" comment="Java Rectangle Extend Shape">
-      <change afterPath="$PROJECT_DIR$/Rectangle/Rectangle.mdj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Triangle/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Triangle/src/main/java/org/example/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Triangle/src/main/java/org/example/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MovablePoint/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/MovablePoint/src/main/java/org/example/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +81,7 @@
       <workItem from="1667961277479" duration="7986000" />
       <workItem from="1667977397751" duration="6681000" />
       <workItem from="1668585684670" duration="56000" />
-      <workItem from="1668586210345" duration="12329000" />
+      <workItem from="1668586210345" duration="14005000" />
     </task>
     <task id="LOCAL-00001" summary="Rectangle class">
       <created>1667962353222</created>
@@ -210,7 +202,21 @@
       <option name="project" value="LOCAL" />
       <updated>1668602940440</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Java Rectangle Extend Shape">
+      <created>1668606291145</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1668606291145</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Java Rectangle Extend Shape">
+      <created>1668606359910</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1668606359910</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
