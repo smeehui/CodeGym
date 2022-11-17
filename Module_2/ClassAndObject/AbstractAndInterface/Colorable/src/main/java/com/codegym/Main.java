@@ -1,4 +1,4 @@
-package com.codegym;
+package com.huy;
 
 import colorable.Colorable;
 

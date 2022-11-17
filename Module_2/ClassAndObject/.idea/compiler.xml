@@ -18,8 +18,11 @@
         <module name="CircleExtend" />
         <module name="QuadraticEquation" />
         <module name="Fan" />
-        <module name="CleanCodeAndRefactor" />
+        <module name="FizzBuzzRefractoring" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="CleanCodeAndRefactor" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>

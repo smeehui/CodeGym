@@ -1,4 +1,4 @@
-package com.codegym;
+package com.huy;
 
 import resizable.Resizable;
 

@@ -1,4 +1,4 @@
-package com.codegym;
+package com.huy;
 
 public class RectangleTest {
     public static void main(String[] args) {

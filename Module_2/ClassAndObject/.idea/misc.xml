@@ -20,6 +20,7 @@
         <option value="$PROJECT_DIR$/MovablePoint/pom.xml" />
         <option value="$PROJECT_DIR$/Triangle/pom.xml" />
         <option value="$PROJECT_DIR$/CleanCodeAndRefactoring/pom.xml" />
+        <option value="$PROJECT_DIR$/FizzBuzzRefractoring/pom.xml" />
       </list>
     </option>
   </component>

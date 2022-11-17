@@ -1,4 +1,4 @@
-package com.codegym;
+package com.huy;
 
 public class Main {
     public static void main(String[] args) {
