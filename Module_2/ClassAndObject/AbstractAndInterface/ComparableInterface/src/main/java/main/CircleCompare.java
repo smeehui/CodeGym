@@ -1,7 +1,7 @@
 package main;
 
 import circle.Circle;
-import circle.ComparatorCircle;
+import circle.CircleComparator;
 
 import java.util.Arrays;
 
@@ -16,7 +16,7 @@ public class CircleCompare {
         for(Circle circle: cirArr){
             System.out.println(circle.toString());
         }
-        ComparatorCircle comparator = new ComparatorCircle();
+        CircleComparator comparator = new CircleComparator();
         Arrays.sort(cirArr,comparator);
         System.out.println("After sort");
         for(Circle circle: cirArr){
