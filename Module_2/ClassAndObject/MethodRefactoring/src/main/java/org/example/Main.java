@@ -2,6 +2,7 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        double volume = Cylinder.getVolume(12, 20);
+        System.out.println(volume);
     }
 }
