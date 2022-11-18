@@ -11,6 +11,7 @@
         <module name="MethodRefactoring" />
         <module name="Rectangle" />
         <module name="Triangle" />
+        <module name="Tenis" />
         <module name="Point" />
         <module name="MovablePoint" />
         <module name="Student" />
