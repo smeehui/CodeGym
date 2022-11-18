@@ -1,8 +1,7 @@
 package com.huy;
 
-import resizable.Resizable;
 
-public class Circle extends Shape {
+public class Circle extends Shape implements Resizable {
     private double radius = 1.0;
 
     public Circle() {

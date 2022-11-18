@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="Circle" />
         <module name="Shape" />
+        <module name="MethodRefactoring" />
         <module name="Rectangle" />
         <module name="Triangle" />
         <module name="Point" />

@@ -1,6 +1,5 @@
 package com.huy;
 
-import resizable.Resizable;
 
 public class Shape implements Resizable {
     private String color = "green";
@@ -38,6 +37,9 @@ public class Shape implements Resizable {
                 + (isFilled() ? "filled" : "not filled");
     }
 
+
     @Override
-    public void resize(){};
+    public void resize() {
+
+    }
 }

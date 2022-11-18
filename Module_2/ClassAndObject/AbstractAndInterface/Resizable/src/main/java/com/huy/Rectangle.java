@@ -1,7 +1,5 @@
 package com.huy;
 
-import resizable.Resizable;
-
 public class Rectangle extends Shape {
     private double width = 1.0;
     private double length = 1.0;
@@ -56,7 +54,7 @@ public class Rectangle extends Shape {
 
     @Override
     public void resize() {
-        this.setLength(this.getLength()+this.getLength()*Math.random());
-        this.setWidth(this.getWidth()+this.getWidth()*Math.random());
+        this.setLength(this.getLength() + this.getLength() * Math.random());
+        this.setWidth(this.getWidth() + this.getWidth() * Math.random());
     }
 }
