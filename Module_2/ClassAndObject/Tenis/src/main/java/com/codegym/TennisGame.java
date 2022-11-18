@@ -11,7 +11,7 @@ public class TennisGame {
     final static String THIRTY = "Thirty";
     final static String FORTY = "Forty";
 
-    public static String getScore(String player1Name, String player2Name, int playerOneScore, int playerTwoScore) {
+    public static String getScore(String playerOneName, String playerTwoName, int playerOneScore, int playerTwoScore) {
         if (playerOneScore == playerTwoScore) return whenScoresAreEqual(playerOneScore);
         else if (playerOneScore >= 4 || playerTwoScore >= 4) {
             return whenScoresAreMax(playerOneScore,playerTwoScore);
@@ -20,7 +20,7 @@ public class TennisGame {
 
     private static String whilePlaying(int playerOneScore, int playerTwoScore) {
         String score = "";
-        int tempScore = 0;
+        int tempScore;
         for (int i = 1; i < 3; i++) {
             if (i == 1) tempScore = playerOneScore;
             else {
@@ -28,18 +28,10 @@ public class TennisGame {
                 tempScore = playerTwoScore;
             }
             switch (tempScore) {
-                case 0:
-                    score += LOVE;
-                    break;
-                case 1:
-                    score += FIFTEEN;
-                    break;
-                case 2:
-                    score += THIRTY;
-                    break;
-                case 3:
-                    score += FORTY;
-                    break;
+                case 0 -> score += LOVE;
+                case 1 -> score += FIFTEEN;
+                case 2 -> score += THIRTY;
+                case 3 -> score += FORTY;
             }
         }
         return score;
@@ -54,21 +46,12 @@ public class TennisGame {
     }
 
     private static String whenScoresAreEqual(int playerOneScore) {
-        switch (playerOneScore) {
-            case 0:
-                return LOVE_ALL;
-
-            case 1:
-                return FIFTEEN_ALL;
-
-            case 2:
-                return THIRTY_ALL;
-
-            case 3:
-                return FORTY_ALL;
-
-            default:
-                return DEUCE;
-        }
+        return switch (playerOneScore) {
+            case 0 -> LOVE_ALL;
+            case 1 -> FIFTEEN_ALL;
+            case 2 -> THIRTY_ALL;
+            case 3 -> FORTY_ALL;
+            default -> DEUCE;
+        };
     }
 }
