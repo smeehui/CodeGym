@@ -11,7 +11,6 @@
         <module name="MethodRefactoring" />
         <module name="Rectangle" />
         <module name="Triangle" />
-        <module name="Tenis" />
         <module name="Point" />
         <module name="MovablePoint" />
         <module name="Student" />
@@ -20,11 +19,13 @@
         <module name="CircleExtend" />
         <module name="QuadraticEquation" />
         <module name="Fan" />
+        <module name="NextDayCalculator" />
         <module name="FizzBuzzRefractoring" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CleanCodeAndRefactor" target="19" />
+      <module name="Tenis" target="19" />
     </bytecodeTargetLevel>
   </component>
 </project>
