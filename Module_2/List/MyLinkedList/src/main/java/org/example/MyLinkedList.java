@@ -34,7 +34,7 @@ public class MyLinkedList {
                 System.out.print(temp.getData() + " ");
                 temp = temp.next;
                 if (temp != null) System.out.print("->");
-                else System.out.println("");
+                else System.out.println();
             }
         }
     }
@@ -45,7 +45,6 @@ public class MyLinkedList {
             newNode.next = head;
             numNodes++;
         }
-        ;
         head = newNode;
     }
 

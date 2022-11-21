@@ -1,6 +1,6 @@
 package org.example;
 
-public class Main {
+public class MyLinkedListTest {
     public static void main(String[] args) {
         Node node1 = new Node("love");
         Node node2 = new Node(2);
