@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/FizzBuzzExtended/FizzBuzzExtended.iml" filepath="$PROJECT_DIR$/FizzBuzzExtended/FizzBuzzExtended.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/TestDrivenProgramming.iml" filepath="$PROJECT_DIR$/.idea/TestDrivenProgramming.iml" />
       <module fileurl="file://$PROJECT_DIR$/TriangleClassifier/TriangleClassifier.iml" filepath="$PROJECT_DIR$/TriangleClassifier/TriangleClassifier.iml" />
     </modules>
