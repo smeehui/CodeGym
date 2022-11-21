@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/TestDrivenProgramming.iml" filepath="$PROJECT_DIR$/.idea/TestDrivenProgramming.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TriangleClassifier/TriangleClassifier.iml" filepath="$PROJECT_DIR$/TriangleClassifier/TriangleClassifier.iml" />
     </modules>
   </component>
 </project>

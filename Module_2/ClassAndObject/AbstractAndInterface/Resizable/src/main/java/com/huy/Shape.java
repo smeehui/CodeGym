@@ -1,7 +1,7 @@
 package com.huy;
 
 
-public class Shape implements Resizable {
+public abstract class Shape implements Resizable,Comparable<Shape>{
     private String color = "green";
     private boolean filled = true;
 
@@ -41,5 +41,12 @@ public class Shape implements Resizable {
     @Override
     public void resize() {
 
+    }
+    public abstract double getArea();
+    @Override
+    public int compareTo(Shape shape) {
+        if (this.getArea() > shape.getArea()) return 1;
+        if (this.getArea() == shape.getArea()) return 0;
+        return -1;
     }
 }
