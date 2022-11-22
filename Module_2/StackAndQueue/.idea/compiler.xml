@@ -7,8 +7,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MyLinkedListStackandQueue" />
-        <module name="TreeMapCountCharacter" />
+        <module name="CircularQueue" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="TreeMapCountCharacter" target="19" />
+    </bytecodeTargetLevel>
   </component>
 </project>
