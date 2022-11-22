@@ -1,4 +1,4 @@
-package huy.code;
+package huy.node;
 
 public class Node<E> {
     private E value;
@@ -25,7 +25,7 @@ public class Node<E> {
 
     @Override
     public String toString() {
-        return super.toString() + ": " + this.getValue();
+       return "value: " + this.getValue();
     }
 
 }

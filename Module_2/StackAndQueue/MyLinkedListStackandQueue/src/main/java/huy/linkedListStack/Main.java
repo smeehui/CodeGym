@@ -1,4 +1,4 @@
-package huy.code;
+package huy.linkedListStack;
 
 import java.util.Arrays;
 

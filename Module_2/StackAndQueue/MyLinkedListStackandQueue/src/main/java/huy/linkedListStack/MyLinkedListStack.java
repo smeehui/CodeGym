@@ -1,6 +1,8 @@
-package huy.code;
+package huy.linkedListStack;
 
 import Interface.SnQInterface;
+import huy.node.Node;
+
 import java.util.Arrays;
 
 public class MyLinkedListStack<T> implements SnQInterface<T> {
