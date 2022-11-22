@@ -1,4 +1,4 @@
-package org.example;
+package huy.code;
 
 public class MyLinkedListTest {
     public static void main(String[] args) {

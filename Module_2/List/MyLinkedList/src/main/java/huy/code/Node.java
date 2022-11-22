@@ -1,4 +1,4 @@
-package org.example;
+package huy.code;
 class Node {
     public Node next;
     private Object data;
