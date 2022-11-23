@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="MyLinkedListStackandQueue" />
+        <module name="CircularQueue" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="MyLinkedListStackandQueue" target="19" />
-      <module name="MyLinkedQueue" target="1.5" />
-      <module name="ReverseArrayUsingStack" target="1.5" />
+      <module name="TreeMapCountCharacter" target="19" />
     </bytecodeTargetLevel>
   </component>
 </project>
