@@ -60,5 +60,15 @@ public class CustomLinkedListTest {
         System.out.println("Remove World");
         System.out.println("Status: " + list.remove("World") + ", " + list);
 
+        CustomLinkedList<Integer> intergerList = new CustomLinkedList<>();
+        intergerList.add(10);
+        intergerList.add(20);
+        intergerList.add(30);
+        intergerList.add(40);
+        System.out.println(intergerList);
+        CustomLinkedList<String> StringList = new CustomLinkedList<>("Hello","I'm","Huy", "23", "age");
+        System.out.println(StringList);
+        StringList.reverse();
+        System.out.println(StringList);
     }
 }

@@ -7,6 +7,13 @@ public class CustomLinkedList<E> {
 
     public CustomLinkedList() {
     }
+    @SafeVarargs
+    public CustomLinkedList(E... args) {
+        for (E e : args) {
+            Node<E> newNode = new Node<>(e);
+            this.addLast(newNode);
+        }
+    }
 
     public CustomLinkedList(E value) {
         Node<E> newNode = new Node<>(value);
@@ -66,7 +73,20 @@ public class CustomLinkedList<E> {
             numNodes++;
         }
     }
-
+    public boolean add(E value) {
+        Node<E> newNode = new Node<>(value);
+        if (this.head == null) {
+            this.head = newNode;
+            this.tail = newNode;
+            numNodes = 1;
+            return true;}
+        else {
+            newNode.setNext(this.head);
+            this.head = newNode;
+            numNodes++;
+            return true;
+        }
+    }
     public void add(int index, E value) {
         Node<E> newNode = new Node<>(value);
         Node<E> temp = this.head;
@@ -127,7 +147,8 @@ public class CustomLinkedList<E> {
     }
 
     @Override
-    public CustomLinkedList<E> clone() {
+    public CustomLinkedList<E> clone() throws CloneNotSupportedException {
+        super.clone();
         Node<E> temp = this.head;
         if (temp == null) return null;
         Node<E> newNode = new Node<>(temp.getValue());
@@ -165,6 +186,19 @@ public class CustomLinkedList<E> {
         this.tail = null;
         this.numNodes = 0;
     }
+    public void reverse() {
+        Node<E> oldHead = this.head;
+        Node<E> cur = this.head;
+        Node<E> prev = null;
+        while(cur!= null) {
+            Node<E> next = cur.getNext();
+            cur.setNext(prev);
+            prev = cur;
+            cur = next;
+        }
+        this.setHead(prev);
+        this.tail = oldHead;
+    }
 
     private void setHead(Node<E> node) {
         this.head = node;
@@ -178,15 +212,16 @@ public class CustomLinkedList<E> {
     public String toString() {
         Node<E> temp = head;
         StringBuilder sb = new StringBuilder();
-        sb.append("Nodes: ").append(this.size()).append(" ");
+        sb.append("Nodes: ").append(this.size()).append(" ").append("Head: ").append(head.getValue()+", ");
         while (true) {
             if (temp == null) {
-                sb.append("null");
+                sb.append("null ");
                 break;
             }
             sb.append(temp.getValue()).append("-->");
             temp = temp.getNext();
         }
+        sb.append("Tail: ").append(tail.getValue());
         return sb.toString();
     }
 }

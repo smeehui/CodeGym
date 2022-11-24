@@ -1,6 +1,6 @@
 package huy.code;
 
-public class MyLinkedListTest {
+public class MyLinkedListTest{
     public static void main(String[] args) {
         Node node1 = new Node("love");
         Node node2 = new Node(2);

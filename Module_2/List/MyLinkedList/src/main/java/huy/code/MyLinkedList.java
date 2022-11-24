@@ -3,7 +3,6 @@ package huy.code;
 public class MyLinkedList {
     private Node head;
     private int numNodes;
-
     public MyLinkedList(Object data) {
         head = new Node(data);
     }

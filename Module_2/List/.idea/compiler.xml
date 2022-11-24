@@ -7,8 +7,9 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="MyList" />
-        <module name="CustomLinkedList" />
         <module name="MyLinkedList" />
+        <module name="StudentListSort" />
+        <module name="CustomLinkedList" />
       </profile>
     </annotationProcessing>
   </component>
