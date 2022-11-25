@@ -1,10 +1,11 @@
 package huy.product;
 
 public class CheckInputException {
-    enum Type{
+    enum Type {
         DOUBLE("double"),
         INT("int");
         private final String s;
+
         Type(String s) {
             this.s = s;
         }
@@ -14,32 +15,40 @@ public class CheckInputException {
             return s;
         }
     }
+
     private Type desiredType;
     private String input;
-    public CheckInputException(){}
+
+    public CheckInputException() {
+    }
+
     public CheckInputException(Type type, String input) {
         this.desiredType = type;
         this.input = input;
     }
-    public boolean check() {switch (this.desiredType){
-           case DOUBLE:
-               try {
-                   Double.parseDouble(this.input.toString());
-                   return true;
-               }catch (NumberFormatException e) {
-                   return false;
-               }
-        case INT:
-            try {
-                Integer.parseInt(this.input.toString());
-                return true;
-            }catch (NumberFormatException e) {
+
+    public boolean check() {
+        switch (this.desiredType) {
+            case DOUBLE:
+                try {
+                    Double.parseDouble(this.input);
+                    return true;
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            case INT:
+                try {
+                    Integer.parseInt(this.input);
+                    return true;
+                } catch (NumberFormatException e) {
+                    return false;
+                }
+            default:
                 return false;
-            }
-        default: return false;
         }
     }
-    public boolean check(Type type,String input){
+
+    public boolean check(Type type, String input) {
         this.desiredType = type;
         this.input = input;
         return check();

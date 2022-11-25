@@ -1,9 +1,7 @@
 package huy.product;
 
 public class View {
-    private ArrayListManagerment products;
-    public View(ArrayListManagerment products) {
-        this.products = products;
+    public View() {
     }
     public void menu() {
         System.out.println("""
@@ -14,9 +12,15 @@ public class View {
                     4.Display products
                     5.Search by name
                     6.Sort by price
+                    0.Exit
                     """);
     }
-    public void showProducts(){
-        this.products.show();
+
+    public void sortByPriceMenu() {
+        System.out.println("""
+                Sort by price:
+                1. Ascending order
+                2. Descending order
+                """);
     }
 }

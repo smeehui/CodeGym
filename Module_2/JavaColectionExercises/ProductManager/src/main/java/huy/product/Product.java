@@ -1,19 +1,17 @@
 package huy.product;
 
-import java.util.UUID;
-
 public class Product {
     private int amount;
     private String name;
     private double price;
     private String description;
     private int ID;
-    public Product(){};
+    public Product(){}
     public Product( String name,int amount, double price,String description) {
         this.amount = amount;
         this.name = name;
         this.price = price;
-        this.description = description==""?"No description":description;
+        this.description = description.equals("")?"No description":description;
         this.ID= generateID();
     }
 
@@ -71,4 +69,5 @@ public class Product {
                 ", description='" + getDescription() + '\'' +
                 '}';
     }
+
 }

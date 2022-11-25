@@ -1,18 +1,21 @@
 package huy.product;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
+import java.util.*;
 
-public class ArrayListManagerment {
+public class ArrayListManagement{
     private final ArrayList<Product> prodList;
 
-    public ArrayListManagerment() {
+    public ArrayList<Product> getProdList() {
+        return prodList;
+    }
+
+    public ArrayListManagement() {
         prodList = new ArrayList<>();
     }
 
-    public ArrayListManagerment(Product product) {
+    public ArrayListManagement(Product product) {
         prodList = new ArrayList<>();
+        prodList.add(product);
     }
 
     public boolean add(Product product) {
@@ -25,30 +28,6 @@ public class ArrayListManagerment {
         return "prodList=" + Arrays.toString(prodList.toArray());
     }
 
-    public void show() {
-        System.out.printf("%15s%n", "Product list");
-        System.out.printf("%-3s", "#");
-        System.out.printf("%5s", "ID");
-        System.out.print("   ");
-        System.out.printf("%-30s", "NAME");
-        System.out.printf("%10s", "QUANTITY");
-        System.out.printf("%15s", "PRICE");
-        System.out.print("   ");
-        System.out.printf("%-50s", "DESCRIPTION");
-        int count = 0;
-        for (Product product : prodList) {
-            System.out.println();
-            System.out.printf("%-3d", ++count);
-            System.out.printf("%5d", product.getID());
-            System.out.print("   ");
-            System.out.printf("%-30s", product.getName());
-            System.out.printf("%10s", product.getAmount());
-            System.out.printf(Locale.US, "%,15.2f", product.getPrice());
-            System.out.print("   ");
-            System.out.printf("%-50s", product.getDescription());
-        }
-        System.out.println();
-    }
 
     public boolean removeById(int id) {
         for (Product product : prodList) {
@@ -85,7 +64,7 @@ public class ArrayListManagerment {
         ArrayList<Product> result = new ArrayList<>();
         if(this.isEmpty()) return result;
         for (Product product : prodList) {
-            if (product.getName().matches(name)) {
+            if (product.getName().matches("(.*)"+name+"(.*)")) {
                 result.add(product);
             }
         }

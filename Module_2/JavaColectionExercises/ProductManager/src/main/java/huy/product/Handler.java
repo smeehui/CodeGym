@@ -1,12 +1,14 @@
 package huy.product;
 
-import java.util.Scanner;
+import java.util.*;
+
 
 public class Handler {
-    private final ArrayListManagerment list;
+    private final ArrayListManagement list;
     public static Scanner sc = new Scanner(System.in);
+    public final View view = new View();
 
-    public Handler(ArrayListManagerment products) {
+    public Handler(ArrayListManagement products) {
         this.list = products;
     }
 
@@ -16,9 +18,9 @@ public class Handler {
             System.out.println("Add new product (Enter # to cancel):");
             String name = enterName();
             if (name.equals("#")) return false;
-            double price = enterPrice();
+            double price = validateDoubleInput("price");
             if (price < 0) break;
-            int quantity = enterQuantity();
+            int quantity = validateIntInput("quantity");
             if (quantity < 0) break;
             String description = enterDescription();
             if (description.equals("#")) return false;
@@ -39,35 +41,37 @@ public class Handler {
         return sc.nextLine();
     }
 
-    private int enterQuantity() {
+    public int validateIntInput(String field) {
         String input;
         boolean hasError;
         do {
-            System.out.println("Enter product quantity: ");
+            System.out.println("Enter " + field + ": ");
             input = sc.nextLine();
             if (input.equals("#")) return -1;
             hasError = !new CheckInputException(CheckInputException.Type.INT, input).check();
-            if (hasError) System.out.println("Price must be a number");
+            if (hasError)
+                System.out.println(field.substring(0, 1).toUpperCase() + field.substring(1) + " must be a number");
         } while (hasError);
         return Integer.parseInt(input);
     }
 
-    private double enterPrice() {
+    public double validateDoubleInput(String field) {
         String input;
         boolean hasError;
         do {
-            System.out.println("Enter product price: ");
+            System.out.println("Enter " + field + ": ");
             input = sc.nextLine();
             if (input.equals("#")) return -1;
             hasError = !new CheckInputException(CheckInputException.Type.DOUBLE, input).check();
-            if (hasError) System.out.println("Price must be a number");
+            if (hasError)
+                System.out.println(field.substring(0, 1).toUpperCase() + field.substring(1) + " must be a number");
         } while (hasError);
         return Double.parseDouble(input);
     }
 
     public void deleteProductById() {
         String selection = "";
-        list.show();
+        show(list.getProdList());
         do {
             if (list.isEmpty()) {
                 System.out.println("There are no products in the list, press enter");
@@ -77,7 +81,7 @@ public class Handler {
             int id = enterId();
             if (id < 0) break;
             boolean status = list.removeById(id);
-            if (status) list.show();
+            if (status) show(list.getProdList());
             else {
                 System.out.println("Product not found");
                 selection = sc.nextLine();
@@ -87,18 +91,19 @@ public class Handler {
 
     private int enterId() {
         boolean hasError;
-        String  input;
-        do{
+        String input;
+        do {
             System.out.println("Enter id (# to return):");
             input = sc.nextLine();
-            if(input.equals("#")) return -1;
-            hasError =!new CheckInputException(CheckInputException.Type.INT, input).check();
-            if(hasError) {
+            if (input.equals("#")) return -1;
+            hasError = !new CheckInputException(CheckInputException.Type.INT, input).check();
+            if (hasError) {
                 System.out.println("Id must be a number");
             }
-        }while (hasError);
+        } while (hasError);
         return Integer.parseInt(input);
     }
+
 
     public void updateProductById() {
         if (list.isEmpty()) {
@@ -106,40 +111,118 @@ public class Handler {
             sc.nextLine();
             return;
         }
-        list.show();
-        do{
+        show(list.getProdList());
+        do {
             int id = enterId();
-            if (id < 0) break ;
-            if(!list.isExist(id)) {
+            if (id < 0) break;
+            if (!list.isExist(id)) {
                 System.out.println("Product not found");
                 sc.nextLine();
-            }else {
+            } else {
                 String name = enterName();
-                if (name.equals("#")) break ;
-                double price = enterPrice();
+                if (name.equals("#")) break;
+                double price = validateDoubleInput("price");
                 if (price < 0) break;
-                int quantity = enterQuantity();
+                int quantity = validateIntInput("quantity");
                 if (quantity < 0) break;
                 String description = enterDescription();
-                if (description.equals("#")) break ;
-                boolean status = list.updateProductById(new Product(name, quantity,price ,description),id);
+                if (description.equals("#")) break;
+                boolean status = list.updateProductById(new Product(name, quantity, price, description), id);
                 if (status) {
                     System.out.println("Updated successfully");
-                    list.show();
-                };
+                    show(list.getProdList());
+                }
                 if (sc.nextLine().equals("#")) break;
             }
-        }while (true);
+        } while (true);
     }
 
     public void displayProducts() {
         if (list.isEmpty()) {
             System.out.println("There are no products in the list, press enter");
             sc.nextLine();
-        }else {
-            list.show();
+        } else {
+            show(list.getProdList());
             System.out.println("Press enter to return");
             sc.nextLine();
         }
+    }
+
+    public void searchProductByName() {
+        if (list.isEmpty()) {
+            System.out.println("There are no products in the list, press enter");
+            sc.nextLine();
+            return;
+        }
+        do{
+            String name = enterName();
+            if (name.equals("#")) break;
+            ArrayList<Product> result = list.searchProductByName(name);
+            displaySearch(result);
+        }while(!sc.nextLine().equals("#"));
+    }
+
+    private void displaySearch(ArrayList<Product> result) {
+        if (result.size() == 0) {
+            System.out.println("No product found, press enter to continue, # to return");
+            return;
+        }
+        System.out.println("Products found, enter to continue, # to return:");
+        show(result);
+    }
+public void show(ArrayList<Product> list) {
+        System.out.printf("%15s%n", "Product list");
+        System.out.printf("%-3s", "#");
+        System.out.printf("%5s", "ID");
+        System.out.print("   ");
+        System.out.printf("%-30s", "NAME");
+        System.out.printf("%10s", "QUANTITY");
+        System.out.printf("%15s", "PRICE");
+        System.out.print("   ");
+        System.out.printf("%-50s", "DESCRIPTION");
+        int count = 0;
+        for (Product product : list) {
+            System.out.println();
+            System.out.printf("%-3d", ++count);
+            System.out.printf("%5d", product.getID());
+            System.out.print("   ");
+            System.out.printf("%-30s", product.getName());
+            System.out.printf("%10s", product.getAmount());
+            System.out.printf(Locale.US, "%,15.2f", product.getPrice());
+            System.out.print("   ");
+            System.out.printf("%-50s", product.getDescription());
+        }
+        System.out.println();
+    }
+
+    public void sortByPrice() {
+        while (true) {
+            view.sortByPriceMenu();
+            int selection = validateIntInput("selection");
+            if (selection == -1) break;
+            if (selection ==1){
+                list.getProdList().sort((o1, o2) -> {
+                    if (o1.getPrice() < o2.getPrice()) return -1;
+                    return o1.getPrice() > o2.getPrice() ? 1 : 0;
+                });
+                show(list.getProdList());
+                System.out.println("Sorted ascending by price, press enter");
+                sc.nextLine();
+            }else if (selection ==2){
+                list.getProdList().sort((o1, o2) -> {
+                    if (o1.getPrice() < o2.getPrice()) return 1;
+                    return o1.getPrice() > o2.getPrice() ? -1 : 0;
+                });
+                show(list.getProdList());
+                System.out.println("Sorted descending by price, press enter");
+                sc.nextLine();
+            }
+
+        }
+    }
+
+    public void exit() {
+        System.out.println("Good bye!");
+        System.exit(0);
     }
 }
