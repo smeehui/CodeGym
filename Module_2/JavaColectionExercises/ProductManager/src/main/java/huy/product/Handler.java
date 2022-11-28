@@ -4,11 +4,11 @@ import java.util.*;
 
 
 public class Handler {
-    private final ArrayListManagement list;
+    private final ProductList list;
     public static Scanner sc = new Scanner(System.in);
     public final View view = new View();
 
-    public Handler(ArrayListManagement products) {
+    public Handler(ProductList products) {
         this.list = products;
     }
 

@@ -15,11 +15,15 @@ public class Product {
         this.ID= generateID();
     }
 
-    private int generateID() {
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int generateID() {
         int old = this.ID;
         int newId;
         do{
-            newId = (int) (Math.random()*1000);
+            newId = (int) (Math.random()*900+100);
         }while (newId==old);
         return newId;
     }

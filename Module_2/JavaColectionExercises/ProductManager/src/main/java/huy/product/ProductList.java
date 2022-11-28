@@ -2,20 +2,36 @@ package huy.product;
 
 import java.util.*;
 
-public class ArrayListManagement{
+public class ProductList {
     private final ArrayList<Product> prodList;
 
     public ArrayList<Product> getProdList() {
         return prodList;
     }
 
-    public ArrayListManagement() {
+    public ProductList() {
         prodList = new ArrayList<>();
     }
 
-    public ArrayListManagement(Product product) {
+    public ProductList(Product product) {
         prodList = new ArrayList<>();
         prodList.add(product);
+        generateID(prodList);
+    }
+
+    private void generateID(ArrayList<Product> prodList) {
+        ArrayList<Integer> ids = new ArrayList<>();
+        for (Product prod : prodList) {
+            ids.add(prod.getID());
+        }
+        for(int i = 0; i < ids.size(); i++){
+            for (int j = i; j < ids.size(); j++) {
+                while (prodList.get(i).getID() == (ids.get(j))) {
+                    prodList.get(i).generateID();
+                }
+            }
+        }
+
     }
 
     public boolean add(Product product) {

@@ -4,7 +4,7 @@ package huy.product;
 public class App {
 
     public static void main(String[] args) {
-        ArrayListManagement products = new ArrayListManagement();
+        ProductList products = new ProductList();
         initialize(products);
         View view = new View();
         Handler handler = new Handler(products);
@@ -40,7 +40,11 @@ public class App {
     }
 
 
-    private static void initialize(ArrayListManagement products) {
+    private static void initialize(ProductList products) {
+        products.add(new Product("Laptop", 12, 20000, "New Laptop"));
+        products.add(new Product("PC", 10, 22000, "New PC"));
+        products.add(new Product("Speaker", 22, 10000, "New Speaker"));
+        products.add(new Product("TV", 9, 40000, "New TV"));
         products.add(new Product("Laptop", 12, 20000, "New Laptop"));
         products.add(new Product("PC", 10, 22000, "New PC"));
         products.add(new Product("Speaker", 22, 10000, "New Speaker"));
