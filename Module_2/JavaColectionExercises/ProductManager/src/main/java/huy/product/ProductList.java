@@ -3,40 +3,38 @@ package huy.product;
 import java.util.*;
 
 public class ProductList {
-    private final ArrayList<Product> prodList;
+    private final ArrayList<Product> prodList = new ArrayList<>();
 
     public ArrayList<Product> getProdList() {
         return prodList;
     }
 
     public ProductList() {
-        prodList = new ArrayList<>();
+    }
+    public ProductList(ArrayList<Product> product) {
+        this.prodList.addAll(product);
     }
 
     public ProductList(Product product) {
-        prodList = new ArrayList<>();
         prodList.add(product);
-        generateID(prodList);
     }
 
-    private void generateID(ArrayList<Product> prodList) {
-        ArrayList<Integer> ids = new ArrayList<>();
+    private void generateID(ArrayList<Product> prodList, Product product) {
         for (Product prod : prodList) {
-            ids.add(prod.getID());
+           if (product.getID() == prod.getID()){
+               product.setID(product.generateID());
+               generateID(prodList, product);
+           }
         }
-        for(int i = 0; i < ids.size(); i++){
-            for (int j = i; j < ids.size(); j++) {
-                while (prodList.get(i).getID() == (ids.get(j))) {
-                    prodList.get(i).generateID();
-                }
-            }
-        }
-
     }
 
     public boolean add(Product product) {
+        generateID(prodList, product);
         prodList.add(product);
         return true;
+    }
+    public  void addAll(ArrayList<Product> list){
+        prodList.addAll(list);
     }
 
     @Override
@@ -80,7 +78,7 @@ public class ProductList {
         ArrayList<Product> result = new ArrayList<>();
         if(this.isEmpty()) return result;
         for (Product product : prodList) {
-            if (product.getName().matches("(.*)"+name+"(.*)")) {
+            if (product.getName().toUpperCase().contains(name.toUpperCase())) {
                 result.add(product);
             }
         }

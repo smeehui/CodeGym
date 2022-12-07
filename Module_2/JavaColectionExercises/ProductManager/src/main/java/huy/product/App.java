@@ -1,16 +1,20 @@
 package huy.product;
 
 
-public class App {
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
+public class App {
+//    private static ProductList products= new ProductList();
+    private static Handler handler = new Handler();
     public static void main(String[] args) {
-        ProductList products = new ProductList();
-        initialize(products);
         View view = new View();
-        Handler handler = new Handler(products);
         int selection;
         while (true) {
-            view.menu();
+            view.menu("Menu (enter your selection):","Add product", "Remove product by id", "Edit product by id", "Display products", "Search by name", "Sort","Export as");
             selection = handler.validateIntInput("Selection");
             switch (selection) {
                 case 1:
@@ -29,25 +33,19 @@ public class App {
                     handler.searchProductByName();
                     break;
                 case 6:
-                    handler.sortByPrice();
+                    handler.sort();
                     break;
-                case 0:
+                case 7:
+                    handler.writeToFile();
+                    break;
+                case 8:
+                    handler.readData();
+                    break;
+                case -1:
                     handler.exit();
                 default:
             }
         }
 
-    }
-
-
-    private static void initialize(ProductList products) {
-        products.add(new Product("Laptop", 12, 20000, "New Laptop"));
-        products.add(new Product("PC", 10, 22000, "New PC"));
-        products.add(new Product("Speaker", 22, 10000, "New Speaker"));
-        products.add(new Product("TV", 9, 40000, "New TV"));
-        products.add(new Product("Laptop", 12, 20000, "New Laptop"));
-        products.add(new Product("PC", 10, 22000, "New PC"));
-        products.add(new Product("Speaker", 22, 10000, "New Speaker"));
-        products.add(new Product("TV", 9, 40000, "New TV"));
     }
 }

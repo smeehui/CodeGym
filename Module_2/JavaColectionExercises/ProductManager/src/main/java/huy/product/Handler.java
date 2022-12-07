@@ -1,6 +1,10 @@
 package huy.product;
 
-import java.util.*;
+import huy.sort.*;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Handler {
@@ -8,14 +12,26 @@ public class Handler {
     public static Scanner sc = new Scanner(System.in);
     public final View view = new View();
 
-    public Handler(ProductList products) {
-        this.list = products;
+    public Handler() {
+        ArrayList<Product> localData = this.readData();
+        if (localData!=null) {
+            list = new ProductList(localData);
+        }else list = new ProductList();
+        initialize(list);
+    }
+
+    private void initialize(ProductList list) {
+        list.add(new Product("PC", 12,4000000,""));
+        list.add(new Product("PC", 12,4000000,""));
+        list.add(new Product("PC", 12,4000000,""));
+        list.add(new Product("PC", 12,4000000,""));
+        list.add(new Product("PC", 12,4000000,""));
     }
 
     public boolean addNewProduct() {
         String selection;
         do {
-            System.out.println("Add new product (Enter # to cancel):");
+            view.subMenu("Add new product");
             String name = enterName();
             if (name.equals("#")) return false;
             double price = validateDoubleInput("price");
@@ -32,12 +48,12 @@ public class Handler {
     }
 
     private String enterDescription() {
-        System.out.println("Enter description (optional) : ");
+        System.out.print("Enter description (optional) : ");
         return sc.nextLine();
     }
 
     private String enterName() {
-        System.out.println("Enter product name: ");
+        System.out.print("Enter product name: ");
         return sc.nextLine();
     }
 
@@ -45,7 +61,7 @@ public class Handler {
         String input;
         boolean hasError;
         do {
-            System.out.println("Enter " + field + ": ");
+            System.out.print("Enter " + field + ": ");
             input = sc.nextLine();
             if (input.equals("#")) return -1;
             hasError = !new CheckInputException(CheckInputException.Type.INT, input).check();
@@ -59,7 +75,7 @@ public class Handler {
         String input;
         boolean hasError;
         do {
-            System.out.println("Enter " + field + ": ");
+            System.out.print("Enter " + field + ": ");
             input = sc.nextLine();
             if (input.equals("#")) return -1;
             hasError = !new CheckInputException(CheckInputException.Type.DOUBLE, input).check();
@@ -71,7 +87,7 @@ public class Handler {
 
     public void deleteProductById() {
         String selection = "";
-        show(list.getProdList());
+        view.show(list.getProdList());
         do {
             if (list.isEmpty()) {
                 System.out.println("There are no products in the list, press enter");
@@ -81,7 +97,7 @@ public class Handler {
             int id = enterId();
             if (id < 0) break;
             boolean status = list.removeById(id);
-            if (status) show(list.getProdList());
+            if (status) view.show(list.getProdList());
             else {
                 System.out.println("Product not found");
                 selection = sc.nextLine();
@@ -111,7 +127,7 @@ public class Handler {
             sc.nextLine();
             return;
         }
-        show(list.getProdList());
+        view.show(list.getProdList());
         do {
             int id = enterId();
             if (id < 0) break;
@@ -130,7 +146,7 @@ public class Handler {
                 boolean status = list.updateProductById(new Product(name, quantity, price, description), id);
                 if (status) {
                     System.out.println("Updated successfully");
-                    show(list.getProdList());
+                    view.show(list.getProdList());
                 }
                 if (sc.nextLine().equals("#")) break;
             }
@@ -142,7 +158,7 @@ public class Handler {
             System.out.println("There are no products in the list, press enter");
             sc.nextLine();
         } else {
-            show(list.getProdList());
+            view.pagination(list.getProdList(), 10);
             System.out.println("Press enter to return");
             sc.nextLine();
         }
@@ -154,12 +170,11 @@ public class Handler {
             sc.nextLine();
             return;
         }
-        do{
+        do {
             String name = enterName();
             if (name.equals("#")) break;
-            ArrayList<Product> result = list.searchProductByName(name);
-            displaySearch(result);
-        }while(!sc.nextLine().equals("#"));
+            displaySearch(list.searchProductByName(name));
+        } while (!sc.nextLine().equals("#"));
     }
 
     private void displaySearch(ArrayList<Product> result) {
@@ -168,61 +183,146 @@ public class Handler {
             return;
         }
         System.out.println("Products found, enter to continue, # to return:");
-        show(result);
-    }
-public void show(ArrayList<Product> list) {
-        System.out.printf("%15s%n", "Product list");
-        System.out.printf("%-3s", "#");
-        System.out.printf("%5s", "ID");
-        System.out.print("   ");
-        System.out.printf("%-30s", "NAME");
-        System.out.printf("%10s", "QUANTITY");
-        System.out.printf("%15s", "PRICE");
-        System.out.print("   ");
-        System.out.printf("%-50s", "DESCRIPTION");
-        int count = 0;
-        for (Product product : list) {
-            System.out.println();
-            System.out.printf("%-3d", ++count);
-            System.out.printf("%5d", product.getID());
-            System.out.print("   ");
-            System.out.printf("%-30s", product.getName());
-            System.out.printf("%10s", product.getAmount());
-            System.out.printf(Locale.US, "%,15.2f", product.getPrice());
-            System.out.print("   ");
-            System.out.printf("%-50s", product.getDescription());
-        }
-        System.out.println();
+        view.pagination(result, 5);
     }
 
-    public void sortByPrice() {
-        while (true) {
-            view.sortByPriceMenu();
-            int selection = validateIntInput("selection");
-            if (selection == -1) break;
-            if (selection ==1){
-                list.getProdList().sort((o1, o2) -> {
-                    if (o1.getPrice() < o2.getPrice()) return -1;
-                    return o1.getPrice() > o2.getPrice() ? 1 : 0;
-                });
-                show(list.getProdList());
-                System.out.println("Sorted ascending by price, press enter");
-                sc.nextLine();
-            }else if (selection ==2){
-                list.getProdList().sort((o1, o2) -> {
-                    if (o1.getPrice() < o2.getPrice()) return 1;
-                    return o1.getPrice() > o2.getPrice() ? -1 : 0;
-                });
-                show(list.getProdList());
-                System.out.println("Sorted descending by price, press enter");
-                sc.nextLine();
-            }
-
-        }
-    }
 
     public void exit() {
         System.out.println("Good bye!");
         System.exit(0);
+    }
+
+    public void sort() {
+        if (list.isEmpty()) {
+            System.out.println("There are no products in the list, press enter");
+            sc.nextLine();
+            return;
+        }
+        int selection;
+        while (true) {
+            view.menu("Sort by:", "Price", "Name", "Quantity");
+            selection = validateIntInput("selection");
+            if (selection == -1) break;
+            switch (selection) {
+                case 1 -> {
+                    view.sortSubMenus("Sort by Price:");
+                    selection = validateIntInput("");
+                    if (selection == -1) break;
+                    if (selection == 1) {
+                        list.getProdList().sort(new ByPriceASC());
+                        view.pagination(list.getProdList(), 10);
+                    } else if (selection == 2) {
+                        list.getProdList().sort(new ByPriceDESC());
+                        view.pagination(list.getProdList(), 10);
+                    }
+                }
+                case 2 -> {
+                    view.sortSubMenus("Sort by Name:");
+                    selection = validateIntInput("");
+                    if (selection == -1) break;
+                    if (selection == 1) {
+                        list.getProdList().sort(new ByNameASC());
+                        view.pagination(list.getProdList(), 10);
+                    }
+                    if (selection == 2) {
+                        list.getProdList().sort(new ByNameDESC());
+                        view.pagination(list.getProdList(), 10);
+                    }
+                }
+                case 3 -> {
+                    view.sortSubMenus("Sort by quantity:");
+                    selection = validateIntInput("");
+                    if (selection == -1) break;
+                    if (selection == 1) {
+                        list.getProdList().sort(new ByQuantityASC());
+                        view.pagination(list.getProdList(), 10);
+                    }
+                    if (selection == 2) {
+                        list.getProdList().sort(new ByQuantityDESC());
+                        view.pagination(list.getProdList(), 10);
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    public void writeToFile() {
+        view.menu("Export as:", "Text document in table", "CSV format");
+        int selection;
+        do {
+            selection = validateIntInput("selection");
+            if (selection == -1) break;
+            switch (selection) {
+                case 1 -> {
+                    File file = new File("");
+                    try {
+                        FileWriter writer = new FileWriter(file.getCanonicalPath() + "/files/products.txt");
+                        BufferedWriter buffer = new BufferedWriter(writer);
+                        buffer.write(view.show(list.getProdList()));
+                        buffer.close();
+                        writer.close();
+                        System.out.println("Exported successfully at "+ file.getCanonicalPath()+ "/files/products.txt");
+                    } catch (IOException e) {
+                        System.out.println("Write failed: " + e.getMessage());
+                    }
+                }
+                case 2 -> {
+                    File file = new File("");
+                    try {
+                        FileWriter writer = new FileWriter(file.getCanonicalPath() + "/files/products.tsv");
+                        BufferedWriter buffer = new BufferedWriter(writer);
+                        ArrayList<Product> products = list.getProdList();
+                        for (Product product : products) {
+                            buffer.write(String.valueOf(product.getID()));
+                            buffer.write("\t");
+                            buffer.write(product.getName());
+                            buffer.write("\t");
+                            buffer.write(String.valueOf(product.getPrice()));
+                            buffer.write("\t");
+                            buffer.write(String.valueOf(product.getAmount()));
+                            buffer.write("\t");
+                            buffer.write(String.valueOf(product.getDescription()));
+                            buffer.write("\t");
+                            buffer.write(product.getDateAdded());
+                            buffer.write("\n");
+                        }
+                        buffer.close();
+                        writer.close();
+                        System.out.println("Exported successfully at " + file.getCanonicalPath() + "/files/products.tsv");
+                    } catch (IOException e) {
+                        System.out.println("Write failed: " + e.getMessage());
+                    }
+                }
+            }
+        } while (true);
+    }
+    public  ArrayList<Product> readData() {
+        File file = new File("");
+        ArrayList<Product> dataProducts = new ArrayList<>();
+        try {
+            FileReader reader = new FileReader(file.getCanonicalPath() + "/files/products.tsv");
+            BufferedReader bf = new BufferedReader(reader);
+            while (true) {
+                String line = bf.readLine();
+                if (line == null) break;
+                String[] values = line.split("\t");
+                int id = Integer.parseInt(values[0].trim());
+                String name = values[1];
+                double price = Double.parseDouble(values[2].trim());
+                int quantity = Integer.parseInt(values[3].trim());
+                String description = values[4];
+                String date = values[5];
+                Product product = new Product(name, quantity, price, description);
+                product.setID(id);
+                product.setDateAdded(date);
+                dataProducts.add(product);
+            }
+            return dataProducts;
+        } catch (IOException e) {
+            System.out.println("File not found:");
+            return null;
+        }
     }
 }
