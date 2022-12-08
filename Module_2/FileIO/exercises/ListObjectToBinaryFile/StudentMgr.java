@@ -14,6 +14,9 @@ public class StudentMgr {
         students.add(new Student(5, "Nguyễn Khắc Nhật", "Hà Nội"));
         boolean status = readerAndWriter.writeToFile("./data/students.csv", students);
         System.out.println(status ? "Success" : "Failed");
+
+
+
         List<Student> readStudents = readerAndWriter.readFromFile("./data/students.csv");
         for (Student student : readStudents) {
             System.out.println(student);
