@@ -1,7 +1,5 @@
 package FileIOProductMgr;
 
-import FileObjectIOS.Person;
-
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -12,7 +10,6 @@ public class FOOStream {
         try (ObjectOutputStream oop = new ObjectOutputStream(new FileOutputStream(path))) {
             oop.writeObject(products);
             oop.flush();
-            oop.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
