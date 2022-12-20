@@ -6,11 +6,12 @@ public class Main {
         Thread odd = new Thread(new OddThread());
         Thread even = new Thread(new EvenThread());
         odd.start();
-        try {
-            odd.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        odd.notify();
+//        try {
+//            odd.join();
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
         even.start();
         System.out.println("Main ended");
     }

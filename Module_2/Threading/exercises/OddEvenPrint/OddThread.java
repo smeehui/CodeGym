@@ -2,7 +2,7 @@ package OddEvenPrint;
 
 public class OddThread implements Runnable{
     @Override
-    public void run() {
+     public void run() {
         for (int i = 1; i < 10; i += 2) {
             System.out.println("Odd: " + i);
             try {
