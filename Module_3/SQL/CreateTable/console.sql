@@ -1,0 +1,44 @@
+DROP DATABASE IF EXISTS QuanLiDiemThi;
+CREATE DATABASE IF NOT EXISTS QuanLiDiemThi;
+# HocSinh(MaHS, TenHS, NgaySinh, Lop, GT)
+#
+# MonHoc(MaMH, TenMH, MaGV)
+#
+# BangDiem(MaHS, MaMH, DiemThi, NgayKT)
+#
+# GiaoVien(MaGV, TenGV, SDT)
+
+USE QuanLiDiemThi;
+CREATE TABLE HocSinh
+(
+    MaHS     VARCHAR(20) PRIMARY KEY,
+    TenHS    VARCHAR(50) NOT NULL,
+    NgaySinh DATE        NOT NULL,
+    Lop      VARCHAR(50) NOT NULL,
+    GT       boolean     NOT NULL
+);
+CREATE TABLE MonHoc
+(
+    MaMH  VARCHAR(20) PRIMARY KEY,
+    TenMH VARCHAR(50) NOT NULL
+);
+CREATE TABLE BangDiem
+(
+    MaHS    VARCHAR(20) NOT NULL,
+    FOREIGN KEY HsFK (MaHS) REFERENCES HocSinh (MaHS),
+    MaMh    VARCHAR(20) NOT NULL,
+    FOREIGN KEY MhFk (MaMh) REFERENCES MonHoc (MaMH),
+    PRIMARY KEY (MaMh,MaHS),
+    DiemThi FLOAT4,
+    NgayKT  DATE
+);
+CREATE TABLE GiaoVien
+(
+    MaGV  VARCHAR(20) PRIMARY KEY,
+    TenGV VARCHAR(50),
+    SDT   VARCHAR(50)
+);
+ALTER TABLE MonHoc
+ADD MaGV VARCHAR(20);
+ALTER TABLE MonHoc
+ADD CONSTRAINT GvFk FOREIGN KEY (MaGV) REFERENCES GiaoVien(MaGV);
