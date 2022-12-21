@@ -1,0 +1,33 @@
+USE QuanLyBanHang;
+CREATE TABLE IF NOT EXISTS Customer
+(
+    cID INT PRIMARY KEY AUTO_INCREMENT,
+    cName VARCHAR(50) NOT NULL,
+    cAge INT NOT NULL
+);
+CREATE TABLE IF NOT EXISTS Orders
+(
+    oID        INT PRIMARY KEY,
+    cID        INT      NOT NULL,
+    oDate      DATETIME NOT NULL,
+    totalPrice FLOAT    NOT NULL,
+    CONSTRAINT fkCustomer FOREIGN KEY (cID) REFERENCES Customer (cID)
+)
+;
+
+CREATE TABLE IF NOT EXISTS Product
+(
+    pID INT PRIMARY KEY ,
+    pName VARCHAR(50) NOT NULL,
+    pPrice FLOAT NOT NULL
+)
+;
+CREATE TABLE IF NOT EXISTS OrderDetails
+(
+    oID INT,
+    pID INT,
+    oQty INT,
+    CONSTRAINT orderDetailsPK PRIMARY KEY (oID, pID),
+    CONSTRAINT fkOrderDetailsID FOREIGN KEY (oID) REFERENCES OrderDetails (pID),
+    CONSTRAINT fkOrderDetailsPID FOREIGN KEY (pID) REFERENCES Product(pID)
+);
