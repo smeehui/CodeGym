@@ -10,7 +10,20 @@ LEFT JOIN  Mark M  on s.SubID = M.SubID
 WHERE Mark >= ALL (SELECT Mark FROM Mark);
 
 # Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên, xếp hạng theo thứ tự điểm giảm dần
-SELECT s.StudentID, StudentName, Address, Phone, Status,AVG(M.Mark) AVERAGE_MARK FROM Student s
-JOIN Mark M on s.StudentID = M.StudentID
-GROUP BY s.StudentID, StudentName, Address, Phone, Status
-ORDER BY AVERAGE_MARK DESC ;
+SELECT s.StudentID, StudentName, Address, Phone, `Status`, AVG(M.Mark) AVERAGE_MARK
+FROM Student s
+         JOIN Mark M on s.StudentID = M.StudentID
+GROUP BY s.StudentID, StudentName, Address, Phone, `Status`
+ORDER BY AVERAGE_MARK DESC   ;
+
+
+CREATE VIEW Student_Rank
+AS SELECT s.StudentID, StudentName, Address, Phone, `Status`,AVG(M.Mark) AVERAGE_MARK FROM Student s
+                                                                                             JOIN Mark M on s.StudentID = M.StudentID
+   GROUP BY s.StudentID, StudentName, Address, Phone, `Status`
+   ORDER BY AVERAGE_MARK DESC;
+EXPLAIN
+SELECT *
+FROM Student
+WHERE (StudentID < 5) ;
+
