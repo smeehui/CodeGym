@@ -10,11 +10,13 @@ public class Triangle extends Shape {
     }
 
     public Triangle(double side1, double side2, double side3) {
-        this.setSide1(side1);
-        this.setSide2(side2);
-        this.setSide3(side3);
-    } public Triangle(double side1, double side2, double side3, String color, boolean isFilled) {
-        super(color,isFilled);
+        this.side1 = side1;
+        this.side2 = side2;
+        this.side3 = side3;
+    }
+
+    public Triangle(double side1, double side2, double side3, String color, boolean isFilled) {
+        super(color, isFilled);
         this.setSide1(side1);
         this.setSide2(side2);
         this.setSide3(side3);
@@ -45,21 +47,24 @@ public class Triangle extends Shape {
     }
 
     public double getArea() {
-        return Math.sqrt(this.getHeron()*(this.getHeron()-this.getSide1())*(this.getHeron()-this.getSide2())*(this.getHeron()-this.getSide3()));
+        return Math.sqrt(this.getHeron() * (this.getHeron() - this.getSide1()) * (this.getHeron() - this.getSide2()) * (this.getHeron() - this.getSide3()));
     }
-    public double getHeron(){
-        return (this.getSide1()+this.getSide2()+ this.getSide3())/2;
+
+    public double getHeron() {
+        return (this.getSide1() + this.getSide2() + this.getSide3()) / 2;
     }
+
     public double getPerimeter() {
-        return this.getSide1()+this.getSide2()+this.getSide3();
+        return this.getSide1() + this.getSide2() + this.getSide3();
     }
+
     @Override
     public String toString() {
         return "A rectangle with three sides: "
-                + this.getSide1()+", " + this.getSide2()+ ", "+ this.getSide3()+ ",\n"
-                + "perimeter is: "+ this.getPerimeter()+ ",\n"
-                + "area is: " + this.getArea() +"\n"
-                + "extended from "+ super.toString();
+               + this.getSide1() + ", " + this.getSide2() + ", " + this.getSide3() + ",\n"
+               + "perimeter is: " + this.getPerimeter() + ",\n"
+               + "area is: " + this.getArea() + "\n"
+               + "extended from " + super.toString();
     }
 
 }

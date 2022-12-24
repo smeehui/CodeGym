@@ -1,6 +1,6 @@
 package circle;
 
-public class ComparableCircle extends Circle implements Comparable<ComparableCircle> {
+public class ComparableCircle extends Circle{
 
     public ComparableCircle() {
         super();
@@ -10,10 +10,4 @@ public class ComparableCircle extends Circle implements Comparable<ComparableCir
         super(radius);
     }
 
-    public int compareTo(ComparableCircle circle) {
-//        return Double.compare(this.getRadius(), circle.getRadius()); Java double compare
-        if (this.getRadius() > circle.getRadius()) return 1;
-        if (this.getRadius() == circle.getRadius()) return 0;
-        return -1;
-    }
 }
