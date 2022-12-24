@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0eea4e76-d040-42e7-ac24-b1a7bcb9d579" name="Changes" comment="Java Test Driven Programming FindAbsolute">
-      <change afterPath="$PROJECT_DIR$/TestDrivenProgramming/NextDayCalculator/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TestDrivenProgramming/NextDayCalculator/src/main/java/org/example/NextDayCalculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TestDrivenProgramming/NextDayCalculator/src/test/java/org/example/NextDayCalculatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="0eea4e76-d040-42e7-ac24-b1a7bcb9d579" name="Changes" comment="Java Test Driven Programming Daycalculate" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -53,24 +45,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last_opened_file_path": "D:/Codegym/Module_2/ClassAndObject/TestDrivenProgramming",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Codegym/Module_2/ClassAndObject/TestDrivenProgramming&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Codegym\Module_2\ClassAndObject\Tenis" />
@@ -205,6 +197,7 @@
       <workItem from="1668760260586" duration="485000" />
       <workItem from="1668760957429" duration="84000" />
       <workItem from="1668765879263" duration="6280000" />
+      <workItem from="1668908516272" duration="58000" />
     </task>
     <task id="LOCAL-00001" summary="Rectangle class">
       <created>1667962353222</created>
@@ -374,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1668765918079</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Java Test Driven Programming Daycalculate">
+      <created>1668908556647</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1668908556647</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +413,8 @@
     <MESSAGE value="Java Refractor FizzBuzz" />
     <MESSAGE value="Java Refractor Method Cylinder" />
     <MESSAGE value="Java Test Driven Programming FindAbsolute" />
-    <option name="LAST_COMMIT_MESSAGE" value="Java Test Driven Programming FindAbsolute" />
+    <MESSAGE value="Java Test Driven Programming Daycalculate" />
+    <option name="LAST_COMMIT_MESSAGE" value="Java Test Driven Programming Daycalculate" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
