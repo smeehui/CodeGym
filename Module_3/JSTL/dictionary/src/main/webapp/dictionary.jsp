@@ -1,6 +1,5 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Simple Dictionary</title>
@@ -14,7 +13,6 @@
     dict.put("computer", "Máy tính");
 
     String search = request.getParameter("search");
-
     String result = dict.get(search);
     if (result != null) {
         out.println("Word: " + search);
