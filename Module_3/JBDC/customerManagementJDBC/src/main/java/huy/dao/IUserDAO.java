@@ -13,7 +13,11 @@ public interface IUserDAO {
     public List<User> selectAllUsers();
     List<User> selectRemovedUsers();
 
-    public boolean deleteUser(int id) throws SQLException;
+    public boolean updateUserStatus(int id,boolean status) throws SQLException;
 
     public boolean updateUser(User user) throws SQLException;
+
+    List<User> selectByCountry(String query);
+    List<User> selectAllUserOrderByName();
+
 }

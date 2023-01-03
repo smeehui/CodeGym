@@ -28,8 +28,29 @@ public class UserServlet extends HttpServlet {
             case "edit"-> showEditForm(request,response);
             case "remove"-> removeUser(request,response);
             case "removed"-> showRemovedUsers(request, response);
+            case "search" -> seachUsers(request, response);
+            case "restore" -> restoreUser(request,response);
+            case "sort"-> shortUserByName(request, response);
             default -> showAllUsers(request, response);
         }
+    }
+
+    private void shortUserByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String type = request.getParameter("type");
+        String newType = type.equals("asc") ? "desc" : "asc";
+        List<User> users = userDAO.selectAllUserOrderByName();
+        request.setAttribute("users", users);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/all.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private void seachUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String query = request.getParameter("q");
+        List<User> users = userDAO.selectByCountry(query);
+        request.setAttribute("users", users);
+        request.setAttribute("query",query);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/all.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showRemovedUsers(HttpServletRequest request, HttpServletResponse response) {
@@ -46,7 +67,16 @@ public class UserServlet extends HttpServlet {
     private void removeUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         try {
-            userDAO.deleteUser(id);
+            userDAO.updateUserStatus(id, false);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        response.sendRedirect("/");
+    }
+    private void restoreUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        try {
+            userDAO.updateUserStatus(id, true);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

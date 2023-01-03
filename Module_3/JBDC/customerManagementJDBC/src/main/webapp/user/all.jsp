@@ -25,7 +25,7 @@
         <thead>
         <tr class="thead-dark">
             <th scope="col">ID</th>
-            <th scope="col">Tên KH</th>
+            <th scope="col">Tên KH<a class="text-right" href="${pageContext.request.contextPath}/user?action=sort&type=asc">Sort</a></th>
             <th scope="col">Email</th>
             <th scope="col">Quốc gia</th>
             <th scope="col">Actions</th>
@@ -62,7 +62,13 @@
                                       href="${pageContext.request.contextPath}/user?action=removed">Removed</a></div>
             <div class="col-3 p-1"><a href="/" class="btn btn-primary w-100">Refresh</a></div>
         </div>
-        <div class="col-6 row align-items-center"></div>
+        <div class="col-6 row align-items-center">
+            <form class="d-flex w-100 p-1 m-0" role="search" action="${pageContext.request.contextPath}/products" method="get">
+                <input class="form-control me-2 d-none" name="action" value="search">
+                <input class="form-control me-2" type="search" placeholder="Search" name="q" aria-label="Search" value="${requestScope['query']}">
+                <button class="btn btn-outline-success ml-2" type="submit">Search</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

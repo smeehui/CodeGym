@@ -14,8 +14,10 @@ public class UserDAO implements IUserDAO {
     private static final String SELECT_USER_BY_ID = "select * from users where id =?";
     private static final String SELECT_ALL_USERS = "select * from users where status=true";
     private static final String SELECT_REMOVED_USERS = "select * from users where status=false";
-    private static final String DELETE_USERS_SQL = "update users set status = false where id = ?;";
+    private static final String DELETE_USERS_SQL = "update users set status = ? where id = ?;";
     private static final String UPDATE_USERS_SQL = "update users set name = ?,email= ?, country =?where id = ?;";
+    private static final String SELECT_BY_COUNTRY = "select * from users where country like ? ";
+    private static final String SELECT_ALL_USERS_SORT_BY_NAME = "select * from users order by name ASC";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -128,13 +130,14 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public boolean deleteUser(int id) throws SQLException {
+    public boolean updateUserStatus(int id,boolean status) throws SQLException {
         boolean rowDeleted;
         try (
                 Connection connection = getConnection();
                 PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL)
         ) {
-            statement.setInt(1, id);
+            statement.setBoolean(1,status);
+            statement.setInt(2, id);
             rowDeleted = statement.executeUpdate() > 0;
         }
         return rowDeleted;
@@ -151,6 +154,63 @@ public class UserDAO implements IUserDAO {
             rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated;
+    }
+
+    @Override
+    public List<User> selectByCountry(String query) {
+        List<User> users = new ArrayList<>();
+        try(
+                Connection connection = getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_COUNTRY)
+                )
+        {
+            preparedStatement.setString(1, "%"+query+"%");
+            System.out.println(preparedStatement);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                boolean status = rs.getBoolean("status");
+                if (status){
+                    users.add(new User(id, name, email, country,status));
+                }
+            }
+            return users;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public List<User> selectAllUserOrderByName() {
+        // using try-with-resources to avoid closing resources (boiler plate code)
+        List<User> users = new ArrayList<>();
+        // Step 1: Establishing a Connection
+        try (Connection connection = getConnection();
+
+             // Step 2:Create a statement using connection object
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS_SORT_BY_NAME)) {
+            System.out.println(preparedStatement);
+            // Step 3: Execute the query or update query
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Step 4: Process the ResultSet object.
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                boolean status = rs.getBoolean("status");
+                if (status) {
+                    users.add(new User(id, name, email, country,status));
+                }
+            }
+        } catch (SQLException e) {
+            printSQLException(e);
+        }
+        return users;
     }
 
     private void printSQLException(SQLException ex) {
