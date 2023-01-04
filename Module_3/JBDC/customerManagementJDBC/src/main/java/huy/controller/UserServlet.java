@@ -31,7 +31,21 @@ public class UserServlet extends HttpServlet {
             case "search" -> seachUsers(request, response);
             case "restore" -> restoreUser(request,response);
             case "sort"-> shortUserByName(request, response);
+            case "view" -> showUserDetails(request, response);
             default -> showAllUsers(request, response);
+        }
+    }
+
+    private void showUserDetails(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        User user = userDAO.getUserById(id);
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("user/view.jsp");
+        try {
+            if (user==null) response.sendRedirect("404_notFound.jsp");
+            else dispatcher.forward(request,response);
+        } catch (IOException | ServletException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -137,7 +151,9 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
-        userDAO.insertUser(new User(id, name, email, country));
+        User user = new User(id, name, email, country);
+        user.setStatus(true);
+        userDAO.insertUserStoreP(user);
         try {
             response.sendRedirect("/");
         } catch (IOException e) {

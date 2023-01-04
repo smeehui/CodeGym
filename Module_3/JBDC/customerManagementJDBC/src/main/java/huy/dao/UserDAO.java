@@ -195,7 +195,6 @@ public class UserDAO implements IUserDAO {
             System.out.println(preparedStatement);
             // Step 3: Execute the query or update query
             ResultSet rs = preparedStatement.executeQuery();
-
             // Step 4: Process the ResultSet object.
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -211,6 +210,48 @@ public class UserDAO implements IUserDAO {
             printSQLException(e);
         }
         return users;
+    }
+
+    @Override
+    public User getUserById(int id) {
+        User user =null;
+        String query = "{CALL getUserById(?)}";
+        try (
+                Connection connection = getConnection();
+                CallableStatement callableStatement = connection.prepareCall(query)
+        ) {
+            callableStatement.setInt(1,id);
+            ResultSet rs = callableStatement.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String email = rs.getString("email");
+                String country = rs.getString("country");
+                boolean status = rs.getBoolean("status");
+                user = new User(id, name, email, country,status);
+            }
+            return user;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public void insertUserStoreP(User user) {
+        String query = "{CALL insertUser(?,?,?,?,?)}";
+        try (
+                Connection connection = getConnection();
+                CallableStatement callableStatement = connection.prepareCall(query)
+                )
+        {
+            callableStatement.setInt(1,user.getId());
+            callableStatement.setString(2, user.getName());
+            callableStatement.setString(3,user.getCountry());
+            callableStatement.setString(4, user.getEmail());
+            callableStatement.setBoolean(5, user.isStatus());
+            callableStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void printSQLException(SQLException ex) {
