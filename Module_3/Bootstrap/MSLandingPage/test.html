@@ -14,60 +14,35 @@
         <link rel="stylesheet" href="style.css" />
     </head>
     <body>
-        <div class="container border p-2 mt-5">
-            <h3 class="h3 text-center">Thêm sản phẩm mới</h3>
-            <form class="row g-3">
-                <div class="col-md-6">
-                    <label for="name" class="form-label">Tên sản phẩm</label>
-                    <input class="form-control" id="name" name="name" />
-                </div>
-                <div class="col-md-6">
-                    <label for="quantity" class="form-label">Số lượng</label>
-                    <input
-                        class="form-control"
-                        id="quantity"
-                        name="quantity"
-                        type="number"
-                    />
-                </div>
-                <div class="col-12">
-                    <label for="price" class="form-label">Giá</label>
-                    <input
-                        type="number"
-                        class="form-control"
-                        id="price"
-                        name="price"
-                    />
-                </div>
-                <div class="col-9">
-                    <label for="desc" class="form-label">Mô tả</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        id="desc"
-                        value="Hàng mới"
-                        name="desc"
-                    />
-                </div>
-                <div class="col-3">
-                    <label for="status" class="form-label">Mô tả</label>
-                    <select
-                        id="status"
-                        class="form-select form-control"
-                        name="available"
-                    >
-                        <option selected>Choose...</option>
-                        <option value="true">Có sẵn</option>
-                        <option value="false">Không có sẵn</option>
-                    </select>
-                </div>
-
-                <div class="col-12 mt-2">
-                    <button type="submit" class="btn btn-primary">
-                        Xác nhận
-                    </button>
-                </div>
-            </form>
+        <div
+            class="container mt-5"
+            style="box-shadow: 0 0 10px black; padding: 10px"
+        >
+            <table class="table table-bordered table-light">
+                <thead>
+                    <tr>
+                        <th class="text-center h3" scope="col" colspan="5">
+                            Chi tiết khách hàng
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">ID:</th>
+                        <td>001</td>
+                        <th style="width: fit-content">Tên đầy đủ:</th>
+                        <td colspan="2">Nguyen Van A</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Email:</th>
+                        <td colspan="4">Jacob</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Địa chỉ</th>
+                        <td colspan="5"></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </body>
     <script

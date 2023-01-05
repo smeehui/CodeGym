@@ -9,6 +9,7 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name = "UserServlet", value = "/")
@@ -33,6 +34,19 @@ public class UserServlet extends HttpServlet {
             case "sort"-> shortUserByName(request, response);
             case "view" -> showUserDetails(request, response);
             default -> showAllUsers(request, response);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        try {
+            switch (action) {
+                case "add" -> addNewUser(request, response);
+                case "edit"-> updateUser(request, response);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -124,18 +138,7 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        try {
-            switch (action) {
-                case "add" -> addNewUser(request, response);
-                case "edit"-> updateUser(request, response);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+
 
     private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -143,7 +146,7 @@ public class UserServlet extends HttpServlet {
         String email = request.getParameter("email");
         String country = request.getParameter("country");
         boolean isSuccess = userDAO.updateUser(new User(id, name, email, country));
-        response.sendRedirect("/");
+        if (isSuccess) response.sendRedirect("/");
     }
 
     private void addNewUser(HttpServletRequest request, HttpServletResponse response) throws SQLException {
@@ -153,7 +156,17 @@ public class UserServlet extends HttpServlet {
         String country = request.getParameter("country");
         User user = new User(id, name, email, country);
         user.setStatus(true);
-        userDAO.insertUserStoreP(user);
+//        Common method
+//        userDAO.insertUser(user);
+//        use Procedure
+//        userDAO.insertUserStoreP(user);
+//        use Transaction
+        String[] permissionsStr = request.getParameterValues("permission");
+        int[] permissionsInt = new int[permissionsStr.length];
+        for (int i = 0; i < permissionsStr.length; i++) {
+            permissionsInt[i] = Integer.parseInt(permissionsStr[i]);
+        }
+        userDAO.addUserTransaction(user,permissionsInt);
         try {
             response.sendRedirect("/");
         } catch (IOException e) {
