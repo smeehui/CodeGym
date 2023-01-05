@@ -1,3 +1,42 @@
+DELIMITER //
+DROP PROCEDURE IF EXISTS getCusById;
+CREATE PROCEDURE getCusById
+
+(IN cusID INT(2))
+
+BEGIN
+
+    SELECT * FROM customers WHERE customerNumber = cusID;
+
+END //
+DELIMITER //;
+call getCusById(103);
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS GetCustomersCountByCity;
+CREATE PROCEDURE GetCustomersCountByCity(
+
+    IN  in_city VARCHAR(50),
+
+    OUT total INT
+
+)
+
+BEGIN
+
+    SELECT COUNT(customerNumber)
+
+    INTO total
+
+    FROM customers
+
+    WHERE city = in_city;
+
+END//
+
+DELIMITER ;
+CAll GetCustomersCountByCity('Lyon', @total);
+SELECT @total
 USE classicmodels;
 
 -- IN parameter

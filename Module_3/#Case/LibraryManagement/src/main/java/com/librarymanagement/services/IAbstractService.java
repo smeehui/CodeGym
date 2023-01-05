@@ -1,11 +1,13 @@
 package com.librarymanagement.services;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IAbstractService<Model, ID> {
-    List<Model> findAll();
+    Map<ID,Model> getAll();
 
-    Model findById(ID id);
+    Map<ID, Model> getAllExists();
+    Model getById(ID id);
 
     boolean existsById(ID id);
 
@@ -13,5 +15,5 @@ public interface IAbstractService<Model, ID> {
 
     void update(Model newEntity);
 
-    public abstract void deleteById(Long id);
+    void deleteById(Long id);
 }

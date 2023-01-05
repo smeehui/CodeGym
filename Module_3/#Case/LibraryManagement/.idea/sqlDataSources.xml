@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDataSourceStorage">
+    <option name="dataSources">
+      <list>
+        <State>
+          <option name="id" value="83b6ec84-f462-4bf8-acf6-513392e99239" />
+          <option name="name" value="@localhost (DDL)" />
+          <option name="languageId" value="MySQL" />
+          <option name="urls">
+            <array>
+              <option value="file://$PROJECT_DIR$/DDL Database" />
+            </array>
+          </option>
+        </State>
+      </list>
+    </option>
+  </component>
+</project>

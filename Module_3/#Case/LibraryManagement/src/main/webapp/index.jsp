@@ -399,7 +399,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./user/all.html">
+                    <a href="./user?action=viewAllActive">
                         <i class="bi bi-circle"></i
                         ><span>Xem danh sách</span>
                     </a>

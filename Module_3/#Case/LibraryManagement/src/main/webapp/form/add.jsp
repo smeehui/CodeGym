@@ -78,10 +78,10 @@
                 action="#"
         >
             <input
-                    type="text"
-                    name="query"
-                    placeholder="Search"
-                    title="Enter search keyword"
+                   type="text"
+                   name="query"
+                   placeholder="Search"
+                   title="Enter search keyword"
             />
             <button type="submit" title="Search">
                 <i class="bi bi-search"></i>
@@ -660,7 +660,7 @@
 
     <section class="section">
         <div class="row">
-            <c:if test="${requestScope.get('view')=='user'}">
+            <c:if test="${requestScope['view']=='user'}">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
@@ -669,31 +669,48 @@
                             </h5>
 
                             <!-- General Form Elements -->
-                            <form>
+                            <form method="post">
                                 <div class="row mb-3">
                                     <label
                                             class="col-sm-2 col-form-label"
                                             for="inputName"
                                     >Tên đầy đủ</label
                                     >
-                                    <div class="col-sm-10">
-                                        <input
-                                                id="inputName"
-                                                class="form-control"
-                                                type="text"
+                                    <div class="col-sm-4">
+                                        <input required
+                                               name="userFullName"
+                                               id="inputName"
+                                               class="form-control"
+                                               type="text"
+                                        />
+
+                                    </div>
+                                    <label
+                                            class="col-sm-2 col-form-label text-center border-start"
+                                            for="inputAddress"
+                                    >Địa chỉ</label
+                                    >
+                                    <div class="col-sm-4">
+                                        <input required
+                                               name = "userAddress"
+                                               id="inputAddress"
+                                               class="form-control"
+                                               type="text"
                                         />
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label
                                             class="col-sm-2 col-form-label"
-                                            for="inputText"
+                                            for="inputUsername"
                                     >Username</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                class="form-control"
-                                                type="text"
+                                        <input required
+                                               id="inputUsername"
+                                               name = "username"
+                                               class="form-control"
+                                               type="text"
                                         />
                                     </div>
                                 </div>
@@ -704,23 +721,11 @@
                                     >Password</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                class="form-control"
-                                                type="password"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label
-                                            class="col-sm-2 col-form-label"
-                                            for="inputAddress"
-                                    >Địa chỉ</label
-                                    >
-                                    <div class="col-sm-10">
-                                        <input
-                                                id="inputAddress"
-                                                class="form-control"
-                                                type="text"
+                                        <input required
+                                               id="inputPassword"
+                                               name = "userPassword"
+                                               class="form-control"
+                                               type="password"
                                         />
                                     </div>
                                 </div>
@@ -731,9 +736,11 @@
                                     >Email</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                class="form-control"
-                                                type="email"
+                                        <input required
+                                               id="inputEmail"
+                                               name = "userEmail"
+                                               class="form-control"
+                                               type="email"
                                         />
                                     </div>
                                 </div>
@@ -744,9 +751,11 @@
                                     >Phone number</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                class="form-control"
-                                                type="number"
+                                        <input required
+                                               id="inputNumber"
+                                               name = "userNumber"
+                                               class="form-control"
+                                               type="number"
                                         />
                                     </div>
                                 </div>
@@ -758,32 +767,33 @@
                                     </legend>
                                     <div class="col-sm-10 ">
                                         <div class="form-check d-inline-block m-x-3">
-                                            <input
-                                                    checked
-                                                    class="form-check-input"
-                                                    id="gridRadios1"
-                                                    name="gridRadios"
-                                                    type="radio"
-                                                    value="option1"
+                                            <input required
+                                                   name = ""
+                                                   checked
+                                                   class="form-check-input"
+                                                   id="memberRole"
+                                                   name="userRole"
+                                                   type="radio"
+                                                   value="1"
                                             />
                                             <label
                                                     class="form-check-label"
-                                                    for="gridRadios1"
+                                                    for="memberRole"
                                             >
                                                 Thành viên
                                             </label>
                                         </div>
                                         <div class="form-check d-inline-block">
-                                            <input
-                                                    class="form-check-input"
-                                                    id="gridRadios2"
-                                                    name="gridRadios"
-                                                    type="radio"
-                                                    value="option2"
+                                            <input required
+                                                   class="form-check-input"
+                                                   id="adminRole"
+                                                   name="userRole"
+                                                   type="radio"
+                                                   value="2"
                                             />
                                             <label
                                                     class="form-check-label"
-                                                    for="gridRadios2"
+                                                    for="adminRole"
                                             >
                                                 Thủ thư
                                             </label>
@@ -833,9 +843,10 @@
                                     >Text</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                type="text"
-                                                class="form-control"
+                                        <input required
+                                               name = ""
+                                               type="text"
+                                               class="form-control"
                                         />
                                     </div>
                                 </div>
@@ -846,9 +857,9 @@
                                     >Tên sách</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                type="email"
-                                                class="form-control"
+                                        <input required
+                                               type="email"
+                                               class="form-control"
                                         />
                                     </div>
                                 </div>
@@ -859,9 +870,9 @@
                                     >Mã ISBN</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                type="password"
-                                                class="form-control"
+                                        <input required
+                                               type="password"
+                                               class="form-control"
                                         />
                                     </div>
                                 </div>
@@ -872,9 +883,9 @@
                                     >Number</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                type="number"
-                                                class="form-control"
+                                        <input required
+                                               type="number"
+                                               class="form-control"
                                         />
                                     </div>
                                 </div>
@@ -885,10 +896,10 @@
                                     >File Upload</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                class="form-control"
-                                                type="file"
-                                                id="formFile"
+                                        <input required
+                                               class="form-control"
+                                               type="file"
+                                               id="formFile"
                                         />
                                     </div>
                                 </div>
@@ -899,9 +910,9 @@
                                     >Date</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                type="date"
-                                                class="form-control"
+                                        <input required
+                                               type="date"
+                                               class="form-control"
                                         />
                                     </div>
                                 </div>
@@ -912,9 +923,9 @@
                                     >Time</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                type="time"
-                                                class="form-control"
+                                        <input required
+                                               type="time"
+                                               class="form-control"
                                         />
                                     </div>
                                 </div>
@@ -926,12 +937,12 @@
                                     >Color Picker</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                type="color"
-                                                class="form-control form-control-color"
-                                                id="exampleColorInput"
-                                                value="#4154f1"
-                                                title="Choose your color"
+                                        <input required
+                                               type="color"
+                                               class="form-control form-control-color"
+                                               id="exampleColorInput"
+                                               value="#4154f1"
+                                               title="Choose your color"
                                         />
                                     </div>
                                 </div>
@@ -956,13 +967,13 @@
                                     </legend>
                                     <div class="col-sm-10">
                                         <div class="form-check">
-                                            <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="gridRadios"
-                                                    id="gridRadios1"
-                                                    value="option1"
-                                                    checked
+                                            <input required
+                                                   class="form-check-input"
+                                                   type="radio"
+                                                   name="gridRadios"
+                                                   id="gridRadios1"
+                                                   value="option1"
+                                                   checked
                                             />
                                             <label
                                                     class="form-check-label"
@@ -972,12 +983,12 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="gridRadios"
-                                                    id="gridRadios2"
-                                                    value="option2"
+                                            <input required
+                                                   class="form-check-input"
+                                                   type="radio"
+                                                   name="gridRadios"
+                                                   id="gridRadios2"
+                                                   value="option2"
                                             />
                                             <label
                                                     class="form-check-label"
@@ -987,13 +998,13 @@
                                             </label>
                                         </div>
                                         <div class="form-check disabled">
-                                            <input
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    name="gridRadios"
-                                                    id="gridRadios"
-                                                    value="option"
-                                                    disabled
+                                            <input required
+                                                   class="form-check-input"
+                                                   type="radio"
+                                                   name="gridRadios"
+                                                   id="gridRadios"
+                                                   value="option"
+                                                   disabled
                                             />
                                             <label
                                                     class="form-check-label"
@@ -1012,10 +1023,10 @@
                                     </legend>
                                     <div class="col-sm-10">
                                         <div class="form-check">
-                                            <input
-                                                    class="form-check-input"
-                                                    type="checkbox"
-                                                    id="gridCheck1"
+                                            <input required
+                                                   class="form-check-input"
+                                                   type="checkbox"
+                                                   id="gridCheck1"
                                             />
                                             <label
                                                     class="form-check-label"
@@ -1026,11 +1037,11 @@
                                         </div>
 
                                         <div class="form-check">
-                                            <input
-                                                    class="form-check-input"
-                                                    type="checkbox"
-                                                    id="gridCheck2"
-                                                    checked
+                                            <input required
+                                                   class="form-check-input"
+                                                   type="checkbox"
+                                                   id="gridCheck2"
+                                                   checked
                                             />
                                             <label
                                                     class="form-check-label"
@@ -1047,11 +1058,11 @@
                                     >Disabled</label
                                     >
                                     <div class="col-sm-10">
-                                        <input
-                                                type="text"
-                                                class="form-control"
-                                                value="Read only / Disabled"
-                                                disabled
+                                        <input required
+                                               type="text"
+                                               class="form-control"
+                                               value="Read only / Disabled"
+                                               disabled
                                         />
                                     </div>
                                 </div>
