@@ -1,0 +1,41 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.parent{
+    width: 120px;
+    background-color: black;
+    color: white;
+    list-style-type: none;
+    cursor: pointer;
+}
+.sub{
+    position: relative;
+    width: 200px;
+    display: inline-block;
+}
+.sub>span{
+    width: 100px;
+}
+.parent li{
+    width: 100%;
+    padding: 5px 0 5px 10px;
+}
+.parent li:hover{
+    background-color: red;
+}
+.child{
+    text-align: left;
+    position: absolute;
+    background-color: black;
+    color: white;
+    display: none;
+    list-style-type: none;
+    width: 150px;
+    left: 100%;
+    top: 0;
+}
+.parent li:hover>.child{
+    display: inline;
+}

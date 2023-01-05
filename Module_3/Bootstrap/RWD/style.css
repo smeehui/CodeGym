@@ -1,0 +1,23 @@
+.card-deck {
+    margin-bottom: 30px;
+}
+@media (max-width: 700px) {
+    .card-deck {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .card {
+        width: 45%;
+        margin-left: 4px;
+        margin-right: 4px;
+        margin-bottom: 8px;
+    }
+}
+@media (max-width: 500px) {
+    .card-deck {
+        flex-wrap: wrap;
+    }
+    .card {
+        width: 100%;
+    }
+}
