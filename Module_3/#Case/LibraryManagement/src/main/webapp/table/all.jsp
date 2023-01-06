@@ -655,49 +655,97 @@
     <section class="section">
         <div class="row">
             <div class="col-lg-12">
-                <c:if test="${requestScope['view']=='user'}">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Danh sách người dùng</h5>
+               <c:set var="view" value="${requestScope['view']}"/>
+                <c:choose>
+                    <c:when test="${view=='user'}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Danh sách người dùng</h5>
 
-                            <!-- Default Table -->
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Tên đầy đủ</th>
-                                    <th scope="col">Số điện thoại</th>
-                                    <th scope="col">Địa chỉ</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Quyền</th>
-                                    <th scope="col" class = "text-center">Quản lý</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <c:forEach var="user" items="${requestScope['users'].values()}">
+                                <!-- Default Table -->
+                                <table class="table">
+                                    <thead>
                                     <tr>
-                                        <th scope="row">${user.getId()}</th>
-                                        <td >${user.getFullName()}</td>
-                                        <td >${user.getMobile()}</td>
-                                        <td >${user.getAddress()}</td>
-                                        <td >${user.getEmail()}</td>
-                                        <td >${user.getRole()}</td>
-                                        <td
-                                                class="d-flex justify-content-around"
-                                        >
-                                            <i
-                                                    class="bi bi-person-gear btn btn-primary"
-                                            ></i>
-                                            <i class="bi bi-person-fill-x btn btn-warning"></i>
-                                        </td>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Tên đầy đủ</th>
+                                        <th scope="col">Số điện thoại</th>
+                                        <th scope="col">Địa chỉ</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Quyền</th>
+                                        <th scope="col" class = "text-center">Quản lý</th>
                                     </tr>
-                                </c:forEach>
-                                </tbody>
-                            </table>
-                            <!-- End Default Table Example -->
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="user" items="${requestScope['users'].values()}">
+                                        <tr>
+                                            <th scope="row">${user.getId()}</th>
+                                            <td >${user.getFullName()}</td>
+                                            <td >${user.getMobile()}</td>
+                                            <td >${user.getAddress()}</td>
+                                            <td >${user.getEmail()}</td>
+                                            <td >${user.getRole()}</td>
+                                            <td
+                                                    class="d-flex justify-content-around"
+                                            >
+                                                <i
+                                                        class="bi bi-person-gear btn btn-primary"
+                                                ></i>
+                                                <i class="bi bi-person-fill-x btn btn-warning"></i>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                                <!-- End Default Table Example -->
+                            </div>
                         </div>
-                    </div>
-                </c:if>
+                    </c:when>
+                    <c:when test="${view=='book'}">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Danh sách người dùng</h5>
+
+                                <!-- Default Table -->
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">ISBN</th>
+                                        <th scope="col">Tiêu đề</th>
+                                        <th scope="col">Tác giả</th>
+                                        <th scope="col">Thể loại</th>
+                                        <th scope="col">Ngôn ngữ</th>
+                                        <th scope="col">Trạng thái</th>
+                                        <th scope="col" class = "text-center">Quản lý</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <c:forEach var="book" items="${requestScope['books'].values()}">
+                                        <tr>
+                                            <th scope="row">${book.getId()}</th>
+                                            <td >${book.getIsbn()}</td>
+                                            <td >${book.getTitle()}</td>
+                                            <td >${book.getAuthor()}</td>
+                                            <td >${book.getSubject()}</td>
+                                            <td >${book.getLanguage()}</td>
+                                            <td >${book.isAvailable()?"Có sẵn":"Không có sẵn"}</td>
+                                            <td
+                                                    class="d-flex justify-content-around"
+                                            >
+                                                <i
+                                                        class="bi bi-pencil-fill btn btn-primary"
+                                                ></i>
+                                                <i class="bi bi-x-circle-fill btn btn-warning"></i>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                    </tbody>
+                                </table>
+                                <!-- End Default Table Example -->
+                            </div>
+                        </div>
+                    </c:when>
+                </c:choose>
             </div>
         </div>
     </section>

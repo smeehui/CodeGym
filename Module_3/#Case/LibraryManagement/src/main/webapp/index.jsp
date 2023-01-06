@@ -399,7 +399,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="./user?action=viewAllActive">
+                    <a href="./user?action=all">
                         <i class="bi bi-circle"></i
                         ><span>Xem danh sách</span>
                     </a>
@@ -437,7 +437,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="forms-layouts.html">
+                    <a href="/book?action=all">
                         <i class="bi bi-circle"></i
                         ><span>Xem danh sách</span>
                     </a>

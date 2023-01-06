@@ -1,6 +1,5 @@
 package com.librarymanagement.services;
 
-import java.util.List;
 import java.util.Map;
 
 public interface IAbstractService<Model, ID> {

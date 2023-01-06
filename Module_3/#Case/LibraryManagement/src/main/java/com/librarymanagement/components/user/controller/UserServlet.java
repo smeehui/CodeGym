@@ -24,8 +24,16 @@ public class UserServlet extends HttpServlet {
         String action = request.getParameter("action");
         switch (action) {
             case "add" -> showAddForm(request, response);
-            case "viewAllActive" -> showAllActiveUsers(request, response);
+            case "all" -> showAllUsers(request, response);
         }
+    }
+
+    private void showAllUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("view", "user");
+        Map<Integer, User> userMap = userDAO.getAll();
+        request.setAttribute("users", userMap);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("table/all.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showAllActiveUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

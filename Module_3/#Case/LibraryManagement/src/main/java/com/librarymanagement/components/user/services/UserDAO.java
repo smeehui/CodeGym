@@ -9,7 +9,7 @@ import java.util.Map;
 public class UserDAO implements IUserDAO {
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/libdb";
     private static final String jdbcUsername = "root";
-    private static final String jdbcPassword = "11111";
+    private static final String jdbcPassword = "Smee@99123";
 
     private static final String SELECT_ALL_USER = "SELECT * FROM users";
     private static final String SELECT_ALL_EXIST_USER = "SELECT * FROM users WHERE users.deleted =false";
