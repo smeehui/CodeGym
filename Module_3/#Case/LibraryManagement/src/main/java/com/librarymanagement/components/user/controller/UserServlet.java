@@ -8,6 +8,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.Map;
 
 @WebServlet(name = "com.librarymanagement.components.user.controller.UserServlet", value = "/user")
@@ -25,12 +26,22 @@ public class UserServlet extends HttpServlet {
         switch (action) {
             case "add" -> showAddForm(request, response);
             case "all" -> showAllUsers(request, response);
+            case "edit" -> showEditForm(request, response);
         }
+    }
+
+    private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        long id = Long.parseLong(request.getParameter("id"));
+        User user = userDAO.getById(id);
+        request.setAttribute("view","user");
+        request.setAttribute("user", user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/form/edit.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showAllUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("view", "user");
-        Map<Integer, User> userMap = userDAO.getAll();
+        Map<Long, User> userMap = userDAO.getAll();
         request.setAttribute("users", userMap);
         RequestDispatcher dispatcher = request.getRequestDispatcher("table/all.jsp");
         dispatcher.forward(request, response);
@@ -38,7 +49,7 @@ public class UserServlet extends HttpServlet {
 
     private void showAllActiveUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("view", "user");
-        Map<Integer, User> userMap = userDAO.getAllExists();
+        Map<Long, User> userMap = userDAO.getAllExists();
         request.setAttribute("users", userMap);
         RequestDispatcher dispatcher = request.getRequestDispatcher("table/all.jsp");
         dispatcher.forward(request, response);
@@ -52,6 +63,23 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String action = request.getParameter("action");
+        switch (action) {
+            case "add" -> addNewUser(request, response);
+        }
+    }
 
+    private void addNewUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        long id = System.currentTimeMillis() / 1000;
+        String userFullName = request.getParameter("userFullName");
+        String username = request.getParameter("username");
+        String address = request.getParameter("userAddress");
+        String password = request.getParameter("userPassword");
+        String email = request.getParameter("userEmail");
+        String phone = request.getParameter("userNumber");
+        int role = Integer.parseInt(request.getParameter("role"));
+        User user = new User(id, username, password, userFullName, phone, email, address, role, new Date(System.currentTimeMillis()),new Date(System.currentTimeMillis()),false);
+        boolean isSuccess = userDAO.add(user);
+        response.sendRedirect("/user?action=all");
     }
 }

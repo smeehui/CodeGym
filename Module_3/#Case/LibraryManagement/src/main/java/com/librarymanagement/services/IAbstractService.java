@@ -1,16 +1,18 @@
 package com.librarymanagement.services;
 
+import com.librarymanagement.components.user.models.User;
+
 import java.util.Map;
 
 public interface IAbstractService<Model, ID> {
-    Map<ID,Model> getAll();
+    Map<Long, User> getAll();
 
-    Map<ID, Model> getAllExists();
-    Model getById(ID id);
+    Map<Long, User> getAllExists();
+    Model getById(long id);
 
     boolean existsById(ID id);
 
-    void add(Model newEntity);
+    boolean add(Model newEntity);
 
     void update(Model newEntity);
 

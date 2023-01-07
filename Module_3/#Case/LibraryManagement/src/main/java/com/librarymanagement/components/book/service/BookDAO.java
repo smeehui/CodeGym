@@ -1,7 +1,7 @@
 package com.librarymanagement.components.book.service;
 
 import com.librarymanagement.components.book.model.Book;
-import com.librarymanagement.components.book.model.BookFormat;
+import com.librarymanagement.components.user.models.User;
 
 import java.sql.*;
 import java.util.HashMap;
@@ -56,19 +56,20 @@ public class BookDAO implements IBookDAO {
                 Book book = Book.parse(rs);
                 books.put(book.getId(), book);
             }
+            preparedStatement.close();
         } catch (SQLException e) {
-            
+            e.printStackTrace();
         }
         return books;
     }
 
     @Override
-    public Map getAllExists() {
+    public Map<Long, User> getAllExists() {
         return null;
     }
 
     @Override
-    public Object getById(Object o) {
+    public Object getById(long o) {
         return null;
     }
 
@@ -78,8 +79,9 @@ public class BookDAO implements IBookDAO {
     }
 
     @Override
-    public void add(Object newEntity) {
+    public boolean add(Object newEntity) {
 
+        return false;
     }
 
     @Override

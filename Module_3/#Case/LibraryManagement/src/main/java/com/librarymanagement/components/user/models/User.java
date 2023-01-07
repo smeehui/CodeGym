@@ -2,10 +2,10 @@ package com.librarymanagement.components.user.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 
 public class User {
-    private Integer id;
+    private long id;
     private String username;
     private String password;
     private String fullName;
@@ -15,11 +15,20 @@ public class User {
     private int role;
     private Date createdAt;
     private Date updatedAt;
+    private boolean deleted;
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     public User() {
     }
 
-    public User(Integer id, String username, String password, String fullName, String mobile, String email, String address, int role, Date createdAt, Date updatedAt) {
+    public User(Long id, String username, String password, String fullName, String mobile, String email, String address, int role, Date createdAt, Date updatedAt,boolean isDeleted) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -30,10 +39,11 @@ public class User {
         this.role = role;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+        this.deleted = isDeleted;
     }
 
     public static User parseUser(ResultSet rs) throws SQLException {
-        int id = rs.getInt("id");
+        long id = rs.getLong("id");
         String fullName = rs.getString("fullName");
         String address = rs.getString("address");
         String phone = rs.getString("phone");
@@ -44,14 +54,14 @@ public class User {
         Date dateModified = rs.getDate("dateModified");
         int role = rs.getInt("role");
         Boolean isDeleted = rs.getBoolean("deleted");
-        User user = new User(id,username,password,fullName,phone,email,address,role,dateAdded,dateModified);
+        User user = new User(id,username,password,fullName,phone,email,address,role,dateAdded,dateModified,isDeleted);
         return user;
     }
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

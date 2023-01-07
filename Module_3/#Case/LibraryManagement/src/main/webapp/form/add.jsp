@@ -400,13 +400,13 @@
                     data-bs-parent="#sidebar-nav"
             >
                 <li>
-                    <a href="./user/add.html">
+                    <a href="${pageContext.request.contextPath}/user?action=add">
                         <i class="bi bi-circle"></i
                         ><span>Thêm mới</span>
                     </a>
                 </li>
                 <li>
-                    <a href="components-pagination.html">
+                    <a href="${pageContext.request.contextPath}/user?action=all">
                         <i class="bi bi-circle"></i
                         ><span>Xem danh sách</span>
                     </a>
@@ -438,13 +438,13 @@
                     data-bs-parent="#sidebar-nav"
             >
                 <li>
-                    <a href="forms-elements.html">
+                    <a href="${pageContext.request.contextPath}/book?action=add">
                         <i class="bi bi-circle"></i
                         ><span>Thêm mới</span>
                     </a>
                 </li>
                 <li>
-                    <a href="forms-layouts.html">
+                    <a href="${pageContext.request.contextPath}/book?action=all">
                         <i class="bi bi-circle"></i
                         ><span>Xem danh sách</span>
                     </a>
@@ -768,7 +768,7 @@
                                     <div class="col-sm-10 ">
                                         <div class="form-check d-inline-block m-x-3">
                                             <input required
-                                                   name = ""
+                                                   name = "role"
                                                    checked
                                                    class="form-check-input"
                                                    id="memberRole"
@@ -785,6 +785,7 @@
                                         </div>
                                         <div class="form-check d-inline-block">
                                             <input required
+                                                   name = "role"
                                                    class="form-check-input"
                                                    id="adminRole"
                                                    name="userRole"
@@ -920,7 +921,7 @@
                                                     required
                                                     class="form-check-input"
                                                     type="radio"
-                                                    name="gridRadios"
+                                                    name="isAvailable"
                                                     id="gridRadios1"
                                                     value="option1"
                                                     checked=""
@@ -937,7 +938,7 @@
                                                     required
                                                     class="form-check-input"
                                                     type="radio"
-                                                    name="gridRadios"
+                                                    name="isAvailable"
                                                     id="gridRadios2"
                                                     value="option2"
                                             />
@@ -951,15 +952,19 @@
                                     </div>
                                 </fieldset>
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label"
-                                    >Submit Button</label
-                                    >
+                                    <div class="col-sm-2"></div>
                                     <div class="col-sm-10">
                                         <button
                                                 type="submit"
                                                 class="btn btn-primary"
                                         >
-                                            Submit Form
+                                            Thêm mới
+                                        </button>
+                                        <button
+                                                type="reset"
+                                                class="btn btn-primary"
+                                        >
+                                            Nhập lại
                                         </button>
                                     </div>
                                 </div>

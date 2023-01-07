@@ -5,16 +5,8 @@ import com.librarymanagement.services.IAbstractService;
 
 public interface IUserDAO extends IAbstractService<User,Integer> {
 
-    void add(User newUser);
+    boolean add(User newUser);
 
-    void getUserRole(int id);
     void update(User newUser);
-
-    boolean existById(long id);
-
-    boolean existsByEmail(String email);
-
-    boolean existsByPhone(String phone);
-
-    boolean existsByUsername(String userName);
+    void getUserRole(int id);
 }

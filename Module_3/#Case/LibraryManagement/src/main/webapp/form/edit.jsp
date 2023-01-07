@@ -6,13 +6,16 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
-    <title>Tables / General - NiceAdmin Bootstrap Template</title>
+    <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
     <meta content="" name="description"/>
     <meta content="" name="keywords"/>
 
     <!-- Favicons -->
     <link href="../assets/img/favicon.png" rel="icon"/>
-    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon"/>
+    <link
+            href="../assets/img/apple-touch-icon.png"
+            rel="apple-touch-icon"
+    />
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -36,7 +39,10 @@
     />
     <link href="../assets/vendor/quill/quill.snow.css" rel="stylesheet"/>
     <link href="../assets/vendor/quill/quill.bubble.css" rel="stylesheet"/>
-    <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet"/>
+    <link
+            href="../assets/vendor/remixicon/remixicon.css"
+            rel="stylesheet"
+    />
     <link
             href="../assets/vendor/simple-datatables/style.css"
             rel="stylesheet"
@@ -639,14 +645,14 @@
 
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>General Tables</h1>
+        <h1>Form Elements</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
                     <a href="index.html">Home</a>
                 </li>
-                <li class="breadcrumb-item">Tables</li>
-                <li class="breadcrumb-item active">General</li>
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item active">Elements</li>
             </ol>
         </nav>
     </div>
@@ -654,101 +660,233 @@
 
     <section class="section">
         <div class="row">
-            <div class="col-lg-12">
-               <c:set var="view" value="${requestScope['view']}"/>
-                <c:choose>
-                    <c:when test="${view=='user'}">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Danh sách người dùng</h5>
+            <div class="col-xl-12">
+                <div class="card">
+                    <c:set var="view" value="${requestScope['view']}"/>
+                    <c:choose>
+                        <c:when test="${view=='user'}">
+                            <c:set var="user" value="${requestScope['user']}"/>
+                            <div class="card-body pt-3">
+                                <!-- Bordered Tabs -->
+                                <ul class="nav nav-tabs nav-tabs-bordered">
+                                    <li class="nav-item">
+                                        <button
+                                                class="nav-link active"
+                                                data-bs-toggle="tab"
+                                                data-bs-target="#profile-edit"
+                                        >
+                                            Edit Profile
+                                        </button>
+                                    </li>
+                                    <li class="nav-item">
+                                        <button
+                                                class="nav-link"
+                                                data-bs-toggle="tab"
+                                                data-bs-target="#profile-change-password"
+                                        >
+                                            Change Password
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content pt-2">
+                                    <div
+                                            class="tab-pane fade profile-edit pt-3 active show"
+                                            id="profile-edit"
+                                    >
+                                        <!-- Profile Edit Form -->
+                                        <form method="post" action="${pageContext.request.contextPath}/user?action=edit">
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="fullName"
+                                                        class="col-md-4 col-lg-3 col-form-label"
+                                                >Full Name</label
+                                                >
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input
+                                                            name="fullName"
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="fullName"
+                                                            value="${user.getFullName()}"
+                                                    />
+                                                </div>
+                                            </div>
 
-                                <!-- Default Table -->
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Tên đầy đủ</th>
-                                        <th scope="col">Số điện thoại</th>
-                                        <th scope="col">Địa chỉ</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Quyền</th>
-                                        <th scope="col" class = "text-center">Quản lý</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="user" items="${requestScope['users'].values()}">
-                                        <tr>
-                                            <th scope="row">${user.getId()}</th>
-                                            <td ><a href="${pageContext.request.contextPath}/user?action=view?id=${user.getId()}">${user.getFullName()}</a></td>
-                                            <td >${user.getMobile()}</td>
-                                            <td >${user.getAddress()}</td>
-                                            <td >${user.getEmail()}</td>
-                                            <td >${user.getRole()}</td>
-                                            <td
-                                                    class="d-flex justify-content-around"
-                                            >
-                                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/user?action=edit&id=${user.getId()}">
-                                                    <i
-                                                            class="bi bi-person-gear"
-                                                    ></i>
-                                                </a>
-                                                <a class="btn btn-warning " href="${pageContext.request.contextPath}/user?action=delete&id=${user.getId()}">
-                                                    <i class="bi bi-person-fill-x text-white"></i>
-                                                </a>
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="Address"
+                                                        class="col-md-4 col-lg-3 col-form-label"
+                                                >Address</label
+                                                >
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input
+                                                            name="address"
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="Address"
+                                                            value="${user.getAddress()}"
+                                                    />
+                                                </div>
+                                            </div>
 
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                                <!-- End Default Table Example -->
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="Phone"
+                                                        class="col-md-4 col-lg-3 col-form-label"
+                                                >Phone</label
+                                                >
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input
+                                                            name="phone"
+                                                            type="text"
+                                                            class="form-control"
+                                                            id="Phone"
+                                                            value="${user.getMobile()}"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="Email"
+                                                        class="col-md-4 col-lg-3 col-form-label"
+                                                >Email</label
+                                                >
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input
+                                                            name="email"
+                                                            type="email"
+                                                            class="form-control"
+                                                            id="Email"
+                                                            value="${user.getEmail()}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div
+                                                        class="col-md-4 col-lg-3 col-form-label"
+                                                > Quyền</div
+                                                >
+                                                <div class="col-md-8 col-lg-9 d-flex">
+                                                    <div class="form-check">
+                                                        <input
+                                                                required
+                                                                class="form-check-input"
+                                                                type="radio"
+                                                                name="role"
+                                                                id="admin"
+                                                                value="1"
+                                                                checked=""
+                                                        />
+                                                        <label
+                                                                class="fosẵnrm-check-label"
+                                                                for="admin"
+                                                        >
+                                                            Thủ thư
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mx-5">
+                                                        <input
+                                                                required
+                                                                class="form-check-input"
+                                                                type="radio"
+                                                                name="role"
+                                                                id="member"
+                                                                value="2"
+                                                        />
+                                                        <label
+                                                                class="form-check-label"
+                                                                for="member"
+                                                        >
+                                                            Thành viên
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text-center">
+                                                <button
+                                                        type="submit"
+                                                        class="btn btn-primary"
+                                                >
+                                                    Save Changes
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <!-- End Profile Edit Form -->
+                                    </div>
+
+                                    <div
+                                            class="tab-pane fade pt-3"
+                                            id="profile-change-password"
+                                    >
+                                        <!-- Change Password Form -->
+                                        <form>
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="currentPassword"
+                                                        class="col-md-4 col-lg-3 col-form-label"
+                                                >Current Password</label
+                                                >
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input
+                                                            name="password"
+                                                            type="password"
+                                                            class="form-control"
+                                                            id="currentPassword"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="newPassword"
+                                                        class="col-md-4 col-lg-3 col-form-label"
+                                                >New Password</label
+                                                >
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input
+                                                            name="newpassword"
+                                                            type="password"
+                                                            class="form-control"
+                                                            id="newPassword"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="renewPassword"
+                                                        class="col-md-4 col-lg-3 col-form-label"
+                                                >Re-enter New
+                                                    Password</label
+                                                >
+                                                <div class="col-md-8 col-lg-9">
+                                                    <input
+                                                            name="renewpassword"
+                                                            type="password"
+                                                            class="form-control"
+                                                            id="renewPassword"
+                                                    />
+                                                </div>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <button
+                                                        type="submit"
+                                                        class="btn btn-primary"
+                                                >
+                                                    Change Password
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <!-- End Change Password Form -->
+                                    </div>
+                                </div>
+                                <!-- End Bordered Tabs -->
                             </div>
-                        </div>
-                    </c:when>
-                    <c:when test="${view=='book'}">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Danh sách người dùng</h5>
-
-                                <!-- Default Table -->
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">ISBN</th>
-                                        <th scope="col">Tiêu đề</th>
-                                        <th scope="col">Tác giả</th>
-                                        <th scope="col">Thể loại</th>
-                                        <th scope="col">Ngôn ngữ</th>
-                                        <th scope="col">Trạng thái</th>
-                                        <th scope="col" class = "text-center">Quản lý</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <c:forEach var="book" items="${requestScope['books'].values()}">
-                                        <tr>
-                                            <td >${book.getIsbn()}</td>
-                                            <td >${book.getTitle()}</td>
-                                            <td >${book.getAuthor()}</td>
-                                            <td >${book.getSubject()}</td>
-                                            <td >${book.getLanguage()}</td>
-                                            <td >${book.isAvailable()?"Có sẵn":"Không có sẵn"}</td>
-                                            <td
-                                                    class="d-flex justify-content-around"
-                                            >
-                                                <i
-                                                        class="bi bi-pencil-fill btn btn-primary"
-                                                ></i>
-                                                <i class="bi bi-x-circle-fill btn btn-warning text-white"></i>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                    </tbody>
-                                </table>
-                                <!-- End Default Table Example -->
-                            </div>
-                        </div>
-                    </c:when>
-                </c:choose>
+                        </c:when>
+                    </c:choose>
+                </div>
             </div>
         </div>
     </section>
