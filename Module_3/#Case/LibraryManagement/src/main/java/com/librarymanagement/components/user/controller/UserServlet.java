@@ -27,7 +27,13 @@ public class UserServlet extends HttpServlet {
             case "add" -> showAddForm(request, response);
             case "all" -> showAllUsers(request, response);
             case "edit" -> showEditForm(request, response);
+            case "delete" -> deleteUser(request, response);
         }
+    }
+
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) {
+        long id = Long.parseLong(request.getParameter("id"));
+        User user = userDAO.getById(id);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +47,7 @@ public class UserServlet extends HttpServlet {
 
     private void showAllUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("view", "user");
-        Map<Long, User> userMap = userDAO.getAll();
+        Map<Long, User> userMap = userDAO.getAllExists();
         request.setAttribute("users", userMap);
         RequestDispatcher dispatcher = request.getRequestDispatcher("table/all.jsp");
         dispatcher.forward(request, response);

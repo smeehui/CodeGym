@@ -13,11 +13,10 @@ public class UserDAO implements IUserDAO {
 
     private static final String SELECT_ALL_USER = "SELECT * FROM users";
     private static final String SELECT_ALL_EXIST_USER = "SELECT * FROM users WHERE users.deleted =false";
-
     private static final String SELECT_ALL_USER_ROLE = "SELECT * FROM roles";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String INSERT_NEW_USER = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-
+    private static final String DELETE_BY_ID = "UPDATE users SET users.deleted = true WHERE users.id=?";
 
     protected Connection getConnection() {
         Connection connection = null;

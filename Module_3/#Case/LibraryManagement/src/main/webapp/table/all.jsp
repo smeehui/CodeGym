@@ -679,23 +679,22 @@
                                     <c:forEach var="user" items="${requestScope['users'].values()}">
                                         <tr>
                                             <th scope="row">${user.getId()}</th>
-                                            <td ><a href="${pageContext.request.contextPath}/user?action=view?id=${user.getId()}">${user.getFullName()}</a></td>
+                                            <td ><a href="${pageContext.request.contextPath}/user?action=view?id=${user.getId()}" >${user.getFullName()}</a></td>
                                             <td >${user.getMobile()}</td>
                                             <td >${user.getAddress()}</td>
                                             <td >${user.getEmail()}</td>
                                             <td >${user.getRole()}</td>
-                                            <td
-                                                    class="d-flex justify-content-around"
-                                            >
+                                            <td class="d-flex justify-content-around" >
                                                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/user?action=edit&id=${user.getId()}">
-                                                    <i
-                                                            class="bi bi-person-gear"
-                                                    ></i>
+                                                    <i class="bi bi-person-gear"></i>
                                                 </a>
-                                                <a class="btn btn-warning " href="${pageContext.request.contextPath}/user?action=delete&id=${user.getId()}">
-                                                    <i class="bi bi-person-fill-x text-white"></i>
-                                                </a>
-
+                                                <i
+                                                        class="bi bi-person-fill-x text-white btn btn-warning"
+                                                        data-bs-toggle="modal" data-bs-target="#verticalycentered"
+                                                        data-username="${user.getFullName()}"
+                                                        data-userId="${user.getId()}"
+                                                        onclick="confirmDelete(event)"
+                                                ></i>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -749,6 +748,23 @@
                         </div>
                     </c:when>
                 </c:choose>
+                <div class="modal fade" id="verticalycentered" tabindex="-1" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Xác nhận xoá.</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn chắc chắn muốn xoá <span id="deleted-item"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <a class="btn btn-primary" id="delete-confirm-btn">Xác nhận</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -787,7 +803,16 @@
 <script src="../assets/vendor/simple-datatables/simple-datatables.js"></script>
 <script src="../assets/vendor/tinymce/tinymce.min.js"></script>
 <script src="../assets/vendor/php-email-form/validate.js"></script>
+<script>
+    function confirmDelete(e){
+        console.log(e.target)
+        let id = e.target.dataset.userid;
+        let fullname = e.target.dataset.username;
+        document.getElementById("deleted-item").innerText=fullname;
+        document.getElementById("delete-confirm-btn").setAttribute("href", "${pageContext.request.contextPath}/user?action=delete&id="+id)
 
+    }
+</script>
 <!-- Template Main JS File -->
 <script src="../assets/js/main.js"></script>
 </body>
