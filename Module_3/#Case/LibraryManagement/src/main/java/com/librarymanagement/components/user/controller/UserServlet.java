@@ -22,18 +22,22 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
+        String action = request.getParameter("action")==null?"":request.getParameter("action");
         switch (action) {
             case "add" -> showAddForm(request, response);
-            case "all" -> showAllUsers(request, response);
             case "edit" -> showEditForm(request, response);
             case "delete" -> deleteUser(request, response);
+            default -> showAllUsers(request, response);
         }
     }
 
-    private void deleteUser(HttpServletRequest request, HttpServletResponse response) {
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long id = Long.parseLong(request.getParameter("id"));
         User user = userDAO.getById(id);
+        if (user != null) {
+            userDAO.deleteById(id);
+        }
+        response.sendRedirect("/user");
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -69,7 +73,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
+        String action = request.getParameter("action")==null?"":request.getParameter("action");
         switch (action) {
             case "add" -> addNewUser(request, response);
         }

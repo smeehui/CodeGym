@@ -5,7 +5,7 @@ import com.librarymanagement.services.IAbstractService;
 
 import java.util.List;
 
-public interface IBookDAO extends IAbstractService {
+public interface IBookDAO extends IAbstractService<Book,Long> {
     Book getByISBN(String isbn);
 
     boolean existByISBN(String isbn);

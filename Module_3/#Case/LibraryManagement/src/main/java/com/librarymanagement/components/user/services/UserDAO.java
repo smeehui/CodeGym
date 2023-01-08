@@ -77,10 +77,9 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public boolean existsById(Integer integer) {
+    public boolean existsById(Long aLong) {
         return false;
     }
-
     @Override
     public Map<Long, User> getAll() {
         Map<Long, User> users = new HashMap<>();
@@ -130,7 +129,19 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public boolean deleteById(Long id) {
+    try(Connection connection = getConnection()) {
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+        preparedStatement.setLong(1, id);
+        int rowAffected = preparedStatement.executeUpdate();
+        return rowAffected > 0;
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+    }
 
+    @Override
+    public boolean isDeleted(Long id) {
+        return false;
     }
 }

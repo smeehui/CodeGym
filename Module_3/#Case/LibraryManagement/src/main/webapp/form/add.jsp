@@ -836,7 +836,7 @@
                             </h5>
 
                             <!-- General Form Elements -->
-                            <form>
+                            <form method="post" action="${pageContext.request.contextPath}/book?action=add">
                                 <div class="row mb-3">
                                     <label
                                             for="inputIsbn"
@@ -859,9 +859,10 @@
                                     >
                                     <div class="col-sm-4">
                                         <input
-                                                id="inputTitle"
                                                 required
-                                                type="email"
+                                                name="bookTitle"
+                                                id="inputTitle"
+                                                type="text"
                                                 class="form-control"
                                         />
                                     </div>
@@ -875,6 +876,7 @@
                                     <div class="col-sm-10">
                                         <input
                                                 required
+                                                name="bookAuthor"
                                                 id="inputAuthor"
                                                 type="text"
                                                 class="form-control"
@@ -889,8 +891,9 @@
                                     >
                                     <div class="col-sm-4">
                                         <input
-                                                id="inputSubject"
                                                 required
+                                                name="bookSubject"
+                                                id="inputSubject"
                                                 type="text"
                                                 class="form-control"
                                         />
@@ -902,8 +905,9 @@
                                     >
                                     <div class="col-sm-4">
                                         <input
-                                                id="inputLanguage"
                                                 required
+                                                name="bookLanguage"
+                                                id="inputLanguage"
                                                 type="text"
                                                 class="form-control"
                                         />
@@ -923,8 +927,8 @@
                                                     type="radio"
                                                     name="isAvailable"
                                                     id="gridRadios1"
-                                                    value="option1"
-                                                    checked=""
+                                                    value="true"
+                                                    checked
                                             />
                                             <label
                                                     class="form-check-label"
@@ -940,7 +944,7 @@
                                                     type="radio"
                                                     name="isAvailable"
                                                     id="gridRadios2"
-                                                    value="option2"
+                                                    value="false"
                                             />
                                             <label
                                                     class="form-check-label"

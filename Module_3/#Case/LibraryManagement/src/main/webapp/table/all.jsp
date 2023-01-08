@@ -691,8 +691,9 @@
                                                 <i
                                                         class="bi bi-person-fill-x text-white btn btn-warning"
                                                         data-bs-toggle="modal" data-bs-target="#verticalycentered"
-                                                        data-username="${user.getFullName()}"
-                                                        data-userId="${user.getId()}"
+                                                        data-name="${user.getFullName()}"
+                                                        data-id="${user.getId()}"
+                                                        data-type="user"
                                                         onclick="confirmDelete(event)"
                                                 ></i>
                                             </td>
@@ -737,7 +738,14 @@
                                                 <i
                                                         class="bi bi-pencil-fill btn btn-primary"
                                                 ></i>
-                                                <i class="bi bi-x-circle-fill btn btn-warning text-white"></i>
+                                                <i
+                                                        class="bi bi-x-circle-fill btn btn-warning text-white"
+                                                        data-bs-toggle="modal" data-bs-target="#verticalycentered"
+                                                        data-name="${book.getTitle()}"
+                                                        data-id="${book.getId()}"
+                                                        data-type="book"
+                                                        onclick="confirmDelete(event)"
+                                                ></i>
                                             </td>
                                         </tr>
                                     </c:forEach>
@@ -806,11 +814,11 @@
 <script>
     function confirmDelete(e){
         console.log(e.target)
-        let id = e.target.dataset.userid;
-        let fullname = e.target.dataset.username;
-        document.getElementById("deleted-item").innerText=fullname;
-        document.getElementById("delete-confirm-btn").setAttribute("href", "${pageContext.request.contextPath}/user?action=delete&id="+id)
-
+        let id = e.target.dataset.id;
+        let name = e.target.dataset.name;
+        let type = e.target.dataset.type;
+        document.getElementById("deleted-item").innerText=name;
+        document.getElementById("delete-confirm-btn").setAttribute("href", "${pageContext.request.contextPath}/"+type+"?action=delete&id="+id)
     }
 </script>
 <!-- Template Main JS File -->

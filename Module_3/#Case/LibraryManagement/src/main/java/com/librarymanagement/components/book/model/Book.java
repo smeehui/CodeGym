@@ -15,6 +15,7 @@ public class Book {
     private Date createdAt;
     private Date updatedAt;
     private boolean available;
+    private boolean deleted;
 
     public void setId(Long id) {
         this.id = id;
@@ -31,7 +32,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(Long id, String isbn, String title, String author, String subject, String language, Date createdAt, Date updatedAt, boolean available) {
+    public Book(Long id, String isbn, String title, String author, String subject, String language, Date createdAt, Date updatedAt, boolean available,boolean isDeleted) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
@@ -41,6 +42,15 @@ public class Book {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.available = available;
+        this.deleted = isDeleted;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     public Book(String title, String isbn, String author, String subject, String language) {
@@ -61,7 +71,8 @@ public class Book {
         Date dateAdded = rs.getDate("dateAdded");
         Date dateModified = rs.getDate("dateModified");
         boolean isAvailable = rs.getBoolean("available");
-        return new Book(id,isbn, title, author,subject,language,dateAdded,dateModified,isAvailable);
+        boolean isDeleted = rs.getBoolean("deleted");
+        return new Book(id,isbn, title, author,subject,language,dateAdded,dateModified,isAvailable,isDeleted);
     }
 
 

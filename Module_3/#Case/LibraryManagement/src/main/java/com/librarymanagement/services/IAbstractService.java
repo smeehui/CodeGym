@@ -5,9 +5,9 @@ import com.librarymanagement.components.user.models.User;
 import java.util.Map;
 
 public interface IAbstractService<Model, ID> {
-    Map<Long, User> getAll();
+    Map<ID, Model> getAll();
 
-    Map<Long, User> getAllExists();
+    Map<ID, Model> getAllExists();
     Model getById(long id);
 
     boolean existsById(ID id);
@@ -16,5 +16,7 @@ public interface IAbstractService<Model, ID> {
 
     void update(Model newEntity);
 
-    void deleteById(Long id);
+    boolean deleteById(Long id);
+
+    boolean isDeleted(Long id);
 }
