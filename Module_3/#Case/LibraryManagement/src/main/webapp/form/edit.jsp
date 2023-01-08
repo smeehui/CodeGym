@@ -885,6 +885,210 @@
                                 <!-- End Bordered Tabs -->
                             </div>
                         </c:when>
+                        <c:when test="${view=='book'}">
+                            <c:set var="book" value="${requestScope['book']}"/>
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            Chỉnh sửa thông tin sách
+                                        </h5>
+
+                                        <!-- General Form Elements -->
+                                        <form method="post" action="${pageContext.request.contextPath}/book?action=edit">
+                                            <div class="row mb-3 d-none">
+                                                <label
+                                                        for="inputId"
+                                                        class="col-sm-2 col-form-label"
+                                                >ID</label
+                                                >
+                                                <div class="col-sm-4">
+                                                    <input
+                                                            required
+                                                            id="inputId"
+                                                            name="id"
+                                                            type="text"
+                                                            class="form-control"
+                                                            value="${book.getId()}"
+                                                    />
+                                                </div>
+                                                <label
+                                                        for="inputIsDeleted"
+                                                        class="col-sm-2 col-form-label text-center"
+                                                >Đã xoá</label
+                                                >
+                                                <div class="col-sm-4">
+                                                    <input
+                                                            required
+                                                            name="isDeleted"
+                                                            id="inputIsDeleted"
+                                                            type="text"
+                                                            class="form-control"
+                                                            value="${book.isDeleted()}"
+                                                    />
+                                                </div>
+                                                <label
+                                                        for="inputDateAded"
+                                                        class="col-sm-2 col-form-label text-center"
+                                                >Ngày thêm</label
+                                                >
+                                                <div class="col-sm-4">
+                                                    <input
+                                                            required
+                                                            name="dateAdded"
+                                                            id="inputDateAded"
+                                                            type="text"
+                                                            class="form-control"
+                                                            value="${book.getCreatedAt()}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="inputIsbn"
+                                                        class="col-sm-2 col-form-label"
+                                                >ISBN</label
+                                                >
+                                                <div class="col-sm-4">
+                                                    <input
+                                                            required
+                                                            id="inputIsbn"
+                                                            name="isbn"
+                                                            type="text"
+                                                            class="form-control"
+                                                            value="${book.getIsbn()}"
+                                                    />
+                                                </div>
+                                                <label
+                                                        for="inputTitle"
+                                                        class="col-sm-2 col-form-label text-center"
+                                                >Tiêu đề</label
+                                                >
+                                                <div class="col-sm-4">
+                                                    <input
+                                                            required
+                                                            name="bookTitle"
+                                                            id="inputTitle"
+                                                            type="text"
+                                                            class="form-control"
+                                                            value="${book.getTitle()}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="inputAuthor"
+                                                        class="col-sm-2 col-form-label"
+                                                >Tác giả</label
+                                                >
+                                                <div class="col-sm-10">
+                                                    <input
+                                                            required
+                                                            name="bookAuthor"
+                                                            id="inputAuthor"
+                                                            type="text"
+                                                            class="form-control"
+                                                            value="${book.getAuthor()}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label
+                                                        for="inputSubject"
+                                                        class="col-sm-2 col-form-label"
+                                                >Thể loại</label
+                                                >
+                                                <div class="col-sm-4">
+                                                    <input
+                                                            required
+                                                            name="bookSubject"
+                                                            id="inputSubject"
+                                                            type="text"
+                                                            class="form-control"
+                                                            value="${book.getSubject()}"
+                                                    />
+                                                </div>
+                                                <label
+                                                        for="inputLanguage"
+                                                        class="col-sm-2 col-form-label text-center"
+                                                >Ngôn ngữ</label
+                                                >
+                                                <div class="col-sm-4">
+                                                    <input
+                                                            required
+                                                            name="bookLanguage"
+                                                            id="inputLanguage"
+                                                            type="text"
+                                                            class="form-control"
+                                                            value="${book.getLanguage()}"
+                                                    />
+                                                </div>
+                                            </div>
+                                            <fieldset class="row mb-3">
+                                                <legend
+                                                        class="col-form-label col-sm-2 pt-0"
+                                                >
+                                                    Trạng thái
+                                                </legend>
+                                                <div class="col-sm-10 d-flex">
+                                                    <div class="form-check">
+                                                        <input
+                                                                required
+                                                                class="form-check-input"
+                                                                type="radio"
+                                                                name="isAvailable"
+                                                                id="gridRadios1"
+                                                                value="true"
+                                                                checked
+                                                        />
+                                                        <label
+                                                                class="form-check-label"
+                                                                for="gridRadios1"
+                                                        >
+                                                            Có sẵn
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check mx-5">
+                                                        <input
+                                                                required
+                                                                class="form-check-input"
+                                                                type="radio"
+                                                                name="isAvailable"
+                                                                id="gridRadios2"
+                                                                value="false"
+                                                        />
+                                                        <label
+                                                                class="form-check-label"
+                                                                for="gridRadios2"
+                                                        >
+                                                            Không có sẵn
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </fieldset>
+                                            <div class="row mb-3">
+                                                <div class="col-sm-2"></div>
+                                                <div class="col-sm-10">
+                                                    <button
+                                                            type="submit"
+                                                            class="btn btn-primary"
+                                                    >
+                                                        Thêm mới
+                                                    </button>
+                                                    <button
+                                                            type="reset"
+                                                            class="btn btn-primary"
+                                                    >
+                                                        Nhập lại
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- End General Form Elements -->
+                                    </div>
+                                </div>
+                            </div>
+                        </c:when>
                     </c:choose>
                 </div>
             </div>

@@ -3,10 +3,12 @@ package com.librarymanagement.components.user.services;
 import com.librarymanagement.components.user.models.User;
 import com.librarymanagement.services.IAbstractService;
 
+import java.sql.SQLException;
+
 public interface IUserDAO extends IAbstractService<User,Long> {
 
-    boolean add(User newUser);
+    boolean add(User newUser) throws SQLException;
 
-    void update(User newUser);
+    boolean update(User newUser);
     void getUserRole(int id);
 }

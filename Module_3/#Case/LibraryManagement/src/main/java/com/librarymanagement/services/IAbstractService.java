@@ -1,7 +1,6 @@
 package com.librarymanagement.services;
 
-import com.librarymanagement.components.user.models.User;
-
+import java.sql.SQLException;
 import java.util.Map;
 
 public interface IAbstractService<Model, ID> {
@@ -12,9 +11,9 @@ public interface IAbstractService<Model, ID> {
 
     boolean existsById(ID id);
 
-    boolean add(Model newEntity);
+    boolean add(Model newEntity) throws SQLException;
 
-    void update(Model newEntity);
+    boolean update(Model newEntity);
 
     boolean deleteById(Long id);
 

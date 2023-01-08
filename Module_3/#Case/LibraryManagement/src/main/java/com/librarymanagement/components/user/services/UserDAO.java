@@ -100,7 +100,7 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public boolean add(User newUser) {
+    public boolean add(User newUser) throws SQLException {
         int rowAffected = 0;
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_NEW_USER);
@@ -112,20 +112,19 @@ public class UserDAO implements IUserDAO {
             preparedStatement.setString(6, newUser.getUsername());
             preparedStatement.setString(7, newUser.getPassword());
             preparedStatement.setInt(8, newUser.getRole());
-            preparedStatement.setDate(9, newUser.getCreatedAt());
-            preparedStatement.setDate(10, newUser.getUpdatedAt());
+            preparedStatement.setTimestamp(9, Timestamp.from(newUser.getCreatedAt()));
+            preparedStatement.setTimestamp(10, Timestamp.from(newUser.getUpdatedAt()));
             preparedStatement.setBoolean(11, newUser.isDeleted());
             rowAffected = preparedStatement.executeUpdate();
             preparedStatement.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
         return rowAffected > 0;
     }
 
     @Override
-    public void update(User newUser) {
+    public boolean update(User newUser) {
 
+        return false;
     }
 
     @Override

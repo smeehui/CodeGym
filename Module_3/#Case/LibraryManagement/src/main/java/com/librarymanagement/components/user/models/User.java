@@ -3,6 +3,7 @@ package com.librarymanagement.components.user.models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.time.Instant;
 
 public class User {
     private long id;
@@ -13,8 +14,8 @@ public class User {
     private String email;
     private String address;
     private int role;
-    private Date createdAt;
-    private Date updatedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
     private boolean deleted;
 
     public boolean isDeleted() {
@@ -28,7 +29,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, String password, String fullName, String mobile, String email, String address, int role, Date createdAt, Date updatedAt,boolean isDeleted) {
+    public User(Long id, String username, String password, String fullName, String mobile, String email, String address, int role, Instant createdAt, Instant updatedAt,boolean isDeleted) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -50,8 +51,8 @@ public class User {
         String email = rs.getString("email");
         String username = rs.getString("username");
         String password = rs.getString("password");
-        Date dateAdded = rs.getDate("dateAdded");
-        Date dateModified = rs.getDate("dateModified");
+        Instant dateAdded = rs.getTimestamp("dateAdded").toInstant();
+        Instant dateModified = rs.getTimestamp("dateModified").toInstant();
         int role = rs.getInt("role");
         Boolean isDeleted = rs.getBoolean("deleted");
         User user = new User(id,username,password,fullName,phone,email,address,role,dateAdded,dateModified,isDeleted);
@@ -121,19 +122,19 @@ public class User {
         this.role = role;
     }
 
-    public Date getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public Instant getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 

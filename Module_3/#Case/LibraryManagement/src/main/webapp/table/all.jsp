@@ -735,9 +735,9 @@
                                             <td
                                                     class="d-flex justify-content-around"
                                             >
-                                                <i
-                                                        class="bi bi-pencil-fill btn btn-primary"
-                                                ></i>
+                                                <a class="btn btn-primary" href="${pageContext.request.contextPath}/book?action=edit&id=${book.getId()}">
+                                                    <i class="bi bi-pencil-fill "></i>
+                                                </a>
                                                 <i
                                                         class="bi bi-x-circle-fill btn btn-warning text-white"
                                                         data-bs-toggle="modal" data-bs-target="#verticalycentered"

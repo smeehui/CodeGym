@@ -10,11 +10,11 @@ import java.util.Map;
 
 public class BookDAO implements IBookDAO {
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/libdb";
-    private Map<Long,Book> books;
+    private static final String UPDATE_BOOK = "UPDATE books SET isbn = ?,title = ? ,author = ?,subject = ?,language = ?,dateAdded = ?,dateModified =?,available = ? WHERE id = ? ";
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "Smee@99123";
-    private static final String SELECT_ALL_BOOKS = "SELECT * FROM books";
-    private static final String SELECT_ALL_AVAILABLE_BOOKS = "SELECT * FROM books WHERE books.deleted=false";
+    private static final String SELECT_ALL_BOOKS = "SELECT * FROM books ORDER BY books.title ASC";
+    private static final String SELECT_ALL_AVAILABLE_BOOKS = "SELECT * FROM books WHERE books.deleted=false ORDER BY books.title ASC";
     private static final String DELETE_BY_ID = "UPDATE books SET deleted = true WHERE books.id = ?";
     private static final String SELECT_BY_ID= "SELECT *FROM books WHERE books.id = ?";
     private static final String INSERT_NEW_BOOK = "INSERT INTO books VALUES (?,?,?,?,?,?,?,?,?,?)";
@@ -57,14 +57,15 @@ public class BookDAO implements IBookDAO {
     }
 
     private Map<Long, Book> getBooks(String selectAllBooks) {
-        this.books = new HashMap<>();
+        Map<Long, Book> books = new HashMap<>();
         try (Connection connection = getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(selectAllBooks);
             ResultSet rs = preparedStatement.executeQuery();
+            long count = 0;
             while (rs.next()) {
                 Book book = Book.parse(rs);
-                books.put(book.getId(), book);
-            }
+                books.put(count++, book);
+              }
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -100,13 +101,13 @@ public class BookDAO implements IBookDAO {
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_NEW_BOOK);
             preparedStatement.setLong(1,book.getId());
-            preparedStatement.setString(2,book.getIsbn());
+            preparedStatement.setString(2,book.getIsbn().replace("_",""));
             preparedStatement.setString(3,book.getTitle());
             preparedStatement.setString(4,book.getAuthor());
             preparedStatement.setString(5,book.getSubject());
             preparedStatement.setString(6,book.getLanguage());
-            preparedStatement.setDate(7,book.getCreatedAt());
-            preparedStatement.setDate(8,book.getUpdatedAt());
+            preparedStatement.setTimestamp(7,Timestamp.from(book.getCreatedAt()));
+            preparedStatement.setTimestamp(8,Timestamp.from(book.getUpdatedAt()));
             preparedStatement.setBoolean(9,book.isAvailable());
             preparedStatement.setBoolean(10,book.isDeleted());
             return preparedStatement.executeUpdate() > 0;
@@ -116,8 +117,23 @@ public class BookDAO implements IBookDAO {
     }
 
     @Override
-    public void update(Book newEntity) {
-
+    public boolean update(Book book) {
+        try (Connection conn = getConnection()) {
+            PreparedStatement preparedStatement = conn.prepareStatement(UPDATE_BOOK);
+            //UPDATE books SET isbn = ?,title = ? ,author = ?,subject = ?,language = ?,dateAdded = ?,dateModified =?,available = ? WHERE id = ?
+            preparedStatement.setString(1, book.getIsbn().replace("-",""));
+            preparedStatement.setString(2, book.getTitle());
+            preparedStatement.setString(3,book.getAuthor());
+            preparedStatement.setString(4,book.getSubject());
+            preparedStatement.setString(5,book.getLanguage());
+            preparedStatement.setTimestamp(6,Timestamp.from(book.getCreatedAt()));
+            preparedStatement.setTimestamp(7,Timestamp.from(book.getUpdatedAt()));
+            preparedStatement.setBoolean(8,book.isAvailable());
+            preparedStatement.setLong(9,book.getId());
+            return preparedStatement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

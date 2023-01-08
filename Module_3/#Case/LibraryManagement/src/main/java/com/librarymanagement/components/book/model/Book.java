@@ -4,6 +4,7 @@ package com.librarymanagement.components.book.model;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Instant;
 
 public class Book {
     private Long id;
@@ -12,8 +13,8 @@ public class Book {
     private String author;
     private String subject;
     private String language;
-    private Date createdAt;
-    private Date updatedAt;
+    private Instant createdAt;
+    private Instant updatedAt;
     private boolean available;
     private boolean deleted;
 
@@ -32,7 +33,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(Long id, String isbn, String title, String author, String subject, String language, Date createdAt, Date updatedAt, boolean available,boolean isDeleted) {
+    public Book(Long id, String isbn, String title, String author, String subject, String language, Instant createdAt, Instant updatedAt, boolean available,boolean isDeleted) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
@@ -68,8 +69,8 @@ public class Book {
         String author = rs.getString("author");
         String subject = rs.getString("subject");
         String language = rs.getString("language");
-        Date dateAdded = rs.getDate("dateAdded");
-        Date dateModified = rs.getDate("dateModified");
+        Instant dateAdded = rs.getTimestamp("dateAdded").toInstant();
+        Instant dateModified = rs.getTimestamp("dateModified").toInstant();
         boolean isAvailable = rs.getBoolean("available");
         boolean isDeleted = rs.getBoolean("deleted");
         return new Book(id,isbn, title, author,subject,language,dateAdded,dateModified,isAvailable,isDeleted);
@@ -135,19 +136,18 @@ public class Book {
         this.language = language;
     }
 
-    public Date getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Instant createdAt) {
         this.createdAt = createdAt;
     }
-
-    public Date getUpdatedAt() {
+    public Instant getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
 

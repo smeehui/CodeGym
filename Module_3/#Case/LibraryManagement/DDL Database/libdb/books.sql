@@ -11,4 +11,6 @@ create table libdb.books
     available    bit          not null,
     deleted      bit          null
 );
+SELECT * FROM books WHERE books.deleted=false ORDER BY books.title ASC;
+
 

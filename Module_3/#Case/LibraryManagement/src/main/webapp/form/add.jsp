@@ -78,10 +78,10 @@
                 action="#"
         >
             <input
-                   type="text"
-                   name="query"
-                   placeholder="Search"
-                   title="Enter search keyword"
+                    type="text"
+                    name="query"
+                    placeholder="Search"
+                    title="Enter search keyword"
             />
             <button type="submit" title="Search">
                 <i class="bi bi-search"></i>
@@ -643,7 +643,7 @@
 </aside>
 <!-- End Sidebar-->
 
-<main id="main" class="main">
+<main id="main" class="main position-relative">
     <div class="pagetitle">
         <h1>Form Elements</h1>
         <nav>
@@ -659,8 +659,10 @@
     <!-- End Page Title -->
 
     <section class="section">
+        <c:set value="${requestScope['view']}" var="view"/>
         <div class="row">
-            <c:if test="${requestScope['view']=='user'}">
+            <c:if test="${view=='user'}">
+                <c:set var="user" value="${requestScope['user']}" />
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
@@ -682,6 +684,7 @@
                                                id="inputName"
                                                class="form-control"
                                                type="text"
+                                               value="${user.getFullName()}"
                                         />
 
                                     </div>
@@ -692,10 +695,11 @@
                                     >
                                     <div class="col-sm-4">
                                         <input required
-                                               name = "userAddress"
+                                               name="userAddress"
                                                id="inputAddress"
                                                class="form-control"
                                                type="text"
+                                               value="${user.getAddress()}"
                                         />
                                     </div>
                                 </div>
@@ -708,9 +712,10 @@
                                     <div class="col-sm-10">
                                         <input required
                                                id="inputUsername"
-                                               name = "username"
+                                               name="username"
                                                class="form-control"
                                                type="text"
+                                               value="${user.getUsername()}"
                                         />
                                     </div>
                                 </div>
@@ -723,9 +728,10 @@
                                     <div class="col-sm-10">
                                         <input required
                                                id="inputPassword"
-                                               name = "userPassword"
+                                               name="userPassword"
                                                class="form-control"
                                                type="password"
+                                               value="${user.getPassword()}"
                                         />
                                     </div>
                                 </div>
@@ -738,9 +744,10 @@
                                     <div class="col-sm-10">
                                         <input required
                                                id="inputEmail"
-                                               name = "userEmail"
+                                               name="userEmail"
                                                class="form-control"
                                                type="email"
+                                               value="${user.getEmail()}"
                                         />
                                     </div>
                                 </div>
@@ -753,9 +760,10 @@
                                     <div class="col-sm-10">
                                         <input required
                                                id="inputNumber"
-                                               name = "userNumber"
+                                               name="userNumber"
                                                class="form-control"
                                                type="number"
+                                               value="${user.getMobile()}"
                                         />
                                     </div>
                                 </div>
@@ -768,8 +776,10 @@
                                     <div class="col-sm-10 ">
                                         <div class="form-check d-inline-block m-x-3">
                                             <input required
-                                                   name = "role"
-                                                   checked
+                                                   name="role"
+                                                    <c:if test="${user.getRole()==1}">
+                                                        checked
+                                                    </c:if>
                                                    class="form-check-input"
                                                    id="memberRole"
                                                    name="userRole"
@@ -785,7 +795,10 @@
                                         </div>
                                         <div class="form-check d-inline-block">
                                             <input required
-                                                   name = "role"
+                                                    <c:if test="${user.getRole()==2}">
+                                                        checked
+                                                    </c:if>
+                                                   name="role"
                                                    class="form-check-input"
                                                    id="adminRole"
                                                    name="userRole"
@@ -827,7 +840,8 @@
                     </div>
                 </div>
             </c:if>
-            <c:if test="${requestScope.get('view')=='book'}">
+            <c:if test="${view=='book'}">
+                <c:set var="book" value="${requestScope['book']}"/>
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
@@ -837,34 +851,40 @@
 
                             <!-- General Form Elements -->
                             <form method="post" action="${pageContext.request.contextPath}/book?action=add">
-                                <div class="row mb-3">
-                                    <label
-                                            for="inputIsbn"
-                                            class="col-sm-2 col-form-label"
-                                    >ISBN</label
-                                    >
-                                    <div class="col-sm-4">
-                                        <input
-                                                required
-                                                id="inputIsbn"
-                                                name="isbn"
-                                                type="text"
-                                                class="form-control"
-                                        />
+                                <div class="row mb-3 justify-content-between">
+                                    <div class="row col-sm-6">
+                                        <label
+                                                for="inputIsbn"
+                                                class="col-form-label"
+                                        >ISBN</label
+                                        >
+                                        <div class="">
+                                            <input
+                                                    required
+                                                    id="inputIsbn"
+                                                    name="isbn"
+                                                    type="text"
+                                                    class="form-control"
+                                                    value="${book.getIsbn()}"
+                                            />
+                                        </div>
                                     </div>
-                                    <label
-                                            for="inputTitle"
-                                            class="col-sm-2 col-form-label text-center"
-                                    >Tiêu đề</label
-                                    >
-                                    <div class="col-sm-4">
-                                        <input
-                                                required
-                                                name="bookTitle"
-                                                id="inputTitle"
-                                                type="text"
-                                                class="form-control"
-                                        />
+                                    <div class="col-sm-6">
+                                        <label
+                                                for="inputTitle"
+                                                class=" col-form-label"
+                                        >Tiêu đề
+                                        </label>
+                                        <div class="">
+                                            <input
+                                                    required
+                                                    name="bookTitle"
+                                                    id="inputTitle"
+                                                    type="text"
+                                                    class="form-control"
+                                                    value="${book.getTitle()}"
+                                            />
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -880,6 +900,7 @@
                                                 id="inputAuthor"
                                                 type="text"
                                                 class="form-control"
+                                                value="${book.getAuthor()}"
                                         />
                                     </div>
                                 </div>
@@ -896,6 +917,7 @@
                                                 id="inputSubject"
                                                 type="text"
                                                 class="form-control"
+                                                value="${book.getSubject()}"
                                         />
                                     </div>
                                     <label
@@ -910,6 +932,7 @@
                                                 id="inputLanguage"
                                                 type="text"
                                                 class="form-control"
+                                                value="${book.getLanguage()}"
                                         />
                                     </div>
                                 </div>
@@ -928,7 +951,7 @@
                                                     name="isAvailable"
                                                     id="gridRadios1"
                                                     value="true"
-                                                    checked
+                                                    <c:if test="${book.isAvailable()}">checked</c:if>
                                             />
                                             <label
                                                     class="form-check-label"
@@ -945,6 +968,7 @@
                                                     name="isAvailable"
                                                     id="gridRadios2"
                                                     value="false"
+                                                    <c:if test="${!book.isAvailable()}">checked</c:if>
                                             />
                                             <label
                                                     class="form-check-label"
@@ -967,6 +991,7 @@
                                         <button
                                                 type="reset"
                                                 class="btn btn-primary"
+                                                id="submit-btn"
                                         >
                                             Nhập lại
                                         </button>
@@ -978,6 +1003,49 @@
                     </div>
                 </div>
             </c:if>
+            <div aria-live="polite" aria-atomic="true" class="position-absolute top-0 end-0">
+                <!-- Position it: -->
+                <!-- - `.toast-container` for spacing between toasts -->
+                <!-- - `top-0` & `end-0` to position the toasts in the upper right corner -->
+                <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
+                <div class="toast-container top-0 end-0 p-3">
+                    <!-- Then put toasts within -->
+                    <c:set value="${requestScope['errors']}" var="errors"/>
+                    <c:forEach items="${requestScope['errors'].keySet()}" var="name">
+                        <div class="toast text-danger errorToast" role="alert">
+                            <div class="toast-header text-danger justify-content-between">
+                                <i class="bi-exclamation-circle-fill" class="rounded mr-2"></i>
+                                <strong class="mr-auto">Lỗi ${name}</strong>
+                                <button class="btn ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
+                                    <span aria-hidden="true" class="btn-outline-light"><i
+                                            class="bi-x-circle"></i> </span>
+                                </button>
+                            </div>
+                            <div class="toast-body">
+                                    ${errors.get(name)}
+                            </div>
+                        </div>
+                    </c:forEach>
+                    <div class="toast successToast text-success" role="alert">
+                        <div class="toast-header text-success justify-content-between">
+                            <i class="bi-exclamation-circle-fill" class="rounded mr-2"></i>
+                            <strong class="mr-auto">Thêm thành công</strong>
+                            <button class="btn ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
+                                <span aria-hidden="true" class="btn-outline-light"><i class="bi-x-circle"></i> </span>
+                            </button>
+                        </div>
+                        <div class="toast-body">
+                            <p>Thêm
+                                <c:choose>
+                                    <c:when test="${view=='user'}"> người dùng</c:when>
+                                    <c:when test="${view=='book'}"> sách</c:when>
+                                </c:choose>
+                                mới thành công
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </main>
@@ -1018,5 +1086,38 @@
 
 <!-- Template Main JS File -->
 <script src="../assets/js/main.js"></script>
+<script>
+    function showErrorToast() {
+        let options = {
+            animation: true,
+            delay: 3000
+        }
+        document.querySelectorAll(".errorToast").forEach((e) => {
+            let toast = new bootstrap.Toast(e);
+            toast.show();
+        })
+    };
+
+    function showSuccessToast() {
+        let options = {
+            animation: true,
+            delay: 3000
+        }
+        let toast = new bootstrap.Toast(document.querySelector(".successToast"));
+        toast.show();
+    };
+</script>
+<script>
+    window.onload = function () {
+        <c:if test="${!(requestScope['errors'].values().isEmpty())}">
+            showErrorToast()
+        </c:if>
+        <c:if test="${requestScope['success']}">
+            showSuccessToast()
+        </c:if>
+
+    }
+</script>
+
 </body>
 </html>
