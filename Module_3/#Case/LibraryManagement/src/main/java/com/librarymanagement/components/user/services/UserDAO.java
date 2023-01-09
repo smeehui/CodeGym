@@ -17,6 +17,7 @@ public class UserDAO implements IUserDAO {
     private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String INSERT_NEW_USER = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     private static final String DELETE_BY_ID = "UPDATE users SET users.deleted = true WHERE users.id=?";
+    private static final String UPDATE_USER_DETAILS = "UPDATE users SET fullName = ?,phone=?,email = ?,address=?,role=?,dateModified=? WHERE id =?";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -45,7 +46,8 @@ public class UserDAO implements IUserDAO {
             connection.close();
             return users;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            errorLogger(e);
+            return null;
         }
     }
 
@@ -55,7 +57,7 @@ public class UserDAO implements IUserDAO {
             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USER_ROLE);
             statement.executeQuery();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            errorLogger(e);
         }
     }
 
@@ -72,7 +74,8 @@ public class UserDAO implements IUserDAO {
             statement.close();
             return null;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            errorLogger(e);
+            return null;
         }
     }
 
@@ -80,6 +83,7 @@ public class UserDAO implements IUserDAO {
     public boolean existsById(Long aLong) {
         return false;
     }
+
     @Override
     public Map<Long, User> getAll() {
         Map<Long, User> users = new HashMap<>();
@@ -94,9 +98,14 @@ public class UserDAO implements IUserDAO {
             preparedStatement.close();
             return users;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            errorLogger(e);
+            return null;
         }
+    }
 
+    private void errorLogger(SQLException e) {
+        System.out.println(e.getErrorCode());
+        System.out.println(e.getMessage());
     }
 
     @Override
@@ -122,21 +131,32 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public boolean update(User newUser) {
-
-        return false;
+    public boolean update(User newUser) throws SQLException {
+        //UPDATE users SET fullName = ?,phone=?,email = ?,address=?,role=?,dateModified=? WHERE id =?
+        try (Connection connection = getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_DETAILS);
+            preparedStatement.setString(1, newUser.getFullName());
+            preparedStatement.setString(2, newUser.getMobile());
+            preparedStatement.setString(3, newUser.getEmail());
+            preparedStatement.setString(4, newUser.getAddress());
+            preparedStatement.setInt(5, newUser.getRole());
+            preparedStatement.setTimestamp(6, Timestamp.from(newUser.getUpdatedAt()));
+            preparedStatement.setLong(7, newUser.getId());
+            return preparedStatement.executeUpdate() > 0;
+        }
     }
 
     @Override
     public boolean deleteById(Long id) {
-    try(Connection connection = getConnection()) {
-        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
-        preparedStatement.setLong(1, id);
-        int rowAffected = preparedStatement.executeUpdate();
-        return rowAffected > 0;
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-    }
+        try (Connection connection = getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatement.setLong(1, id);
+            int rowAffected = preparedStatement.executeUpdate();
+            return rowAffected > 0;
+        } catch (SQLException e) {
+            errorLogger(e);
+            return false;
+        }
     }
 
     @Override

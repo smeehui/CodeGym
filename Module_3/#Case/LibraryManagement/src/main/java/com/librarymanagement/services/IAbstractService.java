@@ -13,7 +13,7 @@ public interface IAbstractService<Model, ID> {
 
     boolean add(Model newEntity) throws SQLException;
 
-    boolean update(Model newEntity);
+    boolean update(Model newEntity) throws SQLException;
 
     boolean deleteById(Long id);
 

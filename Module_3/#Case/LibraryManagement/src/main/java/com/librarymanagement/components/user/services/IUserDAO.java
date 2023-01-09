@@ -9,6 +9,6 @@ public interface IUserDAO extends IAbstractService<User,Long> {
 
     boolean add(User newUser) throws SQLException;
 
-    boolean update(User newUser);
+    boolean update(User newUser) throws SQLException;
     void getUserRole(int id);
 }

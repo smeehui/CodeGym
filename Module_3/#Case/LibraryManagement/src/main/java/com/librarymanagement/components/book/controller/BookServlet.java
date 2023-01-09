@@ -42,7 +42,7 @@ public class BookServlet extends HttpServlet {
         if (book != null) {
             request.setAttribute("book", book);
             request.setAttribute("view", "book");
-            RequestDispatcher requestDispatcher = request.getRequestDispatcher("form/edit.jsp");
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/WEB-INF/form/edit.jsp");
             requestDispatcher.forward(request, response);
         }
     }
@@ -65,14 +65,14 @@ public class BookServlet extends HttpServlet {
         Map<Long, Book> books = bookDAO.getAllExists();
         request.setAttribute("view", "book");
         request.setAttribute("books", books);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("table/all.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("view", "book");
         request.setAttribute("errors", new HashMap<String, String>());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("form/add.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/add.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -86,11 +86,39 @@ public class BookServlet extends HttpServlet {
 
     }
 
-    private void editBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void editBook(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, String> errors = new HashMap<>();
         Book book = validateBookDetails(request, errors);
-        boolean status = bookDAO.update(book);
-        if (status) response.sendRedirect("/book");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/edit.jsp");
+        request.setAttribute("view","book");
+        if (errors.isEmpty()) {
+            try{
+                boolean isSuccess = bookDAO.update(book);
+                if (isSuccess) {
+                    request.setAttribute("book", bookDAO.getById(book.getId()));
+                    request.setAttribute("success", true);
+                    dispatcher.forward(request, response);
+                }
+            }catch (SQLException e){
+                request.setAttribute("book", book);
+                setMessageType(errors, e.getMessage());
+                dispatcher.forward(request, response);
+            }
+        } else {
+            request.setAttribute("book", book);
+            request.setAttribute("success",true);
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void setMessageType(Map<String, String> errors, String message) {
+        String type = "";
+        if (message.contains("isbn")) {
+            type = "ISBN đã tồn tại";
+        } else if (message.contains("id")) {
+            type = "ID đã tồn tại";
+        }
+        errors.put("Lỗi dữ liệu", type);
     }
 
     private Book validateBookDetails(HttpServletRequest request, Map<String, String> errors) {
@@ -102,7 +130,7 @@ public class BookServlet extends HttpServlet {
             id = System.currentTimeMillis() / 1000;
         }
         String isbn = request.getParameter("isbn");
-        if (!ValidateUtils.isIsbnValid(isbn)) errors.put("isbnError", "ISBN không hợp lệ, ISBN phải là 10 số và có định dạng 1234567890 hoặc 1-234-56789-0)");
+        if (!ValidateUtils.isIsbnValid(isbn)) errors.put("ISN", "ISBN không hợp lệ, ISBN phải là 10 số và có định dạng 1234567890 hoặc 1-234-56789-0)");
         String bookTitle = request.getParameter("bookTitle");
         String bookAuthor = request.getParameter("bookAuthor");
         String bookLanguage = request.getParameter("bookLanguage");
@@ -118,7 +146,7 @@ public class BookServlet extends HttpServlet {
     private void addNewBook(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, String> errors = new HashMap<>();
         Book book = validateBookDetails(request, errors);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/form/add.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("//WEB-INF/form/add.jsp");
         request.setAttribute("view", "book");
         if (errors.isEmpty()) {
            try {
