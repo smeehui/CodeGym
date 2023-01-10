@@ -38,6 +38,8 @@
 
 <!-- Template Main CSS File -->
 <link href="/assets/css/style.css" rel="stylesheet" />
+<%--Custome--%>
+<link href="/assets/css/custom.css" rel="stylesheet" />
 
 <!-- =======================================================
 * Template Name: NiceAdmin - v2.5.0

@@ -90,10 +90,51 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
+        request.setAttribute("view","user");
         switch (action) {
             case "add" -> addNewUser(request, response);
             case "edit" -> editUser(request, response);
+            case "changePwd" -> changeUserPassword(request, response);
         }
+    }
+
+    private void changeUserPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Map<String, String> errors = new HashMap<>();
+        long id = Long.parseLong(request.getParameter("id"));
+        User user = userDAO.getById(id);
+        if (user == null) {
+            errors.put("người dùng", "Không tìm thấy người dùng");
+        }
+        assert user != null;
+        validatePassowrd(request, errors,user);
+        request.setAttribute("user",user);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/edit.jsp");
+        request.setAttribute("errors", errors);
+        if (errors.isEmpty()) {
+            user.setPassword(request.getParameter("newPassword"));
+            try {
+                boolean status = userDAO.update(user);
+                request.setAttribute("success", true);
+                dispatcher.forward(request,response);
+            } catch (SQLException e) {
+                errors.put("dữ liệu", e.getMessage());
+            }
+        }else {
+            dispatcher.forward(request,response);
+        }
+    }
+
+    private void validatePassowrd(HttpServletRequest request, Map<String, String> errors, User user) {
+        String curPwd = request.getParameter("password");
+        String newPwd = request.getParameter("newPassword");
+        String reNewPwd = request.getParameter("renewPassword");
+        if (!ValidateUtils.isPasswordValid(curPwd)) errors.put("mật khẩu yếu", "Mật khẩu tối thiểu phải có 8 kí tự");
+        else if (!(user.getPassword().equals(curPwd))) errors.put("mật khẩu không đúng", "Mật khẩu cũ không chính xác");
+        else if (!ValidateUtils.isPasswordValid(newPwd)) errors.put("mật khẩu yếu", "Mật khẩu tối thiểu phải có 8 kí tự");
+        else if ((user.getPassword().equals(newPwd)))
+            errors.put("mật khẩu trùng lặp", "Mật khẩu bạn đã nhập là mật khẩu cũ");
+        else if(!newPwd.equals(reNewPwd))
+            errors.put("mật khẩu không khớp", "Mật khẩu nhập lại không khớp với mật khẩu mới");
     }
 
     private void editUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -130,7 +171,7 @@ public class UserServlet extends HttpServlet {
             type = "Email đã tồn tại";
         } else if (message.contains("username")) {
             type = "Tên người dùng đã tồn tại";
-        }
+        } else type = message;
         errors.put("Lỗi dữ liệu", type);
     }
 
@@ -165,6 +206,7 @@ public class UserServlet extends HttpServlet {
         long id;
         if (idStr != null) id = Long.parseLong(idStr);
         else id = System.currentTimeMillis() / 1000;
+        User user = userDAO.getById(id);
         request.setAttribute("errors", errors);
         String userFullName = request.getParameter("userFullName");
         if (!ValidateUtils.isFirstCaseValid(userFullName))
@@ -189,6 +231,12 @@ public class UserServlet extends HttpServlet {
             dateAdded = Instant.now();
         } else dateAdded = Instant.parse(dateAddedStr);
         Instant dateModified = Instant.now();
-        return new User(id, username, password, userFullName, phone, email, address, role, dateAdded, dateModified, false);
+        boolean isDeleted = false;
+        if (user != null) {
+            username = user.getUsername();
+            password = user.getPassword();
+            isDeleted = user.isDeleted();
+        }
+        return new User(id, username, password, userFullName, phone, email, address, role, dateAdded, dateModified, isDeleted);
     }
 }

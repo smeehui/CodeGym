@@ -212,7 +212,8 @@
                                             id="profile-change-password"
                                     >
                                         <!-- Change Password Form -->
-                                        <form>
+                                        <form method="post" action="${pageContext.request.contextPath}/user?action=changePwd&id=${user.getId()}">
+                                            <input class="d-none" type="text" name="action" value="changePassword">
                                             <div class="row mb-3">
                                                 <label
                                                         for="currentPassword"
@@ -237,7 +238,7 @@
                                                 >
                                                 <div class="col-md-8 col-lg-9">
                                                     <input
-                                                            name="newpassword"
+                                                            name="newPassword"
                                                             type="password"
                                                             class="form-control"
                                                             id="newPassword"
@@ -254,7 +255,7 @@
                                                 >
                                                 <div class="col-md-8 col-lg-9">
                                                     <input
-                                                            name="renewpassword"
+                                                            name="renewPassword"
                                                             type="password"
                                                             class="form-control"
                                                             id="renewPassword"

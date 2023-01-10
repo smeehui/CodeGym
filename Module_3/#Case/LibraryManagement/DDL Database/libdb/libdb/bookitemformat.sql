@@ -1,4 +1,4 @@
-create table libdb.bookItemFormat
+create table libdb.bookitemformat
 (
     id   int         not null
         primary key,

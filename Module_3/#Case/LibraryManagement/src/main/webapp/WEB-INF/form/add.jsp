@@ -426,6 +426,7 @@
                                                 <div class="modal-body">
                                                     <div class="col-lg-12">
                                                         <div class="card">
+                                                            <c:set value="${requestScope['bookItem']}" var="bookItem"/>
                                                             <div
                                                                     class="card-body"
                                                             >
@@ -450,7 +451,7 @@
                                                                                     id="inputPublisher"
                                                                                     type="text"
                                                                                     class="form-control"
-                                                                                    value="${book.getAuthor()}"
+                                                                                    value="${bookItem.getPublisher()}"
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -472,6 +473,7 @@
                                                                                     id="inputDayPublished"
                                                                                     type="date"
                                                                                     class="form-control"
+                                                                                    value="${bookItem.getPublishedDate()}"
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -497,7 +499,7 @@
                                                                                     id="inputPage"
                                                                                     type="number"
                                                                                     class="form-control"
-                                                                                    value="${book.getAuthor()}"
+                                                                                    value="${bookItem.getNumberOfPages()}"
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -519,6 +521,7 @@
                                                                                     id="inputPrice"
                                                                                     type="number"
                                                                                     class="form-control"
+                                                                                    value="${bookItem.getPrice()}"
                                                                             />
                                                                         </div>
                                                                     </div>
@@ -552,31 +555,13 @@
                                                                                     dạng
                                                                                     sách
                                                                                 </option>
-                                                                                <option
-                                                                                        value="1"
-                                                                                >
-                                                                                    PAPERBACK
-                                                                                </option>
-                                                                                <option
-                                                                                        value="2"
-                                                                                >
-                                                                                    HARDCOVER
-                                                                                </option>
-                                                                                <option
-                                                                                        value="3"
-                                                                                >
-                                                                                    EBOOK
-                                                                                </option>
-                                                                                <option
-                                                                                        value="4"
-                                                                                >
-                                                                                    MAGAZINE
-                                                                                </option>
-                                                                                <option
-                                                                                        value="5"
-                                                                                >
-                                                                                    NEWSPAPER
-                                                                                </option>
+                                                                                <c:forEach
+                                                                                        items="${applicationScope['bookFormats'].keySet()}"
+                                                                                        var="bookFormatKey">
+                                                                                    <option <c:if
+                                                                                            test="${bookItem.getFormat()== bookFormatKey}">selected</c:if>
+                                                                                            value="${bookFormatKey}">${applicationScope['bookFormats'].get(bookFormatKey)}</option>
+                                                                                </c:forEach>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -587,7 +572,7 @@
                                                                                 for="inputQuantity"
                                                                                 class="col-form-label"
                                                                         >Số
-                                                                            mượn</label
+                                                                            lượng</label
                                                                         >
                                                                         <div
                                                                                 class=""

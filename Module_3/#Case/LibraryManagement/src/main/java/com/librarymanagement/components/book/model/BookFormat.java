@@ -1,26 +1,26 @@
 package com.librarymanagement.components.book.model;
 
 public enum BookFormat {
-    PAPERBACK("PAPERBACK"),
-    HARDCOVER("HARDCOVER"),
-    NEWSPAPER("NEWSPAPER"),
-    MAGAZINE("MAGAZINE"),
-    EBOOK("EBOOK");
+    PAPERBACK(1),
+    HARDCOVER(2),
+    NEWSPAPER(5),
+    MAGAZINE(4),
+    EBOOK(3);
 
-    private final String value;
+    private final int value;
 
-    private BookFormat(String value) {
+    private BookFormat(int value) {
         this.value = value;
     }
 
-    public String getValue() {
+    public int getValue() {
         return this.value;
     }
 
-    public static BookFormat parserBookFormat(String value) {
+    public static BookFormat parserBookFormat(int value) {
         BookFormat[] values = values();
         for (BookFormat bookFormat : values) {
-            if (bookFormat.value.equals(value))
+            if (bookFormat.value == (value))
                 return bookFormat;
         }
 

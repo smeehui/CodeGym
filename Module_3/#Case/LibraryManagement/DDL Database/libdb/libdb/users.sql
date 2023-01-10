@@ -1,4 +1,3 @@
-use libdb;
 create table libdb.users
 (
     id           int auto_increment

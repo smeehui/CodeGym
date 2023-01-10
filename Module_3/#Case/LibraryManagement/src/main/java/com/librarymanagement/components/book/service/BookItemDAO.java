@@ -10,8 +10,8 @@ public class BookItemDAO implements IBookItemDAO{
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/libdb";
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "Smee@99123";
-    private static final String SELECT_ALL_BOOKITEM = "SELECT * FROM bookItems";
-    private static final String INSERT_NEW_BOOKITEM = "INSERT INTO bookItems VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SELECT_ALL_BOOKITEM = "SELECT * FROM bookitems";
+    private static final String INSERT_NEW_BOOKITEM = "INSERT INTO bookItems VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -44,7 +44,6 @@ public class BookItemDAO implements IBookItemDAO{
                 BookItem bookItem = BookItem.parse(rs);
                 bookItems.put(count++, bookItem);
             }
-            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,16 +69,17 @@ public class BookItemDAO implements IBookItemDAO{
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_NEW_BOOKITEM);
             preparedStatement.setLong(1,bookItem.getId());
-            preparedStatement.setDate(2,bookItem.getPublihsedDate());
+            preparedStatement.setDate(2,bookItem.getPublishedDate());
             preparedStatement.setInt(3,bookItem.getFormat());
             preparedStatement.setString(4,bookItem.getPublisher());
             preparedStatement.setInt(5,bookItem.getNumberOfPages());
             preparedStatement.setDouble(6, bookItem.getPrice());
             preparedStatement.setLong(7,bookItem.getBookId());
-            preparedStatement.setTimestamp(8,Timestamp.from(bookItem.getDateAdded()));
-            preparedStatement.setTimestamp(9,Timestamp.from(bookItem.getDateModified()));
-            preparedStatement.setBoolean(10,bookItem.isAvailable());
-            preparedStatement.setBoolean(11,bookItem.isDeleted());
+            preparedStatement.setInt(8,bookItem.getQuantity());
+            preparedStatement.setTimestamp(9,Timestamp.from(bookItem.getDateAdded()));
+            preparedStatement.setTimestamp(10,Timestamp.from(bookItem.getDateModified()));
+            preparedStatement.setBoolean(11,bookItem.isAvailable());
+            preparedStatement.setBoolean(12,bookItem.isDeleted());
             return preparedStatement.executeUpdate() > 0;
         }
     }

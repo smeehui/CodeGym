@@ -1,4 +1,4 @@
-create table libdb.bookItems
+create table libdb.bookitems
 (
     id            bigint      not null
         primary key,
@@ -8,6 +8,7 @@ create table libdb.bookItems
     numberOfPages int         null,
     price         double      null,
     bookId        bigint      not null,
+    quantity      int         null,
     dateAdded     timestamp   null,
     dateModified  timestamp   null,
     available     bit         null,
@@ -17,6 +18,6 @@ create table libdb.bookItems
     constraint bookItem_books_id_fk
         foreign key (bookId) references libdb.books (id),
     constraint bookItem_format__fk
-        foreign key (format) references libdb.bookItemFormat (id)
+        foreign key (format) references libdb.bookitemformat (id)
 );
 

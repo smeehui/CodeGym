@@ -97,7 +97,7 @@ public class BookDAO implements IBookDAO {
     }
 
     @Override
-    public boolean add(Book book) {
+    public boolean add(Book book) throws SQLException {
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_NEW_BOOK);
             preparedStatement.setLong(1,book.getId());
@@ -111,8 +111,6 @@ public class BookDAO implements IBookDAO {
             preparedStatement.setBoolean(9,book.isAvailable());
             preparedStatement.setBoolean(10,book.isDeleted());
             return preparedStatement.executeUpdate() > 0;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 

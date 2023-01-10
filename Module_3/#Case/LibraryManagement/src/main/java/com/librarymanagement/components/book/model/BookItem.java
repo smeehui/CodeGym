@@ -7,52 +7,64 @@ import java.time.Instant;
 
 public class BookItem {
     private Long id;
-    private Date publihsedDate;
+    private Date publishedDate;
     private int format;
     private String publisher;
     private int numberOfPages;
     private double price;
     private long bookId;
+    private int quantity;
     private Instant dateAdded;
     private Instant dateModified;
     private boolean available;
     private boolean deleted;
     public BookItem() {
     }
-    public BookItem(Long id, Date publihsedDate, int format, String publisher, int numberOfPages, double price, long bookId, Instant dateAdded, Instant dateModified, boolean available, boolean deleted) {
+    public BookItem(Long id, Date publishedDate, int format, String publisher, int numberOfPages, double price, long bookId, int quantity, Instant dateAdded, Instant dateModified, boolean available, boolean deleted) {
         this.id = id;
+        this.publishedDate =publishedDate;
         this.format = format;
         this.publisher = publisher;
         this.numberOfPages = numberOfPages;
         this.price = price;
         this.bookId = bookId;
+        this.quantity = quantity;
         this.dateAdded = dateAdded;
         this.dateModified = dateModified;
         this.available = available;
         this.deleted = deleted;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public static BookItem parse(ResultSet rs) throws SQLException {
         Long id= rs.getLong("id");
-        Date publihsedDate = rs.getDate("publishedDate");
+        Date publihsedDate = rs.getDate("publishDate");
         int format = rs.getInt("format");
         String publisher = rs.getString("publisher");
         int numberOfPages = rs.getInt("numberOfPages");
         double price = rs.getDouble("price");
         long bookId = rs.getLong("bookId");
+        int quantity = rs.getInt("quantity");
         Instant dateAdded = rs.getTimestamp("dateAdded").toInstant();
         Instant dateModified = rs.getTimestamp("dateModified").toInstant();
         boolean available= rs.getBoolean("available");
         boolean deleted= rs.getBoolean("deleted");
-        return new BookItem(id, publihsedDate, format, publisher, numberOfPages, price, bookId, dateAdded, dateModified, available, deleted);
+        return new BookItem(id, publihsedDate, format, publisher, numberOfPages, price, bookId, quantity,dateAdded, dateModified, available, deleted);
     }
 
-    public Date getPublihsedDate() {
-        return publihsedDate;
+    public Date getPublishedDate() {
+        return publishedDate;
     }
 
-    public void setPublihsedDate(Date publihsedDate) {
-        this.publihsedDate = publihsedDate;
+    public void setPublishedDate(Date publishedDate) {
+        this.publishedDate = publishedDate;
     }
 
     public Long getId() {

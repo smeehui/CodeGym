@@ -17,7 +17,11 @@ public class UserDAO implements IUserDAO {
     private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String INSERT_NEW_USER = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     private static final String DELETE_BY_ID = "UPDATE users SET users.deleted = true WHERE users.id=?";
-    private static final String UPDATE_USER_DETAILS = "UPDATE users SET fullName = ?,phone=?,email = ?,address=?,role=?,dateModified=? WHERE id =?";
+    private static final String
+            UPDATE_USER_DETAILS = "UPDATE users SET " +
+                                  "fullName=?,address=?,phone=?,email=?,username=?, password=?, role=?,dateAdded=?," +
+                                  "dateModified=?,deleted=? "+
+                                  "WHERE id=?";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -72,11 +76,10 @@ public class UserDAO implements IUserDAO {
             }
             connection.close();
             statement.close();
-            return null;
         } catch (SQLException e) {
             errorLogger(e);
-            return null;
         }
+        return null;
     }
 
     @Override
@@ -132,16 +135,21 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean update(User newUser) throws SQLException {
-        //UPDATE users SET fullName = ?,phone=?,email = ?,address=?,role=?,dateModified=? WHERE id =?
+//        "fullName=?,address=?,phone=?,email = ?,username = ?, password=?, role=?,dateAdded=?" +
+//        "dateModified=?,deleted=?"+
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_USER_DETAILS);
             preparedStatement.setString(1, newUser.getFullName());
-            preparedStatement.setString(2, newUser.getMobile());
-            preparedStatement.setString(3, newUser.getEmail());
-            preparedStatement.setString(4, newUser.getAddress());
-            preparedStatement.setInt(5, newUser.getRole());
-            preparedStatement.setTimestamp(6, Timestamp.from(newUser.getUpdatedAt()));
-            preparedStatement.setLong(7, newUser.getId());
+            preparedStatement.setString(2, newUser.getAddress());
+            preparedStatement.setString(3, newUser.getMobile());
+            preparedStatement.setString(4, newUser.getEmail());
+            preparedStatement.setString(5, newUser.getUsername());
+            preparedStatement.setString(6, newUser.getPassword());
+            preparedStatement.setInt(7, newUser.getRole());
+            preparedStatement.setTimestamp(8, Timestamp.from(newUser.getCreatedAt()));
+            preparedStatement.setTimestamp(9, Timestamp.from(newUser.getUpdatedAt()));
+            preparedStatement.setBoolean(10,newUser.isDeleted());
+            preparedStatement.setLong(11, newUser.getId());
             return preparedStatement.executeUpdate() > 0;
         }
     }

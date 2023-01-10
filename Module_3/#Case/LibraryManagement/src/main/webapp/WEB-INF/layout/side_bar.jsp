@@ -113,7 +113,7 @@
           </a>
         </li>
         <li>
-          <a href="forms-layouts.html">
+          <a href="${pageContext.request.contextPath}/book_item">
             <i class="bi bi-circle"></i
             ><span>Xem danh sách</span>
           </a>

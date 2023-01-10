@@ -3,16 +3,16 @@
 <html lang="en">
 <head>
     <title>Dashboard - NiceAdmin Bootstrap Template</title>
-    <jsp:include page="/WEB-INF/layout/head_link.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/layout/head_link.jsp"/>
 </head>
 
 <body>
 <!-- ======= Header ======= -->
-<jsp:include page="/WEB-INF/layout/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/header.jsp"/>
 <!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
-<jsp:include page="/WEB-INF/layout/side_bar.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/side_bar.jsp"/>
 <!-- End Sidebar-->
 
 <main id="main" class="main">
@@ -21,7 +21,7 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html">Home</a>
+                    <a href="${pageContext.request.contextPath}/">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
@@ -1267,10 +1267,10 @@
 <!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<jsp:include page="/WEB-INF/layout/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/footer.jsp"/>
 <!-- End Footer -->
 
 
-<jsp:include page="/WEB-INF/layout/script.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/script.jsp"/>
 </body>
 </html>

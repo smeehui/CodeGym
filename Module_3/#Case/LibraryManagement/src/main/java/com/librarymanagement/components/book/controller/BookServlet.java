@@ -2,9 +2,12 @@ package com.librarymanagement.components.book.controller;
 
 import com.librarymanagement.components.book.model.Book;
 import com.librarymanagement.components.book.service.BookDAO;
+import com.librarymanagement.components.book.service.BookFormatDAO;
 import com.librarymanagement.components.book.service.IBookDAO;
+import com.librarymanagement.components.book.service.IBookFormatDAO;
 import com.librarymanagement.utils.ValidateUtils;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,15 +23,18 @@ import java.util.Map;
 @WebServlet(name = "BookServlet", value = "/book")
 public class BookServlet extends HttpServlet {
     IBookDAO bookDAO;
-
+    IBookFormatDAO bookFormatDAO;
     @Override
     public void init() throws ServletException {
         bookDAO = new BookDAO();
+        bookFormatDAO = new BookFormatDAO();
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
+        ServletContext context = request.getServletContext();
+        context.setAttribute("bookFormats", bookFormatDAO.getAll());
         switch (action) {
             case "add" -> showAddForm(request, response);
             case "delete" -> deleteBook(request, response);
