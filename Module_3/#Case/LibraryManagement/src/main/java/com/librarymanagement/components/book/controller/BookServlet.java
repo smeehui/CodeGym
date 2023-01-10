@@ -146,14 +146,24 @@ public class BookServlet extends HttpServlet {
     private void addNewBook(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Map<String, String> errors = new HashMap<>();
         Book book = validateBookDetails(request, errors);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("//WEB-INF/form/add.jsp");
+        RequestDispatcher  dispatcher = request.getRequestDispatcher("/WEB-INF/form/add.jsp");
         request.setAttribute("view", "book");
         if (errors.isEmpty()) {
            try {
-               boolean status = bookDAO.add(book);
-               if (status) {
-                   request.setAttribute("success", true);
+               String hasBookItemStr = request.getParameter("hasBookItem");
+               if (hasBookItemStr==null) hasBookItemStr = "false";
+               boolean isAddNewBookItem = Boolean.parseBoolean(hasBookItemStr);
+               if (isAddNewBookItem) {
+                   dispatcher = request.getRequestDispatcher("/book_item?action=add");
+                   request.setAttribute("bookId",book.getId());
+                   request.setAttribute("book",book);
                    dispatcher.forward(request, response);
+               }else {
+                   boolean status = bookDAO.add(book);
+                   if (status) {
+                       request.setAttribute("success", true);
+                       dispatcher.forward(request, response);
+                   }
                }
            } catch (SQLException e) {
                errors.put("Lỗi dữ liệu", e.getMessage());

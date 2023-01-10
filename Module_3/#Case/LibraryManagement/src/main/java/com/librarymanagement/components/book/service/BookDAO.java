@@ -10,9 +10,9 @@ import java.util.Map;
 
 public class BookDAO implements IBookDAO {
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/libdb";
-    private static final String UPDATE_BOOK = "UPDATE books SET isbn = ?,title = ? ,author = ?,subject = ?,language = ?,dateAdded = ?,dateModified =?,available = ? WHERE id = ? ";
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "Smee@99123";
+    private static final String UPDATE_BOOK = "UPDATE books SET isbn = ?,title = ? ,author = ?,subject = ?,language = ?,dateAdded = ?,dateModified =?,available = ? WHERE id = ? ";
     private static final String SELECT_ALL_BOOKS = "SELECT * FROM books ORDER BY books.title ASC";
     private static final String SELECT_ALL_AVAILABLE_BOOKS = "SELECT * FROM books WHERE books.deleted=false ORDER BY books.title ASC";
     private static final String DELETE_BY_ID = "UPDATE books SET deleted = true WHERE books.id = ?";

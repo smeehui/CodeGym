@@ -7,16 +7,16 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 
     <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
-    <jsp:include page="/WEB-INF/layout/head_link.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/layout/head_link.jsp"/>
 </head>
 
 <body>
 <!-- ======= Header ======= -->
-<jsp:include page="/WEB-INF/layout/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/header.jsp"/>
 <!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
-<jsp:include page="/WEB-INF/layout/side_bar.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/side_bar.jsp"/>
 <!-- End Sidebar-->
 
 <main id="main" class="main">
@@ -25,7 +25,7 @@
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="index.html">Home</a>
+                    <a href="${pageContext.request.contextPath}/">Home</a>
                 </li>
                 <li class="breadcrumb-item">Forms</li>
                 <li class="breadcrumb-item active">Elements</li>
@@ -495,7 +495,7 @@
                     <c:forEach items="${requestScope['errors'].keySet()}" var="name">
                         <div class="toast text-danger errorToast border-danger" role="alert">
                             <div class="toast-header text-danger justify-content-between">
-                                <i class="bi-exclamation-circle-fill" class="rounded mr-2"></i>
+                                <i class="bi-exclamation-circle-fill rounded mr-2"></i>
                                 <strong class="mr-auto">Lỗi ${name.toLowerCase()}</strong>
                                 <button class="btn ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
                                     <span aria-hidden="true" class="btn-outline-light"><i
@@ -509,7 +509,7 @@
                     </c:forEach>
                     <div class="toast successToast text-success border-success" role="alert">
                         <div class="toast-header text-success justify-content-between">
-                            <i class="bi-exclamation-circle-fill" class="rounded mr-2"></i>
+                            <i class="bi-exclamation-circle-fill rounded mr-2"></i>
                             <strong class="mr-auto">Chỉnh sửa thành công</strong>
                             <button class="btn ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
                                 <span aria-hidden="true" class="btn-outline-light"><i class="bi-x-circle"></i> </span>
@@ -533,9 +533,9 @@
 <!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<jsp:include page="/WEB-INF/layout/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/footer.jsp"/>
 <!-- Vendor JS Files -->
-<jsp:include page="/WEB-INF/layout/script.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/script.jsp"/>
 <jsp:include page="/WEB-INF/layout/toast_trigger.jsp"/>
 </body>
 </html>
