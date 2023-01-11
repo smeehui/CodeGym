@@ -150,4 +150,9 @@ public class BookDAO implements IBookDAO {
         Book book = getById(id);
         return book.isDeleted();
     }
+
+    @Override
+    public Map<Long, Book> search(String query, String s) {
+        return null;
+    }
 }

@@ -18,4 +18,5 @@ public interface IAbstractService<Model, ID> {
     boolean deleteById(Long id);
 
     boolean isDeleted(Long id);
+    Map<ID, Model> search(String query, String s);
 }

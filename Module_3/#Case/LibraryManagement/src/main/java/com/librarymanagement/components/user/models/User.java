@@ -3,6 +3,7 @@ package com.librarymanagement.components.user.models;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 public class User {
@@ -18,18 +19,10 @@ public class User {
     private Instant updatedAt;
     private boolean deleted;
 
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
     public User() {
     }
 
-    public User(Long id, String username, String password, String fullName, String mobile, String email, String address, int role, Instant createdAt, Instant updatedAt,boolean isDeleted) {
+    public User(Long id, String username, String password, String fullName, String mobile, String email, String address, int role, Instant createdAt, Instant updatedAt, boolean isDeleted) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -52,12 +45,22 @@ public class User {
         String username = rs.getString("username");
         String password = rs.getString("password");
         Instant dateAdded = rs.getTimestamp("dateAdded").toInstant();
-        Instant dateModified = rs.getTimestamp("dateModified").toInstant();
+        Timestamp dateModifiedTS = rs.getTimestamp("dateModified");
+        Instant dateModified = dateModifiedTS == null ? null : dateModifiedTS.toInstant();
         int role = rs.getInt("role");
         Boolean isDeleted = rs.getBoolean("deleted");
-        User user = new User(id,username,password,fullName,phone,email,address,role,dateAdded,dateModified,isDeleted);
+        User user = new User(id, username, password, fullName, phone, email, address, role, dateAdded, dateModified, isDeleted);
         return user;
     }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     public long getId() {
         return id;
     }

@@ -98,4 +98,9 @@ public class BookItemDAO implements IBookItemDAO{
     public boolean isDeleted(Long id) {
         return false;
     }
+
+    @Override
+    public Map<Long, BookItem> search(String query, String s) {
+        return null;
+    }
 }

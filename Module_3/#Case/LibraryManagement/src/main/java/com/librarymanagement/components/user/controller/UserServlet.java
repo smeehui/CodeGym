@@ -6,6 +6,7 @@ import com.librarymanagement.components.user.services.IRoleDAO;
 import com.librarymanagement.components.user.services.IUserDAO;
 import com.librarymanagement.components.user.services.RoleDAO;
 import com.librarymanagement.components.user.services.UserDAO;
+import com.librarymanagement.services.QueryUtils;
 import com.librarymanagement.utils.ValidateUtils;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -16,9 +17,13 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.net.URL;
+import java.security.Key;
 import java.sql.SQLException;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "com.librarymanagement.components.user.controller.UserServlet", value = "/user")
@@ -36,45 +41,73 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
+        request.setAttribute("view", "user");
         switch (action) {
             case "add" -> showAddForm(request, response);
             case "edit" -> showEditForm(request, response);
             case "delete" -> deleteUser(request, response);
+            case "viewall" -> showUserDatabase(request, response);
+            case "search" -> searchUser(request, response);
             default -> showAllUsers(request, response);
         }
+    }
+
+    private void searchUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("users", parseSearchQuery(request));
+        request.setAttribute("q", request.getParameter("q"));
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    private Map<Long, User> parseSearchQuery(HttpServletRequest request) {
+        String condition = QueryUtils.parseSearchQuery(request);
+        return userDAO.search(request.getParameter("q"),condition);
+    }
+
+    private void showUserDatabase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Map<Long, User> userMap = userDAO.getAll();
+        request.setAttribute("users", userMap);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long id = Long.parseLong(request.getParameter("id"));
         User user = userDAO.getById(id);
         if (user != null) {
-            userDAO.deleteById(id);
+            user.setDeleted(!user.isDeleted());
+            user.setUpdatedAt(Instant.now());
+            try {
+                userDAO.update(user);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
-        response.sendRedirect("/user");
+        response.sendRedirect("/user?action=viewall");
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         long id = Long.parseLong(request.getParameter("id"));
         User user = userDAO.getById(id);
-        request.setAttribute("view", "user");
         request.setAttribute("user", user);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/edit.jsp");
         dispatcher.forward(request, response);
     }
 
     private void showAllUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("view", "user");
-        Map<Long, User> userMap = userDAO.getAllExists();
         Map<Integer, Role> roleMap = roleDAO.getAll();
         HttpSession session = request.getSession();
         session.setAttribute("roles", roleMap);
-        request.setAttribute("users", userMap);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
+        String conditions = QueryUtils.addPaging(request);
+        Map<Long, User> userMap = userDAO.getPaging(conditions,"all");
+        int noOfPage = (int) Math.ceil(userDAO.getNoOfRecords()/5);
+        request.setAttribute("noOfPages", noOfPage);
+        request.setAttribute("users", userMap);
         dispatcher.forward(request, response);
     }
 
     private void showAllActiveUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("view", "user");
         Map<Long, User> userMap = userDAO.getAllExists();
         request.setAttribute("users", userMap);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
@@ -82,7 +115,6 @@ public class UserServlet extends HttpServlet {
     }
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("view", "user");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/add.jsp");
         dispatcher.forward(request, response);
     }
@@ -90,7 +122,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
-        request.setAttribute("view","user");
+        request.setAttribute("view", "user");
         switch (action) {
             case "add" -> addNewUser(request, response);
             case "edit" -> editUser(request, response);
@@ -106,8 +138,8 @@ public class UserServlet extends HttpServlet {
             errors.put("người dùng", "Không tìm thấy người dùng");
         }
         assert user != null;
-        validatePassowrd(request, errors,user);
-        request.setAttribute("user",user);
+        validatePassowrd(request, errors, user);
+        request.setAttribute("user", user);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/edit.jsp");
         request.setAttribute("errors", errors);
         if (errors.isEmpty()) {
@@ -115,12 +147,12 @@ public class UserServlet extends HttpServlet {
             try {
                 boolean status = userDAO.update(user);
                 request.setAttribute("success", true);
-                dispatcher.forward(request,response);
+                dispatcher.forward(request, response);
             } catch (SQLException e) {
                 errors.put("dữ liệu", e.getMessage());
             }
-        }else {
-            dispatcher.forward(request,response);
+        } else {
+            dispatcher.forward(request, response);
         }
     }
 
@@ -130,10 +162,11 @@ public class UserServlet extends HttpServlet {
         String reNewPwd = request.getParameter("renewPassword");
         if (!ValidateUtils.isPasswordValid(curPwd)) errors.put("mật khẩu yếu", "Mật khẩu tối thiểu phải có 8 kí tự");
         else if (!(user.getPassword().equals(curPwd))) errors.put("mật khẩu không đúng", "Mật khẩu cũ không chính xác");
-        else if (!ValidateUtils.isPasswordValid(newPwd)) errors.put("mật khẩu yếu", "Mật khẩu tối thiểu phải có 8 kí tự");
+        else if (!ValidateUtils.isPasswordValid(newPwd))
+            errors.put("mật khẩu yếu", "Mật khẩu tối thiểu phải có 8 kí tự");
         else if ((user.getPassword().equals(newPwd)))
-            errors.put("mật khẩu trùng lặp", "Mật khẩu bạn đã nhập là mật khẩu cũ");
-        else if(!newPwd.equals(reNewPwd))
+            errors.put("mật khẩu bị trùng", "Mật khẩu bạn đã nhập là mật khẩu cũ");
+        else if (!newPwd.equals(reNewPwd))
             errors.put("mật khẩu không khớp", "Mật khẩu nhập lại không khớp với mật khẩu mới");
     }
 
@@ -143,20 +176,20 @@ public class UserServlet extends HttpServlet {
         User user = userDAO.getById(id);
         User updatedUser = validateUserDetails(request, errors);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/edit.jsp");
-        request.setAttribute("view","user");
+        request.setAttribute("view", "user");
         if (errors.isEmpty()) {
-                try{
-                    boolean isSuccess = userDAO.update(updatedUser);
-                    request.setAttribute("user", userDAO.getById(id));
-                    if (isSuccess) {
-                        request.setAttribute("success", true);
-                        dispatcher.forward(request, response);
-                    }
-                }catch (SQLException e){
-                    request.setAttribute("user", user);
-                    setMessageType(errors, e.getMessage());
+            try {
+                boolean isSuccess = userDAO.update(updatedUser);
+                request.setAttribute("user", userDAO.getById(id));
+                if (isSuccess) {
+                    request.setAttribute("success", true);
                     dispatcher.forward(request, response);
                 }
+            } catch (SQLException e) {
+                request.setAttribute("user", user);
+                setMessageType(errors, e.getMessage());
+                dispatcher.forward(request, response);
+            }
         } else {
             request.setAttribute("user", updatedUser);
             dispatcher.forward(request, response);
@@ -165,7 +198,7 @@ public class UserServlet extends HttpServlet {
 
     private void setMessageType(Map<String, String> errors, String message) {
         String type = "";
-        if (message.contains("phone")){
+        if (message.contains("phone")) {
             type = "Số điện thoại đã tồn tại";
         } else if (message.contains("mail")) {
             type = "Email đã tồn tại";
@@ -180,7 +213,6 @@ public class UserServlet extends HttpServlet {
         Map<String, String> errors = new HashMap<>();
         User user = validateUserDetails(request, errors);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/add.jsp");
-        request.setAttribute("view", "user");
         if (errors.isEmpty()) {
             try {
                 boolean isSuccess = userDAO.add(user);
@@ -226,7 +258,7 @@ public class UserServlet extends HttpServlet {
             errors.put("Số điện thoại", "Số điện thoại bao gồm 10 số và bắt đầu là số 0");
         int role = Integer.parseInt(request.getParameter("role"));
         String dateAddedStr = request.getParameter("dateAdded");
-        Instant dateAdded ;
+        Instant dateAdded;
         if (dateAddedStr == null) {
             dateAdded = Instant.now();
         } else dateAdded = Instant.parse(dateAddedStr);
