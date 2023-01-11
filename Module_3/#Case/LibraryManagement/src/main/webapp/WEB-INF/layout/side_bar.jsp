@@ -38,9 +38,9 @@
           </a>
         </li>
         <li>
-          <a href="components-progress.html">
+          <a href="${pageContext.request.contextPath}/user?action=viewall">
             <i class="bi bi-circle"></i
-            ><span>Lịch sử chỉnh sửa</span>
+            ><span>Quản lý dữ liệu</span>
           </a>
         </li>
       </ul>

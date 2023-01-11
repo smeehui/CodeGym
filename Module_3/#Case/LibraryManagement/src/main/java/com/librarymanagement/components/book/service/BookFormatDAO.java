@@ -78,4 +78,9 @@ public class BookFormatDAO implements IBookFormatDAO {
     public boolean isDeleted(Long id) {
         return false;
     }
+
+    @Override
+    public Map<Integer, BookFormat> search(String query, String s) {
+        return null;
+    }
 }

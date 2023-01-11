@@ -11,14 +11,21 @@
     <div class="search-bar">
         <form
                 class="search-form d-flex align-items-center"
-                method="POST"
-                action="#"
+                method="get"
+                action="/${requestScope['view']}"
         >
             <input
                     type="text"
-                    name="query"
+                    name="action"
+                    value="search"
+                    hidden=""
+            />
+            <input
+                    type="text"
+                    name="q"
                     placeholder="Search"
                     title="Enter search keyword"
+                    value="${requestScope["q"]}"
             />
             <button type="submit" title="Search">
                 <i class="bi bi-search"></i>

@@ -11,17 +11,18 @@ public class UserDAO implements IUserDAO {
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "Smee@99123";
 
-    private static final String SELECT_ALL_USER = "SELECT * FROM users";
+    private static final String SELECT_ALL_USER = "SELECT SQL_CALC_FOUND_ROWS * FROM users";
     private static final String SELECT_ALL_EXIST_USER = "SELECT * FROM users WHERE users.deleted =false";
     private static final String SELECT_ALL_USER_ROLE = "SELECT * FROM roles";
     private static final String SELECT_USER_BY_ID = "SELECT * FROM users WHERE id = ?";
     private static final String INSERT_NEW_USER = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     private static final String DELETE_BY_ID = "UPDATE users SET users.deleted = true WHERE users.id=?";
-    private static final String
-            UPDATE_USER_DETAILS = "UPDATE users SET " +
+    private int noOfRecords = 0;
+    private static final String UPDATE_USER_DETAILS = "UPDATE users SET " +
                                   "fullName=?,address=?,phone=?,email=?,username=?, password=?, role=?,dateAdded=?," +
                                   "dateModified=?,deleted=? "+
                                   "WHERE id=?";
+    private static final String SEARCH_USER = "SELECT * FROM users WHERE (fullName LIKE ? OR address LIKE ? OR phone LIKE ? OR email LIKE ?)";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -37,22 +38,7 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public Map<Long, User> getAllExists() {
-        Map<Long, User> users = null;
-        try (Connection connection = getConnection()) {
-            users = new HashMap<>();
-            PreparedStatement statement = connection.prepareStatement(SELECT_ALL_EXIST_USER);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                User user = User.parseUser(rs);
-                users.put(user.getId(), user);
-            }
-            statement.close();
-            connection.close();
-            return users;
-        } catch (SQLException e) {
-            errorLogger(e);
-            return null;
-        }
+        return getUsers(SELECT_ALL_EXIST_USER);
     }
 
     @Override
@@ -89,14 +75,21 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public Map<Long, User> getAll() {
+        return getUsers(SELECT_ALL_USER);
+    }
+
+    private Map<Long, User> getUsers(String query) {
         Map<Long, User> users = new HashMap<>();
         try (Connection connection = getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USER);
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
+            PreparedStatement getRow = connection.prepareStatement("SELECT FOUND_ROWS()");
             while (rs.next()) {
                 User user = User.parseUser(rs);
                 users.put(user.getId(), user);
             }
+            ResultSet rows = getRow.executeQuery();
+            while (rows.next())this.noOfRecords = rows.getInt(1);
             connection.close();
             preparedStatement.close();
             return users;
@@ -104,6 +97,10 @@ public class UserDAO implements IUserDAO {
             errorLogger(e);
             return null;
         }
+    }
+
+    public int getNoOfRecords() {
+        return noOfRecords;
     }
 
     private void errorLogger(SQLException e) {
@@ -155,6 +152,14 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
+    public Map<Long, User> getPaging(String query,String how) {
+        String completedQuery = SELECT_ALL_USER + query;
+        return getUsers(completedQuery);
+    }
+    public int getRow(ResultSet rs) throws SQLException {
+        return rs.getInt(1);
+    }
+    @Override
     public boolean deleteById(Long id) {
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
@@ -170,5 +175,12 @@ public class UserDAO implements IUserDAO {
     @Override
     public boolean isDeleted(Long id) {
         return false;
+    }
+
+    @Override
+    public Map<Long, User> search(String query, String condition) {
+        String queryDB = SEARCH_USER.replace("?", "'%"+query+"%'");
+        if (condition!=null) queryDB += condition;
+        return getUsers(queryDB);
     }
 }
