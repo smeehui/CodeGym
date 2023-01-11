@@ -1,7 +1,6 @@
 package com.librarymanagement.components.book.model;
 
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.Instant;

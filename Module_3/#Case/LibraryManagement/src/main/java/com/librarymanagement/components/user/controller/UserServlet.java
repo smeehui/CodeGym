@@ -185,7 +185,7 @@ public class UserServlet extends HttpServlet {
     }
 
     private void setMessageType(Map<String, String> errors, String message) {
-        String type = "";
+        String type;
         if (message.contains("phone")) {
             type = "Số điện thoại đã tồn tại";
         } else if (message.contains("mail")) {

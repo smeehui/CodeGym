@@ -15,6 +15,8 @@ public class BookTransactionDAO {
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/libdb";
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "Smee@99123";
+    private final IBookDAO bookDAO;
+    private final IBookItemDAO bookItemDAO;
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -26,8 +28,7 @@ public class BookTransactionDAO {
         }
         return connection;
     }
-    IBookDAO bookDAO;
-    IBookItemDAO bookItemDAO;
+
     public BookTransactionDAO() {
         bookDAO = new BookDAO();
         bookItemDAO = new BookItemDAO();

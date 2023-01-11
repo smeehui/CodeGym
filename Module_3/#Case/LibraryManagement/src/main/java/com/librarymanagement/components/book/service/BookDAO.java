@@ -145,8 +145,7 @@ public class BookDAO implements IBookDAO {
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
             preparedStatement.setLong(1,id);
-            boolean hasSuccess = preparedStatement.executeUpdate() > 0;
-            return hasSuccess;
+            return preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

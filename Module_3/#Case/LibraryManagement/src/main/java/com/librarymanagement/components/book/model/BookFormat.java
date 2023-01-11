@@ -9,7 +9,7 @@ public enum BookFormat {
 
     private final int value;
 
-    private BookFormat(int value) {
+     BookFormat(int value) {
         this.value = value;
     }
 

@@ -58,28 +58,29 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach var="user" items="${requestScope['users'].values()}">
-                                        <tr <c:if
-                                            test="${user.isDeleted()}">style="color: var(--bs-danger);opacity: 0.6"</c:if></tr>
-                                        <td>${user.getId()}</td>
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/user?action=view?id=${user.getId()}">${user.getFullName()}</a>
-                                        </td>
-                                        <td>${user.getMobile()}</td>
-                                        <td>${user.getAddress()}</td>
-                                        <td>${user.getEmail()}</td>
-                                        <td>${sessionScope["roles"].get(user.getRole()).getName()}</td>
-                                        <td>
-                                            <div class="d-flex justify-content-evenly container-fluid align-items-center">
+                                        <tr
+                                                <c:if test="${user.isDeleted()}">style="color: var(--bs-danger);opacity: 0.6"</c:if>
+                                        >
+                                            <td>${user.getId()}</td>
+                                            <td>
+                                                <a href="${pageContext.request.contextPath}/user?action=view?id=${user.getId()}">${user.getFullName()}</a>
+                                            </td>
+                                            <td>${user.getMobile()}</td>
+                                            <td>${user.getAddress()}</td>
+                                            <td>${user.getEmail()}</td>
+                                            <td>${sessionScope["roles"].get(user.getRole()).getName()}</td>
+                                            <td>
+                                                <div class="d-flex justify-content-evenly container-fluid align-items-center">
 
-                                                <a class="btn-sm btn btn-primary"
-                                                   href="${pageContext.request.contextPath}/user?action=edit&id=${user.getId()}">
-                                                    <i class="bi bi-person-gear"></i>
-                                                </a>
-                                                <c:choose>
-                                                    <c:when test="${!user.isDeleted()}">
-                                                        <i
-                                                                class="bi bi-person-fill-x text-white  btn-sm btn btn-warning"
-                                                                data-bs-toggle="modal"
+                                                    <a class="btn-sm btn btn-primary"
+                                                       href="${pageContext.request.contextPath}/user?action=edit&id=${user.getId()}">
+                                                        <i class="bi bi-person-gear"></i>
+                                                    </a>
+                                                    <c:choose>
+                                                        <c:when test="${!user.isDeleted()}">
+                                                            <i
+                                                                    class="bi bi-person-fill-x text-white  btn-sm btn btn-warning"
+                                                                    data-bs-toggle="modal"
                                                                 data-bs-target="#verticalycentered"
                                                                 data-name="${user.getFullName()}"
                                                                 data-id="${user.getId()}"
@@ -97,9 +98,8 @@
                                                         ></i>
                                                     </c:when>
                                                 </c:choose>
-
-                                            </div>
-                                        </td>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>
@@ -204,14 +204,14 @@
                                             <td>
                                                 <div class="container-fluid d-flex justify-content-evenly h-100">
                                                     <a class="btn btn-sm btn-primary"
-                                                       href="${pageContext.request.contextPath}/book?action=edit&id=${book.getId()}">
+                                                       href="${pageContext.request.contextPath}/book?action=edit&id=${bookItem.getId()}">
                                                         <i class="bi bi-pencil-fill "></i>
                                                     </a>
                                                     <i
                                                             class="bi bi-x-circle-fill btn btn-sm btn-warning text-white"
                                                             data-bs-toggle="modal" data-bs-target="#verticalycentered"
-                                                            data-name="${book.getTitle()}"
-                                                            data-id="${book.getId()}"
+                                                            data-name="${bookItem.getBookId()}"
+                                                            data-id="${bookItem.getId()}"
                                                             data-type="book"
                                                             onclick="confirmDelete(event)"
                                                     ></i>

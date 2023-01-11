@@ -1,7 +1,5 @@
 package com.librarymanagement.services;
 
-import com.librarymanagement.components.user.models.User;
-
 import java.sql.SQLException;
 import java.util.Map;
 

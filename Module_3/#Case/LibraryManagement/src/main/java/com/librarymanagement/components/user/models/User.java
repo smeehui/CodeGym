@@ -2,7 +2,6 @@ package com.librarymanagement.components.user.models;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -48,9 +47,8 @@ public class User {
         Timestamp dateModifiedTS = rs.getTimestamp("dateModified");
         Instant dateModified = dateModifiedTS == null ? null : dateModifiedTS.toInstant();
         int role = rs.getInt("role");
-        Boolean isDeleted = rs.getBoolean("deleted");
-        User user = new User(id, username, password, fullName, phone, email, address, role, dateAdded, dateModified, isDeleted);
-        return user;
+        boolean isDeleted = rs.getBoolean("deleted");
+        return new User(id, username, password, fullName, phone, email, address, role, dateAdded, dateModified, isDeleted);
     }
 
     public boolean isDeleted() {

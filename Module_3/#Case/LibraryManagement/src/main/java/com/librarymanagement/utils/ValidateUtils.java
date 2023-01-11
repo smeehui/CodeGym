@@ -8,7 +8,7 @@ public class ValidateUtils {
     public static final String USERNAME_PATTERN = "^[A-Za-z0-9_]{4,20}$";
     public static final String PASSWORD_PATTERN = "^([a-zA-Z!@#$%^&*()_+=,./;':|0-9]{6,})$";
     public static final String FIST_CASE_PATTERN = "^([A-Z]+[a-z]* ?)+$";
-    public static final String PHONE_REGEX = "^[0][1-9][0-9]{8,8}$";
+    public static final String PHONE_REGEX = "^0[1-9][0-9]{8}$";
     public static final String EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,3}$";
     public static final String ISBN_REGEX = "^(?:ISBN(?:-10)?:? )?(?=[0-9X]{10}$|(?=(?:[0-9]+[- ]){3})[- 0-9X]{13}$)[0-9]{1,5}[- ]?[0-9]+[- ]?[0-9]+[- ]?[0-9X]$";
 

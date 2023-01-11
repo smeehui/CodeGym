@@ -6,19 +6,19 @@
             delay: 3000
         }
         document.querySelectorAll(".errorToast").forEach((e) => {
-            let toast = new bootstrap.Toast(e);
+            let toast = new bootstrap.Toast(e,options);
             toast.show();
         })
-    };
+    }
 
     function showSuccessToast() {
         let options = {
             animation: true,
             delay: 3000
         }
-        let toast = new bootstrap.Toast(document.querySelector(".successToast"));
+        let toast = new bootstrap.Toast(document.querySelector(".successToast"),options);
         toast.show();
-    };
+    }
 
 </script>
 <script>

@@ -110,7 +110,7 @@ public class UserDAO implements IUserDAO {
 
     @Override
     public boolean add(User newUser) throws SQLException {
-        int rowAffected = 0;
+        int rowAffected ;
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_NEW_USER);
             preparedStatement.setLong(1, newUser.getId());

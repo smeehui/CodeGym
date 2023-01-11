@@ -1,7 +1,6 @@
 package com.librarymanagement.utils;
 
 import com.librarymanagement.components.book.service.BookDAO;
-import com.librarymanagement.components.user.models.User;
 import com.librarymanagement.components.user.services.UserDAO;
 import com.librarymanagement.services.IAbstractService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,7 +21,7 @@ public class RequestUtils{
                     case "all" -> condition.append(" WHERE ");
                     case "search" -> condition.append(" AND ");
                 }
-            };
+            }
             condition.append(k).append("=").append(str);
         }
         if (condition.toString().equals(" AND ")) return null;
