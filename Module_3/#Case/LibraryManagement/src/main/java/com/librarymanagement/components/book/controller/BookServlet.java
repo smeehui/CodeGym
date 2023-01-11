@@ -5,6 +5,7 @@ import com.librarymanagement.components.book.service.BookDAO;
 import com.librarymanagement.components.book.service.BookFormatDAO;
 import com.librarymanagement.components.book.service.IBookDAO;
 import com.librarymanagement.components.book.service.IBookFormatDAO;
+import com.librarymanagement.utils.RequestUtils;
 import com.librarymanagement.utils.ValidateUtils;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
@@ -33,14 +34,22 @@ public class BookServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
+        request.setAttribute("view", "book");
         ServletContext context = request.getServletContext();
         context.setAttribute("bookFormats", bookFormatDAO.getAll());
         switch (action) {
             case "add" -> showAddForm(request, response);
             case "delete" -> deleteBook(request, response);
             case "edit" -> showEditBookForm(request, response);
+            case "search" -> searchBook(request, response);
             default -> showAllBook(request, response);
         }
+    }
+
+    private void searchBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestUtils.setPageAndAttributes(request,"search",bookDAO);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showEditBookForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -68,9 +77,7 @@ public class BookServlet extends HttpServlet {
     }
 
     private void showAllBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<Long, Book> books = bookDAO.getAllExists();
-        request.setAttribute("view", "book");
-        request.setAttribute("books", books);
+        RequestUtils.setPageAndAttributes(request,"all",bookDAO);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
         dispatcher.forward(request, response);
     }
@@ -154,29 +161,25 @@ public class BookServlet extends HttpServlet {
         Book book = validateBookDetails(request, errors);
         RequestDispatcher  dispatcher = request.getRequestDispatcher("/WEB-INF/form/add.jsp");
         request.setAttribute("view", "book");
-        if (errors.isEmpty()) {
-           try {
-               String hasBookItemStr = request.getParameter("hasBookItem");
-               if (hasBookItemStr==null) hasBookItemStr = "false";
-               boolean isAddNewBookItem = Boolean.parseBoolean(hasBookItemStr);
-               if (isAddNewBookItem) {
-                   dispatcher = request.getRequestDispatcher("/book_item?action=add");
-                   request.setAttribute("bookId",book.getId());
-                   request.setAttribute("book",book);
-                   dispatcher.forward(request, response);
-               }else {
-                   boolean status = bookDAO.add(book);
-                   if (status) {
-                       request.setAttribute("success", true);
-                       dispatcher.forward(request, response);
-                   }
-               }
-           } catch (SQLException e) {
-               errors.put("Lỗi dữ liệu", e.getMessage());
-               request.setAttribute("book", book);
-               dispatcher.forward(request, response);
-           }
-        } else {
+        request.setAttribute("book", book);
+        try {
+            String hasBookItemStr = request.getParameter("hasBookItem");
+            if (hasBookItemStr==null) hasBookItemStr = "false";
+            boolean isAddNewBookItem = Boolean.parseBoolean(hasBookItemStr);
+            if (isAddNewBookItem) {
+                dispatcher = request.getRequestDispatcher("/book_item?action=add");
+                request.setAttribute("bookId",book.getId());
+                request.setAttribute("book",book);
+                dispatcher.forward(request, response);
+            }else {
+                boolean status = bookDAO.add(book);
+                if (status) {
+                    request.setAttribute("success", true);
+                    dispatcher.forward(request, response);
+                }
+            }
+        } catch (SQLException e) {
+            errors.put("Lỗi dữ liệu", e.getMessage());
             request.setAttribute("book", book);
             dispatcher.forward(request, response);
         }

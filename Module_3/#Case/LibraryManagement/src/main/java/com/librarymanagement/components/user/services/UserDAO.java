@@ -22,7 +22,7 @@ public class UserDAO implements IUserDAO {
                                   "fullName=?,address=?,phone=?,email=?,username=?, password=?, role=?,dateAdded=?," +
                                   "dateModified=?,deleted=? "+
                                   "WHERE id=?";
-    private static final String SEARCH_USER = "SELECT * FROM users WHERE (fullName LIKE ? OR address LIKE ? OR phone LIKE ? OR email LIKE ?)";
+    private static final String SEARCH_USER = "SELECT SQL_CALC_FOUND_ROWS * FROM users WHERE (fullName LIKE ? OR address LIKE ? OR phone LIKE ? OR email LIKE ?)";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -152,8 +152,9 @@ public class UserDAO implements IUserDAO {
     }
 
     @Override
-    public Map<Long, User> getPaging(String query,String how) {
-        String completedQuery = SELECT_ALL_USER + query;
+    public Map<Long, User> getPaging(String pageDetails, String condition) {
+        String completedQuery;
+        completedQuery = SELECT_ALL_USER +condition + pageDetails;
         return getUsers(completedQuery);
     }
     public int getRow(ResultSet rs) throws SQLException {
@@ -176,11 +177,11 @@ public class UserDAO implements IUserDAO {
     public boolean isDeleted(Long id) {
         return false;
     }
-
     @Override
     public Map<Long, User> search(String query, String condition) {
         String queryDB = SEARCH_USER.replace("?", "'%"+query+"%'");
         if (condition!=null) queryDB += condition;
         return getUsers(queryDB);
     }
+
 }

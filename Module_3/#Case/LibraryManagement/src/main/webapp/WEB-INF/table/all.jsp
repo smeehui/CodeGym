@@ -36,7 +36,7 @@
     <section class="section">
         <div class="row">
             <jsp:include page="/WEB-INF/layout/filter.jsp"/>
-            <div class="col-lg-12" style="font-size: 0.8rem" id="info-table">
+            <div class="col-lg-12 position-relative" style="font-size: 0.8rem" id="info-table">
                 <c:set var="view" value="${requestScope['view']}"/>
                 <c:choose>
                     <c:when test="${view=='user'}">
@@ -105,7 +105,6 @@
                                     </tbody>
                                 </table>
                                 <!-- End Default Table Example -->
-                                <jsp:include page="/WEB-INF/layout/pagination_nav.jsp"/>
                             </div>
                         </div>
                     </c:when>
@@ -129,7 +128,9 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach var="book" items="${requestScope['books'].values()}">
-                                        <tr>
+                                        <tr
+                                                <c:if test="${book.isDeleted()}">style="color: var(--bs-danger);opacity: 0.6"</c:if>
+                                        >
                                             <td>${book.getIsbn()}</td>
                                             <td>${book.getTitle()}</td>
                                             <td>${book.getAuthor()}</td>
@@ -225,6 +226,7 @@
                         </div>
                     </c:when>
                 </c:choose>
+                <jsp:include page="/WEB-INF/layout/pagination_nav.jsp"/>
                 <div class="modal fade" id="verticalycentered" tabindex="-1" style="display: none;" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
@@ -255,25 +257,26 @@
 <jsp:include page="/WEB-INF/layout/script.jsp"/>
 
 <script>
-    function confirmDelete(e){
+    function confirmDelete(e) {
         console.log(e.target)
         let id = e.target.dataset.id;
         let name = e.target.dataset.name;
         let type = e.target.dataset.type;
-        document.getElementById("modal-title").innerText="Xác nhận xóa";
-        document.getElementById("modal-action").innerText="xóa";
-        document.getElementById("deleted-item").innerText=name;
-        document.getElementById("delete-confirm-btn").setAttribute("href", "${pageContext.request.contextPath}/"+type+"?action=delete&id="+id)
+        document.getElementById("modal-title").innerText = "Xác nhận xóa";
+        document.getElementById("modal-action").innerText = "xóa";
+        document.getElementById("deleted-item").innerText = name;
+        document.getElementById("delete-confirm-btn").setAttribute("href", "${pageContext.request.contextPath}/" + type + "?action=delete&id=" + id)
     }
-    function confirmRestore(e){
+
+    function confirmRestore(e) {
         console.log(e.target)
         let id = e.target.dataset.id;
         let name = e.target.dataset.name;
         let type = e.target.dataset.type;
-        document.getElementById("modal-title").innerText="Xác nhận khôi phục";
-         document.getElementById("modal-action").innerText="khôi phục";
-        document.getElementById("deleted-item").innerText=name;
-        document.getElementById("delete-confirm-btn").setAttribute("href", "${pageContext.request.contextPath}/"+type+"?action=delete&id="+id)
+        document.getElementById("modal-title").innerText = "Xác nhận khôi phục";
+        document.getElementById("modal-action").innerText = "khôi phục";
+        document.getElementById("deleted-item").innerText = name;
+        document.getElementById("delete-confirm-btn").setAttribute("href", "${pageContext.request.contextPath}/" + type + "?action=delete&id=" + id)
     }
 
 </script>

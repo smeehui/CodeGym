@@ -7,9 +7,13 @@ import com.librarymanagement.components.book.service.BookItemDAO;
 import com.librarymanagement.components.book.service.IBookFormatDAO;
 import com.librarymanagement.components.book.service.IBookItemDAO;
 import com.librarymanagement.components.user.services.BookTransactionDAO;
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -61,15 +65,17 @@ public class BookItemServlet extends HttpServlet {
         BookItem bookItem = validateBookItemDetails(request, errors);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/add.jsp");
         if (errors.isEmpty()) {
+            Book book = (Book) request.getAttribute("book");
+            boolean status = false;
             try {
-                Book book = (Book) request.getAttribute("book");
-                boolean status = bookTransactionDAO.addNewBookTransaction(book, bookItem);
-                if (status) {
-                    request.setAttribute("success", true);
-                    dispatcher.forward(request, response);
-                }
+                status = bookTransactionDAO.addNewBookTransaction(book, bookItem);
             } catch (SQLException e) {
                 errors.put("Lỗi database", e.getMessage());
+            }
+            if (status) {
+                request.setAttribute("success", true);
+                dispatcher.forward(request, response);
+            } else {
                 request.setAttribute("bookItem", bookItem);
                 dispatcher.forward(request, response);
             }

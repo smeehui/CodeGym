@@ -583,6 +583,7 @@
                                                                                     id="inputQuantity"
                                                                                     type="number"
                                                                                     class="form-control"
+                                                                                    value="${bookItem.getQuantity()}"
                                                                             />
                                                                         </div>
                                                                     </div>

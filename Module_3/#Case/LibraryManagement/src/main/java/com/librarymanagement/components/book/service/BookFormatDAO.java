@@ -83,4 +83,14 @@ public class BookFormatDAO implements IBookFormatDAO {
     public Map<Integer, BookFormat> search(String query, String s) {
         return null;
     }
+
+    @Override
+    public int getNoOfRecords() {
+        return 0;
+    }
+
+    @Override
+    public Map<Integer, BookFormat> getPaging(String pageDetails, String condition) {
+        return null;
+    }
 }

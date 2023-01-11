@@ -103,4 +103,14 @@ public class BookItemDAO implements IBookItemDAO{
     public Map<Long, BookItem> search(String query, String s) {
         return null;
     }
+
+    @Override
+    public int getNoOfRecords() {
+        return 0;
+    }
+
+    @Override
+    public Map<Long, BookItem> getPaging(String pageDetails, String condition) {
+        return null;
+    }
 }

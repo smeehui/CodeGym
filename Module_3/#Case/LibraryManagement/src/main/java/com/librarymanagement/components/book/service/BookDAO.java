@@ -13,12 +13,14 @@ public class BookDAO implements IBookDAO {
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "Smee@99123";
     private static final String UPDATE_BOOK = "UPDATE books SET isbn = ?,title = ? ,author = ?,subject = ?,language = ?,dateAdded = ?,dateModified =?,available = ? WHERE id = ? ";
-    private static final String SELECT_ALL_BOOKS = "SELECT * FROM books ORDER BY books.title ASC";
+    private static final String SELECT_ALL_BOOKS = "SELECT SQL_CALC_FOUND_ROWS * FROM books";
     private static final String SELECT_ALL_AVAILABLE_BOOKS = "SELECT * FROM books WHERE books.deleted=false ORDER BY books.title ASC";
     private static final String DELETE_BY_ID = "UPDATE books SET deleted = true WHERE books.id = ?";
     private static final String SELECT_BY_ID= "SELECT *FROM books WHERE books.id = ?";
     private static final String INSERT_NEW_BOOK = "INSERT INTO books VALUES (?,?,?,?,?,?,?,?,?,?)";
+    private static final String SEARCH_BOOK = "SELECT SQL_CALC_FOUND_ROWS * FROM books WHERE (isbn LIKE ? OR title LIKE ? OR author LIKE ? OR subject LIKE ?)";
 
+    private int noOfRecords = 0;
     protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -60,12 +62,15 @@ public class BookDAO implements IBookDAO {
         Map<Long, Book> books = new HashMap<>();
         try (Connection connection = getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(selectAllBooks);
+             PreparedStatement getRow = connection.prepareStatement("SELECT FOUND_ROWS()");
             ResultSet rs = preparedStatement.executeQuery();
             long count = 0;
             while (rs.next()) {
                 Book book = Book.parse(rs);
                 books.put(count++, book);
               }
+             ResultSet rows = getRow.executeQuery();
+            while (rows.next()) this.noOfRecords = rows.getInt(1);
             preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -110,7 +115,8 @@ public class BookDAO implements IBookDAO {
             preparedStatement.setTimestamp(8,Timestamp.from(book.getUpdatedAt()));
             preparedStatement.setBoolean(9,book.isAvailable());
             preparedStatement.setBoolean(10,book.isDeleted());
-            return preparedStatement.executeUpdate() > 0;
+            int rowAffected = preparedStatement.executeUpdate();
+            return rowAffected > 0;
         }
     }
 
@@ -139,7 +145,8 @@ public class BookDAO implements IBookDAO {
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
             preparedStatement.setLong(1,id);
-            return preparedStatement.executeUpdate() > 0;
+            boolean hasSuccess = preparedStatement.executeUpdate() > 0;
+            return hasSuccess;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -152,7 +159,21 @@ public class BookDAO implements IBookDAO {
     }
 
     @Override
-    public Map<Long, Book> search(String query, String s) {
-        return null;
+    public Map<Long, Book> search(String query, String condition) {
+        String queryDB = SEARCH_BOOK.replace("?", "'%"+query+"%'");
+        if (condition!=null) queryDB += condition;
+        return getBooks(queryDB);
+    }
+
+    @Override
+    public int getNoOfRecords() {
+        return noOfRecords;
+    }
+
+    @Override
+    public Map<Long, Book> getPaging(String pageDetails, String condition) {
+        String completedQuery;
+        completedQuery = SELECT_ALL_BOOKS +condition + pageDetails;
+        return getBooks(completedQuery);
     }
 }

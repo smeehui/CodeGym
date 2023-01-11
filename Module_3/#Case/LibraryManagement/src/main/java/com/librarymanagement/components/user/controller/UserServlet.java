@@ -6,7 +6,7 @@ import com.librarymanagement.components.user.services.IRoleDAO;
 import com.librarymanagement.components.user.services.IUserDAO;
 import com.librarymanagement.components.user.services.RoleDAO;
 import com.librarymanagement.components.user.services.UserDAO;
-import com.librarymanagement.services.QueryUtils;
+import com.librarymanagement.utils.RequestUtils;
 import com.librarymanagement.utils.ValidateUtils;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -17,13 +17,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.net.URL;
-import java.security.Key;
 import java.sql.SQLException;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet(name = "com.librarymanagement.components.user.controller.UserServlet", value = "/user")
@@ -53,16 +49,11 @@ public class UserServlet extends HttpServlet {
     }
 
     private void searchUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("users", parseSearchQuery(request));
-        request.setAttribute("q", request.getParameter("q"));
+        RequestUtils.setPageAndAttributes(request,"search",userDAO);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
         dispatcher.forward(request, response);
     }
 
-    private Map<Long, User> parseSearchQuery(HttpServletRequest request) {
-        String condition = QueryUtils.parseSearchQuery(request);
-        return userDAO.search(request.getParameter("q"),condition);
-    }
 
     private void showUserDatabase(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<Long, User> userMap = userDAO.getAll();
@@ -99,13 +90,10 @@ public class UserServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.setAttribute("roles", roleMap);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
-        String conditions = QueryUtils.addPaging(request);
-        Map<Long, User> userMap = userDAO.getPaging(conditions,"all");
-        int noOfPage = (int) Math.ceil(userDAO.getNoOfRecords()/5);
-        request.setAttribute("noOfPages", noOfPage);
-        request.setAttribute("users", userMap);
+        RequestUtils.setPageAndAttributes(request, "all",userDAO);
         dispatcher.forward(request, response);
     }
+
 
     private void showAllActiveUsers(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Map<Long, User> userMap = userDAO.getAllExists();
