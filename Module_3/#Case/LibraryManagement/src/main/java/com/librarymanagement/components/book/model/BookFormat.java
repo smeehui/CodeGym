@@ -8,7 +8,7 @@ public enum BookFormat {
     EBOOK(3);
 
     private final int value;
-
+    
      BookFormat(int value) {
         this.value = value;
     }

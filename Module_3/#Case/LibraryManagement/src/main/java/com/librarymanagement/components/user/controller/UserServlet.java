@@ -41,8 +41,6 @@ public class UserServlet extends HttpServlet {
         switch (action) {
             case "add" -> showAddForm(request, response);
             case "edit" -> showEditForm(request, response);
-            case "delete" -> deleteUser(request, response);
-            case "viewall" -> showUserDatabase(request, response);
             case "search" -> searchUser(request, response);
             default -> showAllUsers(request, response);
         }
@@ -62,7 +60,7 @@ public class UserServlet extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         long id = Long.parseLong(request.getParameter("id"));
         User user = userDAO.getById(id);
         if (user != null) {
@@ -74,7 +72,8 @@ public class UserServlet extends HttpServlet {
                 throw new RuntimeException(e);
             }
         }
-        response.sendRedirect("/user?action=viewall");
+        String url = RequestUtils.saveQuery(request);
+        response.sendRedirect(url.toString());
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -114,6 +113,7 @@ public class UserServlet extends HttpServlet {
         switch (action) {
             case "add" -> addNewUser(request, response);
             case "edit" -> editUser(request, response);
+            case "delete" -> deleteUser(request, response);
             case "changePwd" -> changeUserPassword(request, response);
         }
     }

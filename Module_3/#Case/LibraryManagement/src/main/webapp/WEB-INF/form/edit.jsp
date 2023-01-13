@@ -39,7 +39,7 @@
             <div class="col-xl-12">
                 <div class="card">
                     <c:set var="view" value="${requestScope['view']}"/>
-                    <c:choose>
+                    <c:when>
                         <c:when test="${view=='user'}">
                             <c:set var="user" value="${requestScope['user']}"/>
                             <div class="card-body pt-3">

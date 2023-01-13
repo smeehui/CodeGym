@@ -39,7 +39,6 @@ public class BookServlet extends HttpServlet {
         context.setAttribute("bookFormats", bookFormatDAO.getAll());
         switch (action) {
             case "add" -> showAddForm(request, response);
-            case "delete" -> deleteBook(request, response);
             case "edit" -> showEditBookForm(request, response);
             case "search" -> searchBook(request, response);
             default -> showAllBook(request, response);
@@ -62,18 +61,19 @@ public class BookServlet extends HttpServlet {
         }
     }
 
-    private void deleteBook(HttpServletRequest request, HttpServletResponse response) {
+    private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws IOException {
         long id = Long.parseLong(request.getParameter("id"));
         Book book = bookDAO.getById(id);
         if (book != null) {
-            boolean status = bookDAO.deleteById(id);
+            book.setDeleted(!book.isDeleted());
+            try {
+                bookDAO.update(book);
+            } catch (SQLException e) {
+                e.getErrorCode();
+            }
         }
-        try {
-            response.sendRedirect("/book?action=all");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
+        String url = RequestUtils.saveQuery(request);
+        response.sendRedirect(url);
     }
 
     private void showAllBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -95,6 +95,7 @@ public class BookServlet extends HttpServlet {
         switch (action) {
             case "add" -> addNewBook(request, response);
             case "edit" -> editBook(request, response);
+            case "delete" -> deleteBook(request, response);
         }
 
     }

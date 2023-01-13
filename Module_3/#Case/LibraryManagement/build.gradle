@@ -20,7 +20,7 @@ targetCompatibility = "14"
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-
+apply plugin: 'maven-publish'
 dependencies {
     implementation 'org.eclipse.jetty:apache-jstl:11.0.0'
     implementation 'mysql:mysql-connector-java:8.0.30'

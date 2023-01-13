@@ -18,6 +18,7 @@ public class UserDAO implements IUserDAO {
     private static final String INSERT_NEW_USER = "INSERT INTO users VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     private static final String DELETE_BY_ID = "UPDATE users SET users.deleted = true WHERE users.id=?";
     private int noOfRecords = 0;
+    private int gotRows=0;
     private static final String UPDATE_USER_DETAILS = "UPDATE users SET " +
                                   "fullName=?,address=?,phone=?,email=?,username=?, password=?, role=?,dateAdded=?," +
                                   "dateModified=?,deleted=? "+
@@ -78,13 +79,28 @@ public class UserDAO implements IUserDAO {
         return getUsers(SELECT_ALL_USER);
     }
 
+    public int getGotRows() {
+        return gotRows;
+    }
+
+    @Override
+    public void setGotRow(int num) {
+
+    }
+
+    public void setGotRows(int gotRows) {
+        this.gotRows = gotRows;
+    }
+
     private Map<Long, User> getUsers(String query) {
+        this.gotRows =0;
         Map<Long, User> users = new HashMap<>();
         try (Connection connection = getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             PreparedStatement getRow = connection.prepareStatement("SELECT FOUND_ROWS()");
             while (rs.next()) {
+                gotRows++;
                 User user = User.parseUser(rs);
                 users.put(user.getId(), user);
             }

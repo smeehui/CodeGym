@@ -23,4 +23,8 @@ public interface IAbstractService<Model, ID> {
     int getNoOfRecords();
 
     Map<ID, Model> getPaging(String pageDetails, String condition);
+
+    int getGotRows();
+
+    void setGotRow(int num);
 }

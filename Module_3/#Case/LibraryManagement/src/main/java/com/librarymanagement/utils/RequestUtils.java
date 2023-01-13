@@ -40,23 +40,41 @@ public class RequestUtils{
         return conditions.toString();
     }
     public static  <Model>  void setPageAndAttributes (HttpServletRequest request, String when, IAbstractService service) {
-        String pageDetails = RequestUtils.addPaging(request);
+        String pageDetails = addPaging(request);
         Map<Long, Model> modelMap;
         String condition;
+        service.setGotRow(0);
         switch (when) {
             case "search" -> {
-                condition = RequestUtils.parseSearchQuery(request, "search");
+                condition = parseSearchQuery(request, "search");
                 modelMap = service.search(request.getParameter("q"), condition + pageDetails);
                 request.setAttribute("q", request.getParameter("q"));
             }
             default -> {
-                condition = RequestUtils.parseSearchQuery(request,"all");
+                condition = parseSearchQuery(request,"all");
                 modelMap = service.getPaging(pageDetails, condition);
             }
         }
         int noOfPage = (int) Math.ceil((float) service.getNoOfRecords() / (float) 5);
         request.setAttribute("noOfPages", noOfPage);
+        request.setAttribute("gotRows",service.getGotRows());
         if (service instanceof UserDAO) request.setAttribute("users", modelMap);
         else if (service instanceof BookDAO) request.setAttribute("books", modelMap);
+    }
+
+    public static String saveQuery(HttpServletRequest request) {
+        int size = Integer.parseInt(request.getParameter("size"));
+        int page = Integer.parseInt(request.getParameter("page"));
+        int noOfElements = Integer.parseInt(request.getParameter("gotRows"));
+        if (noOfElements<=1){
+            page--;
+            if (page==0) page = 1;
+        }
+        String context = request.getParameter("view");
+        StringBuilder url = new StringBuilder("/"+context+"?action=all");
+        String q = request.getParameter("q") != null ?"&q="+ request.getParameter("q"):"";
+        String deletedStr = request.getParameter("deleted")!=null?"&deleted="+request.getParameter("deleted"):"";
+        url.append(deletedStr).append(q).append("&page=" + page).append("&size=" + size);
+        return url.toString();
     }
 }

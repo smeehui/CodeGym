@@ -11,7 +11,7 @@ public class BookItemDAO implements IBookItemDAO{
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "Smee@99123";
     private static final String SELECT_ALL_BOOKITEM = "SELECT * FROM bookitems";
-    private static final String INSERT_NEW_BOOKITEM = "INSERT INTO bookItems VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String INSERT_NEW_BOOKITEM = "INSERT INTO bookitems VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -112,5 +112,15 @@ public class BookItemDAO implements IBookItemDAO{
     @Override
     public Map<Long, BookItem> getPaging(String pageDetails, String condition) {
         return null;
+    }
+
+    @Override
+    public int getGotRows() {
+        return 0;
+    }
+
+    @Override
+    public void setGotRow(int num) {
+
     }
 }

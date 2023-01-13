@@ -93,4 +93,13 @@ public class BookFormatDAO implements IBookFormatDAO {
     public Map<Integer, BookFormat> getPaging(String pageDetails, String condition) {
         return null;
     }
+    @Override
+    public int getGotRows() {
+        return 0;
+    }
+
+    @Override
+    public void setGotRow(int num) {
+
+    }
 }
