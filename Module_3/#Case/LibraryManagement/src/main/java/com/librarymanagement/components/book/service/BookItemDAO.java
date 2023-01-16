@@ -12,6 +12,9 @@ public class BookItemDAO implements IBookItemDAO{
     private static final String jdbcPassword = "Smee@99123";
     private static final String SELECT_ALL_BOOKITEM = "SELECT * FROM bookitems";
     private static final String INSERT_NEW_BOOKITEM = "INSERT INTO bookitems VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+    private static final String SELECT_BY_ID = "SELECT * FROM bookitems WHERE id = ?";
+    private static final String UPDATE_BOOKITEM = "UPDATE bookitems SET publishDate = ?, format = ?, publisher = ?, numberOfPages = ? , price = ? , bookId = ?, quantity = ?, dateAdded = ?, dateModified = ?, available = ?,deleted=? WHERE id = ?";
+
 
     protected Connection getConnection() {
         Connection connection = null;
@@ -56,7 +59,17 @@ public class BookItemDAO implements IBookItemDAO{
 
     @Override
     public BookItem getById(long id) {
-        return null;
+        try (Connection connection = getConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
+            preparedStatement.setLong(1,id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return BookItem.parse(rs);
+            }
+            return null;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -85,8 +98,23 @@ public class BookItemDAO implements IBookItemDAO{
     }
 
     @Override
-    public boolean update(BookItem newEntity) throws SQLException {
-        return false;
+    public boolean update(BookItem bookItem) throws SQLException {
+        try (Connection connection = getConnection()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BOOKITEM);
+            preparedStatement.setDate(1,bookItem.getPublishedDate());
+            preparedStatement.setInt(2, bookItem.getFormat());
+            preparedStatement.setString(3, bookItem.getPublisher());
+            preparedStatement.setInt(4, bookItem.getNumberOfPages());
+            preparedStatement.setDouble(5, bookItem.getPrice());
+            preparedStatement.setLong(6, bookItem.getBookId());
+            preparedStatement.setInt(7, bookItem.getQuantity());
+            preparedStatement.setTimestamp(8, Timestamp.from(bookItem.getDateAdded()));
+            preparedStatement.setTimestamp(9, Timestamp.from(bookItem.getDateModified()));
+            preparedStatement.setBoolean(10, bookItem.isAvailable());
+            preparedStatement.setBoolean(11, bookItem.isDeleted());
+            preparedStatement.setLong(12, bookItem.getId());
+            return preparedStatement.executeUpdate()>0;
+        }
     }
 
     @Override

@@ -107,7 +107,7 @@
               data-bs-parent="#sidebar-nav"
       >
         <li>
-          <a href="forms-elements.html">
+          <a href="${pageContext.request.contextPath}/book_item?action=add">
             <i class="bi bi-circle"></i
             ><span>Thêm mới</span>
           </a>

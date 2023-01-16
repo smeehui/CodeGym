@@ -39,7 +39,7 @@
             <div class="col-xl-12">
                 <div class="card">
                     <c:set var="view" value="${requestScope['view']}"/>
-                    <c:when>
+                    <c:choose>
                         <c:when test="${view=='user'}">
                             <c:set var="user" value="${requestScope['user']}"/>
                             <div class="card-body pt-3">
@@ -485,49 +485,7 @@
                     </c:choose>
                 </div>
             </div>
-            <div aria-live="polite" aria-atomic="true" class="position-absolute top-0 end-0">
-                <!-- Position it: -->
-                <!-- - `.toast-container` for spacing between toasts -->
-                <!-- - `top-0` & `end-0` to position the toasts in the upper right corner -->
-                <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
-                <div class="toast-container top-0 end-0 p-3">
-                    <!-- Then put toasts within -->
-                    <c:set value="${requestScope['errors']}" var="errors"/>
-                    <c:forEach items="${requestScope['errors'].keySet()}" var="name">
-                        <div class="toast text-danger errorToast border-danger" role="alert">
-                            <div class="toast-header text-danger justify-content-between">
-                                <i class="bi-exclamation-circle-fill rounded mr-2"></i>
-                                <strong class="mr-auto">Lỗi ${name.toLowerCase()}</strong>
-                                <button class="btn ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
-                                    <span aria-hidden="true" class="btn-outline-light"><i
-                                            class="bi-x-circle"></i> </span>
-                                </button>
-                            </div>
-                            <div class="toast-body">
-                                    ${errors.get(name)}
-                            </div>
-                        </div>
-                    </c:forEach>
-                    <div class="toast successToast text-success border-success" role="alert">
-                        <div class="toast-header text-success justify-content-between">
-                            <i class="bi-exclamation-circle-fill rounded mr-2"></i>
-                            <strong class="mr-auto">Chỉnh sửa thành công</strong>
-                            <button class="btn ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
-                                <span aria-hidden="true" class="btn-outline-light"><i class="bi-x-circle"></i> </span>
-                            </button>
-                        </div>
-                        <div class="toast-body">
-                            <p>Chỉnh sửa
-                                <c:choose>
-                                    <c:when test="${view=='user'}"> người dùng</c:when>
-                                    <c:when test="${view=='book'}"> sách</c:when>
-                                </c:choose>
-                                 thành công
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <jsp:include page="/WEB-INF/layout/notification.jsp"/>
         </div>
     </section>
 </main>

@@ -672,54 +672,146 @@
                         </div>
                     </div>
                 </c:when>
-                <c:when test="${view=='book_item'}">
-                    <c:set var="book" value="${requestScope['book']}"/>
+                <c:when test="${view=='bookItem'}">
+                    <c:set var="bookItem" value="${requestScope['bookItem']}"/>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    General Form Elements
+                                </h5>
+
+                                <!-- General Form Elements -->
+                                <form id="bItemForm" method="post" action="${pageContext.request.contextPath}/book_item?action=add">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="mb-3 col-sm-6">
+                                                    <label for="inputPublisher" class="col-form-label">Nhà
+                                                        XB</label>
+                                                    <div>
+                                                        <input required="" name="bItemPublisher" id="inputPublisher" type="text" class="form-control" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 col-sm-6">
+                                                    <label for="inputDayPublished" class="col-form-label">Ngày
+                                                        XB</label>
+                                                    <div class="">
+                                                        <input required="" name="bItemPublishedDate" id="inputDayPublished" type="date" class="form-control" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="mb-3 col-sm-6">
+                                                    <label for="inputPage" class="col-form-label">Số
+                                                        trang</label>
+                                                    <div class="">
+                                                        <input required="" name="bItemPages" id="inputPage" type="number" class="form-control" value="">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 col-sm-6">
+                                                    <label for="inputPrice" class="col-form-label">Giá
+                                                        mượn</label>
+                                                    <div class="">
+                                                        <input required="" name="bItemPrice" id="inputPrice" type="number" class="form-control" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-sm-6">
+                                                    <label for="inputFormat" class="col-form-label">Định
+                                                        dạng</label>
+                                                    <div class="">
+                                                        <select id="inputFormat" class="form-select" required="" name="bItemFormat" aria-label="Default select example">
+                                                            <option selected="">
+                                                                Định
+                                                                dạng
+                                                                sách
+                                                            </option>
+
+                                                            <option value="1">PAPERBACK</option>
+
+                                                            <option value="2">HARDCOVER</option>
+
+                                                            <option value="3">EBOOK</option>
+
+                                                            <option value="4">MAGAZINE</option>
+
+                                                            <option value="5">NEWSPAPER</option>
+
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="inputQuantity" class="col-form-label">Số
+                                                        lượng</label>
+                                                    <div class="">
+                                                        <input required="" name="bItemQuantity" id="inputQuantity" type="number" class="form-control" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 p-3 row">
+                                                <div class="col-sm-6">
+                                                    <label class="col-form-label col-sm-3 pt-0">
+                                                        Trạng thái
+                                                    </label>
+                                                    <div class="border border-light rounded">
+                                                        <div class="form-check col-sm-6">
+                                                            <input required="" class="form-check-input" type="radio" name="bIAvailable" id="bIavailable" value="false">
+                                                            <label class="form-check-label" for="bIavailable">
+                                                                Có thể mượn
+                                                            </label>
+                                                        </div>
+                                                        <div class="form-check col-sm-6">
+                                                            <input required="" class="form-check-input" type="radio" name="bIAvailable" id="bINotAvailable" value="false">
+                                                            <label class="form-check-label" for="bINotAvailable">
+                                                                Chưa mượn
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label class="col-form-label col-sm-3 pt-0">
+                                                        Chọn sách
+                                                    </label>
+                                                    <select class="form-control-lg form-select m-a m-auto" name="bookId">
+                                                        <option value="">---Chọn sách tương ứng---</option>
+                                                       <c:forEach var="book" items="${requestScope['books'].values()}">
+                                                           <option value="${book.getId()}">${book.getTitle()}</option>
+                                                       </c:forEach>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-sm-2"></div>
+                                                <div class="col-sm-10">
+                                                    <input
+                                                            type="submit"
+                                                            class="btn btn-primary"
+                                                            value="Thêm mới"
+                                                    />
+                                                    <button
+                                                            type="reset"
+                                                            class="btn btn-primary"
+                                                    >
+                                                        Nhập lại
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- End General Form Elements -->
+                                <!-- Modal -->
+
+                            </div>
+                        </div>
+                    </div>
                 </c:when>
             </c:choose>
             <%--      Notification      --%>
-            <div aria-live="polite" aria-atomic="true" class="position-absolute top-0 end-0">
-                <!-- Position it: -->
-                <!-- - `.toast-container` for spacing between toasts -->
-                <!-- - `top-0` & `end-0` to position the toasts in the upper right corner -->
-                <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
-                <div class="toast-container top-0 end-0 p-3">
-                    <!-- Then put toasts within -->
-                    <c:set value="${requestScope['errors']}" var="errors"/>
-                    <c:forEach items="${requestScope['errors'].keySet()}" var="name">
-                        <div class="toast text-danger errorToast" role="alert">
-                            <div class="toast-header text-danger justify-content-between">
-                                <i class="bi-exclamation-circle-fill" class="rounded mr-2"></i>
-                                <strong class="mr-auto">Lỗi ${name.toLowerCase()}</strong>
-                                <button class="btn ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
-                                    <span aria-hidden="true" class="btn-outline-light"><i
-                                            class="bi-x-circle"></i> </span>
-                                </button>
-                            </div>
-                            <div class="toast-body">
-                                    ${errors.get(name)}
-                            </div>
-                        </div>
-                    </c:forEach>
-                    <div class="toast successToast text-success" role="alert">
-                        <div class="toast-header text-success justify-content-between">
-                            <i class="bi-exclamation-circle-fill" class="rounded mr-2"></i>
-                            <strong class="mr-auto">Thêm thành công</strong>
-                            <button class="btn ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
-                                <span aria-hidden="true" class="btn-outline-light"><i class="bi-x-circle"></i> </span>
-                            </button>
-                        </div>
-                        <div class="toast-body">
-                            <p>Thêm
-                                <c:choose>
-                                    <c:when test="${view=='user'}"> người dùng</c:when>
-                                    <c:when test="${view=='book'}"> sách</c:when>
-                                </c:choose>
-                                mới thành công
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <jsp:include page="/WEB-INF/layout/notification.jsp"/>
         </div>
     </section>
 </main>
