@@ -4,6 +4,8 @@ import com.librarymanagement.components.book.model.Book;
 import com.librarymanagement.components.book.model.BookItem;
 import com.librarymanagement.components.book.service.*;
 import com.librarymanagement.components.user.services.BookTransactionDAO;
+import com.librarymanagement.services.IAbstractService;
+import com.librarymanagement.utils.RequestUtils;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -19,12 +21,14 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebServlet(name = "BookItemServlet", value = "/book_item")
+@WebServlet(name = "BookItemServlet", value = "/bookItem")
 public class BookItemServlet extends HttpServlet {
     private BookTransactionDAO bookTransactionDAO;
     private IBookItemDAO bookItemDAO;
     private IBookFormatDAO bookFormatDAO;
     private IBookDAO bookDAO;
+    private BookItemDOTDAO bookItemDOTDAO;
+    private Map<String,String> errors;
 
     @Override
     public void init() throws ServletException {
@@ -32,6 +36,7 @@ public class BookItemServlet extends HttpServlet {
         bookItemDAO = new BookItemDAO();
         bookFormatDAO = new BookFormatDAO();
         bookDAO = new BookDAO();
+        bookItemDOTDAO = new BookItemDOTDAO();
     }
 
     @Override
@@ -41,8 +46,16 @@ public class BookItemServlet extends HttpServlet {
         context.setAttribute("bookFormats", bookFormatDAO.getAll());
         switch (action) {
             case "add"-> showAddForm(request, response);
+            case "search"-> searchBookItem(request, response);
+            case "delete" -> deleteBookItem(request, response);
             default -> showAllBookItems(request, response);
         }
+    }
+
+    private void searchBookItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestUtils.setPageAndAttributes(request,"search",bookItemDAO);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,8 +63,7 @@ public class BookItemServlet extends HttpServlet {
     }
 
     private void showAllBookItems(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<Long, BookItem> all = bookItemDAO.getAll();
-        request.setAttribute("bookItems", all);
+        RequestUtils.setPageAndAttributes(request,"all",bookItemDOTDAO);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
         dispatcher.forward(request, response);
     }
@@ -60,15 +72,53 @@ public class BookItemServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action") == null ? "" : request.getParameter("action");
         switch (action) {
-            case "add" -> addNewBookItem(request, response);
+            case "add" -> addNewBookItemWithBook(request, response);
             case "edit"-> editBookItem(request, response);
+            case "add_bookitem" -> addBookItemOnly(request, response);
+        }
+    }
+
+    private void deleteBookItem(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        long id = Long.parseLong(request.getParameter("id"));
+        BookItem bookItem = bookItemDAO.getById(id);
+        bookItem.setDeleted(!bookItem.isDeleted());
+        try {
+            bookItemDAO.update(bookItem);
+        } catch (SQLException e) {
+        }
+        String url = RequestUtils.saveQuery(request);
+        response.sendRedirect(url);
+    }
+
+    private void addBookItemOnly(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        errors =new HashMap<>();
+        BookItem bookItem = validateBookItemDetails(request, errors);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/add.jsp");
+        request.setAttribute("errors",errors);
+        if (errors.isEmpty()) {
+            Book book = bookDAO.getById(Long.parseLong(request.getParameter("bookId")));
+            if (book != null) {
+                try {
+                    bookItemDAO.add(bookItem);
+                    request.setAttribute("success", true);
+                    dispatcher.forward(request, response);
+                } catch (SQLException e) {
+                    errors.put("database", e.getMessage());
+                    request.setAttribute("bookItem", bookItem);
+                    dispatcher.forward(request, response);
+                }
+            }else {
+                errors.put("database", "Không tìm thấy sách tương ứng");
+                request.setAttribute("bookItem", bookItem);
+                dispatcher.forward(request, response);
+            }
         }
     }
 
     private void editBookItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, String> errors = new HashMap<>();
+        errors = new HashMap<>();
         BookItem validatedBookItem = validateBookItemDetails(request, errors);
-        Long id = Long.parseLong(request.getParameter("id"));
+        long id = Long.parseLong(request.getParameter("id"));
         BookItem bookItem = bookItemDAO.getById(id);
         if (bookItem == null) {
             errors.put("ID sách mượn", "Không tìm thấy sách mượn tương ứng");
@@ -77,7 +127,7 @@ public class BookItemServlet extends HttpServlet {
         if (errors.isEmpty()) {
             try {
                 bookItemDAO.update(validatedBookItem);
-                request.setAttribute("bookItems", bookItemDAO.getAll());
+                request.setAttribute("bookItems", bookItemDOTDAO.getAll());
             } catch (SQLException e) {
                 errors.put("Database", e.getMessage());
                 request.setAttribute("errors", errors);
@@ -92,24 +142,23 @@ public class BookItemServlet extends HttpServlet {
         }
     }
 
-    private void addNewBookItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, String> errors = request.getAttribute("errors")!=null? (Map<String, String>) request.getAttribute("errors"):new HashMap<>();
+    private void addNewBookItemWithBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        errors = request.getAttribute("errors")!=null? (Map<String, String>) request.getAttribute("errors"):new HashMap<>();
         BookItem bookItem = validateBookItemDetails(request, errors);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/form/add.jsp");
         if (errors.isEmpty()) {
-            Book book = request.getAttribute("book")!=null?(Book) request.getAttribute("book"):bookDAO.getById(Long.parseLong(request.getParameter("bookId")));
+            Book book = (Book) request.getAttribute("book");
             boolean status = false;
             try {
                 status = bookTransactionDAO.addNewBookTransaction(book, bookItem);
             } catch (SQLException e) {
-                errors.put("Lỗi database", e.getMessage());
-                request.setAttribute("errors", errors);
-                dispatcher.forward(request, response);
+                errors.put("Lỗi database","Đã tồn tại sách mượn cho sách hiện tai, nhấn vào chỉnh sửa nếu bạn muốn thay đổi thông tin");
             }
             if (status) {
                 request.setAttribute("success", true);
                 dispatcher.forward(request, response);
             } else {
+                request.setAttribute("errors", errors);
                 request.setAttribute("bookItem", bookItem);
                 dispatcher.forward(request, response);
             }

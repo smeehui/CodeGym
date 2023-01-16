@@ -1,6 +1,8 @@
 package com.librarymanagement.utils;
 
 import com.librarymanagement.components.book.service.BookDAO;
+import com.librarymanagement.components.book.service.BookItemDAO;
+import com.librarymanagement.components.book.service.BookItemDOTDAO;
 import com.librarymanagement.components.user.services.UserDAO;
 import com.librarymanagement.services.IAbstractService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -60,6 +62,8 @@ public class RequestUtils{
         request.setAttribute("gotRows",service.getGotRows());
         if (service instanceof UserDAO) request.setAttribute("users", modelMap);
         else if (service instanceof BookDAO) request.setAttribute("books", modelMap);
+//        else if (service instanceof BookItemDAO) request.setAttribute("bookItems", modelMap);
+        else if (service instanceof BookItemDOTDAO) request.setAttribute("bookItems", modelMap);
     }
 
     public static String saveQuery(HttpServletRequest request) {

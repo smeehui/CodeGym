@@ -65,11 +65,10 @@ public class BookDAO implements IBookDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(selectAllBooks);
              PreparedStatement getRow = connection.prepareStatement("SELECT FOUND_ROWS()");
             ResultSet rs = preparedStatement.executeQuery();
-            long count = 0;
             while (rs.next()) {
                 this.gotRows++;
                 Book book = Book.parse(rs);
-                books.put(count++, book);
+                books.put(book.getId(), book);
               }
              ResultSet rows = getRow.executeQuery();
             while (rows.next()) this.noOfRecords = rows.getInt(1);

@@ -204,17 +204,24 @@
                                     <c:forEach var="bookItem" items="${requestScope['bookItems'].values()}">
                                         <tr>
                                             <td class="bItemId">${bookItem.getId()}</td>
-                                            <td class="bItemId">${bookItem.getBookId()}</td>
+                                            <c:set var="book"
+                                                   value="${requestScope['books'].get(bookItem.getBookId())}"/>
+                                            <td class="bItemId">
+                                                    ${book.getTitle()}
+                                                <c:if test="${book.isDeleted()}"><br>(Đã xoá sách)</c:if>
+                                            </td>
                                             <td hidden class="bookId">${bookItem.getBookId()}</td>
                                             <td class="bItemFormat"
-                                                data-bformat="${bookItem.getFormat()}">${applicationScope['bookFormats'].get(bookItem.getFormat())}</td>
+                                                data-bformat="${bookItem.getFormat()}">${(bookItem.getFormat())}</td>
                                             <td class="bItemPublisher">${bookItem.getPublisher()}</td>
                                             <td class="bItemPublishedDate">${bookItem.getPublishedDate()}</td>
-                                            <td class="bItemNoOfPage">${bookItem.getNumberOfPages()}</td>
-                                            <td class="bItemPrice">${bookItem.getPrice()}</td>
+                                            <td class="bItemNoOfPage text-end">${bookItem.getNumberOfPages()}</td>
+                                            <fmt:formatNumber type="currency" value="${bookItem.getPrice()}"
+                                                              pattern="###,###,### VND" var="price"/>
+                                            <td class="bItemPrice text-end">${price}</td>
                                             <fmt:parseDate value="${bookItem.getDateAdded()}"
                                                            pattern="yyyy-MM-dd'T'HH:mm" var="dateAdded"/>
-                                            <td class="bItemQuantity">${bookItem.getQuantity()}</td>
+                                            <td class="bItemQuantity text-end">${bookItem.getQuantity()}</td>
                                             <td class="bItemDayAdded" data-dateadded="${dateAdded}"><fmt:formatDate value="${dateAdded}" pattern="yyyy-MM-dd HH:mm"/></td>
                                             <td class="bItemAvailable"
                                                 data-bitemavailable="${bookItem.isAvailable()}">${bookItem.isAvailable()?"Có sẵn":"Không có sẵn"}</td>
@@ -231,7 +238,7 @@
                                                     <i
                                                             class="bi bi-x-circle-fill btn btn-sm btn-warning text-white"
                                                             data-bs-toggle="modal" data-bs-target="#verticalycentered"
-                                                            data-name="${bookItem.getBookId()}"
+                                                            data-name="${bookItem.getTitle()}"
                                                             data-id="${bookItem.getId()}"
                                                             data-type="book"
                                                             onclick="confirmDelete(event)"
@@ -257,7 +264,7 @@
                 <div class="modal fade" id="verticalycentered" tabindex="-1" style="display: none;" aria-hidden="true">
                     <form id="confirm-delete-form" method="post">
                         <c:forEach items="${requestScope.entrySet()}" var="parameter">
-                            <c:if test="${!(parameter.getKey().contains('jakarta')||parameter.getKey().contains('users'))}">
+                            <c:if test="${!(parameter.getKey().contains('jakarta')||parameter.getKey().contains('users')||parameter.getKey().contains('book'))}">
                                 <input hidden name="${parameter.getKey()}" value="${parameter.getValue()}">
                             </c:if>
                         </c:forEach>

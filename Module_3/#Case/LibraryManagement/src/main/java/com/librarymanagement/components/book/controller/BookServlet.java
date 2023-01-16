@@ -166,7 +166,7 @@ public class BookServlet extends HttpServlet {
         if (hasBookItemStr == null) hasBookItemStr = "false";
         boolean isAddNewBookItem = Boolean.parseBoolean(hasBookItemStr);
         if (isAddNewBookItem) {
-            dispatcher = request.getRequestDispatcher("/book_item?action=add");
+            dispatcher = request.getRequestDispatcher("/bookItem?action=add");
             request.setAttribute("bookId", book.getId());
             request.setAttribute("book", book);
             dispatcher.forward(request, response);

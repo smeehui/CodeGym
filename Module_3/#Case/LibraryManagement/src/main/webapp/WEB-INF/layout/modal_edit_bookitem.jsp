@@ -100,7 +100,8 @@
                   <div class="form-control col-sm-12">
                     <div class="form-check col-sm-6">
                       <input required class="form-check-input" type="radio"
-                             name="bIAvailable" id="bIavailable" value="true">
+                             name="bIAvailable" id="bIavailable"
+                             value="true">
                       <label class="form-check-label" for="bIavailable">
                         Có
                         thể

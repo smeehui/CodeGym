@@ -31,21 +31,34 @@
             </div>
         </c:forEach>
         <div class="toast successToast text-success" role="alert">
+            <c:set var="action" value="${param['action']}"/>
             <div class="toast-header text-success justify-content-between">
                 <i class="bi-exclamation-circle-fill" class="rounded mr-2"></i>
-                <strong class="mr-auto">Thêm thành công</strong>
+                <strong class="mr-auto"><c:choose>
+                    <c:when test="${action.equals('add')}">
+                        Thêm
+                    </c:when>
+                    <c:when test="${action.equals('edit')}">Sửa</c:when>
+                </c:choose> thành công</strong>
                 <button class="btn ml-2 mb-1 close" data-bs-dismiss="toast" aria-label="Close">
                     <span aria-hidden="true" class="btn-outline-light"><i class="bi-x-circle"></i> </span>
                 </button>
             </div>
             <div class="toast-body">
-                <p>Thêm
-                    <c:choose>
-                        <c:when test="${view=='user'}"> người dùng</c:when>
-                        <c:when test="${view=='book'}"> sách</c:when>
-                    </c:choose>
-                    mới thành công
-                </p>
+                <c:choose>
+                    <c:when test="${action.equals('add')}">
+                        <p>Thêm
+                            <c:choose>
+                                <c:when test="${view=='user'}"> người dùng</c:when>
+                                <c:when test="${view=='book'}"> sách</c:when>
+                            </c:choose>
+                            mới thành công
+                        </p>
+                    </c:when>
+                    <c:when test="${action.equals('edit')}">
+                        <p>Sửa sách mượn thành công</p>
+                    </c:when>
+                </c:choose>
             </div>
         </div>
     </div>

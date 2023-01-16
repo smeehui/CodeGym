@@ -6,16 +6,16 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
-    <jsp:include page="/WEB-INF/layout/head_link.jsp"></jsp:include>
+    <jsp:include page="/WEB-INF/layout/head_link.jsp"/>
 </head>
 
 <body>
 <!-- ======= Header ======= -->
-<jsp:include page="/WEB-INF/layout/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/header.jsp"/>
 <!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
-<jsp:include page="/WEB-INF/layout/side_bar.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/side_bar.jsp"/>
 <!-- End Sidebar-->
 
 <main id="main" class="main position-relative">
@@ -680,9 +680,9 @@
                                 <h5 class="card-title">
                                     General Form Elements
                                 </h5>
-
                                 <!-- General Form Elements -->
-                                <form id="bItemForm" method="post" action="${pageContext.request.contextPath}/book_item?action=add">
+                                <form id="bItemForm" method="post" action="${pageContext.request.contextPath}/bookItem?action=add_bookitem">
+                                    <c:set value="${requestScope['bookItem']}" var="bookItem"/>
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="row">
@@ -690,14 +690,14 @@
                                                     <label for="inputPublisher" class="col-form-label">Nhà
                                                         XB</label>
                                                     <div>
-                                                        <input required="" name="bItemPublisher" id="inputPublisher" type="text" class="form-control" value="">
+                                                        <input required="" name="bItemPublisher" id="inputPublisher" type="text" class="form-control" value="${bookItem.getPublisher()}">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-sm-6">
                                                     <label for="inputDayPublished" class="col-form-label">Ngày
                                                         XB</label>
                                                     <div class="">
-                                                        <input required="" name="bItemPublishedDate" id="inputDayPublished" type="date" class="form-control" value="">
+                                                        <input required="" name="bItemPublishedDate" id="inputDayPublished" type="date" class="form-control" value="${bookItem.getPublishedDate()}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -706,14 +706,14 @@
                                                     <label for="inputPage" class="col-form-label">Số
                                                         trang</label>
                                                     <div class="">
-                                                        <input required="" name="bItemPages" id="inputPage" type="number" class="form-control" value="">
+                                                        <input required="" name="bItemPages" id="inputPage" type="number" class="form-control" value="${bookItem.getNumberOfPages()}">
                                                     </div>
                                                 </div>
                                                 <div class="mb-3 col-sm-6">
                                                     <label for="inputPrice" class="col-form-label">Giá
                                                         mượn</label>
                                                     <div class="">
-                                                        <input required="" name="bItemPrice" id="inputPrice" type="number" class="form-control" value="">
+                                                        <input required="" name="bItemPrice" id="inputPrice" type="number" class="form-control" value="${bookItem.getPrice()}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -729,17 +729,9 @@
                                                                 sách
                                                             </option>
 
-                                                            <option value="1">PAPERBACK</option>
-
-                                                            <option value="2">HARDCOVER</option>
-
-                                                            <option value="3">EBOOK</option>
-
-                                                            <option value="4">MAGAZINE</option>
-
-                                                            <option value="5">NEWSPAPER</option>
-
-
+                                                          <c:forEach var="bookFormat" items="${requestScope['bookFormats'].values()}">
+                                                              <option value="${bookFormat.getValue()}">${bookFormat}</option>
+                                                          </c:forEach>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -758,15 +750,15 @@
                                                     </label>
                                                     <div class="border border-light rounded">
                                                         <div class="form-check col-sm-6">
-                                                            <input required="" class="form-check-input" type="radio" name="bIAvailable" id="bIavailable" value="false">
+                                                            <input required="" class="form-check-input" type="radio" name="bIAvailable" id="bIavailable" value="true">
                                                             <label class="form-check-label" for="bIavailable">
-                                                                Có thể mượn
+                                                                Có sẵn
                                                             </label>
                                                         </div>
                                                         <div class="form-check col-sm-6">
                                                             <input required="" class="form-check-input" type="radio" name="bIAvailable" id="bINotAvailable" value="false">
                                                             <label class="form-check-label" for="bINotAvailable">
-                                                                Chưa mượn
+                                                                Chưa có sẵn
                                                             </label>
                                                         </div>
                                                     </div>
@@ -818,10 +810,10 @@
 <!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<jsp:include page="/WEB-INF/layout/footer.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/footer.jsp"/>
 
 <!-- Vendor JS Files -->
-<jsp:include page="/WEB-INF/layout/script.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/layout/script.jsp"/>
 <jsp:include page="/WEB-INF/layout/toast_trigger.jsp"/>
 </body>
 </html>

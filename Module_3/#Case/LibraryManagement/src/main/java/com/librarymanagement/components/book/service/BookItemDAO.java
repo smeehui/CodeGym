@@ -6,14 +6,17 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BookItemDAO implements IBookItemDAO{
+public class BookItemDAO implements IBookItemDAO {
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/libdb";
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "Smee@99123";
-    private static final String SELECT_ALL_BOOKITEM = "SELECT * FROM bookitems";
+    private static final String SELECT_ALL_BOOKITEM = "SELECT SQL_CALC_FOUND_ROWS * FROM bookitems";
     private static final String INSERT_NEW_BOOKITEM = "INSERT INTO bookitems VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String SELECT_BY_ID = "SELECT * FROM bookitems WHERE id = ?";
+    private static final String SELECT_BY_ID = "SELECT SQL_CALC_FOUND_ROWS * FROM bookitems WHERE id = ?";
     private static final String UPDATE_BOOKITEM = "UPDATE bookitems SET publishDate = ?, format = ?, publisher = ?, numberOfPages = ? , price = ? , bookId = ?, quantity = ?, dateAdded = ?, dateModified = ?, available = ?,deleted=? WHERE id = ?";
+    private static final String SEARCH_BOOKITEM = "SELECT SQL_CALC_FOUND_ROWS * FROM bookitems WHERE (publisher LIKE ? OR title LIKE ? OR author LIKE ? OR subject LIKE ?)";
+    private int gotRows = 0;
+    private int noOfRecords = 0;
 
 
     protected Connection getConnection() {
@@ -38,15 +41,20 @@ public class BookItemDAO implements IBookItemDAO{
         return getBooks(SELECT_ALL_BOOKITEM);
     }
     private Map<Long, BookItem> getBooks(String query) {
+        this.gotRows =0;
         Map<Long, BookItem> bookItems = new HashMap<>();
         try (Connection connection = getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PreparedStatement getRow = connection.prepareStatement("SELECT FOUND_ROWS()");
             ResultSet rs = preparedStatement.executeQuery();
-            long count = 0;
             while (rs.next()) {
+                this.gotRows++;
                 BookItem bookItem = BookItem.parse(rs);
-                bookItems.put(count++, bookItem);
+                bookItems.put(bookItem.getId(), bookItem);
             }
+            ResultSet rows = getRow.executeQuery();
+            while (rows.next()) this.noOfRecords = rows.getInt(1);
+            preparedStatement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -128,27 +136,31 @@ public class BookItemDAO implements IBookItemDAO{
     }
 
     @Override
-    public Map<Long, BookItem> search(String query, String s) {
-        return null;
+    public Map<Long, BookItem> search(String query, String condition) {
+        String queryDB = SEARCH_BOOKITEM.replace("?", "'%"+query+"%'");
+        if (condition!=null) queryDB += condition;
+        return getBooks(queryDB);
     }
 
     @Override
     public int getNoOfRecords() {
-        return 0;
+        return this.noOfRecords;
     }
 
     @Override
     public Map<Long, BookItem> getPaging(String pageDetails, String condition) {
-        return null;
+        String completedQuery;
+        completedQuery = SELECT_ALL_BOOKITEM +condition + pageDetails;
+        return getBooks(completedQuery);
     }
 
     @Override
     public int getGotRows() {
-        return 0;
+        return this.gotRows;
     }
 
     @Override
     public void setGotRow(int num) {
-
+        this.gotRows = 0;
     }
 }

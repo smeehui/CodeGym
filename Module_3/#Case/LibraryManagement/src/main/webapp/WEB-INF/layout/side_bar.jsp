@@ -107,13 +107,13 @@
               data-bs-parent="#sidebar-nav"
       >
         <li>
-          <a href="${pageContext.request.contextPath}/book_item?action=add">
+          <a href="${pageContext.request.contextPath}/bookItem?action=add">
             <i class="bi bi-circle"></i
             ><span>Thêm mới</span>
           </a>
         </li>
         <li>
-          <a href="${pageContext.request.contextPath}/book_item">
+          <a href="${pageContext.request.contextPath}/bookItem">
             <i class="bi bi-circle"></i
             ><span>Xem danh sách</span>
           </a>
