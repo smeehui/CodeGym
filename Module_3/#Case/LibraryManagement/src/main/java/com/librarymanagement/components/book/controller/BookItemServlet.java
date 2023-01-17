@@ -47,13 +47,12 @@ public class BookItemServlet extends HttpServlet {
         switch (action) {
             case "add"-> showAddForm(request, response);
             case "search"-> searchBookItem(request, response);
-            case "delete" -> deleteBookItem(request, response);
             default -> showAllBookItems(request, response);
         }
     }
 
     private void searchBookItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestUtils.setPageAndAttributes(request,"search",bookItemDAO);
+        RequestUtils.setPageAndAttributes(request,"search",bookItemDOTDAO);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/table/all.jsp");
         dispatcher.forward(request, response);
     }
@@ -75,6 +74,7 @@ public class BookItemServlet extends HttpServlet {
             case "add" -> addNewBookItemWithBook(request, response);
             case "edit"-> editBookItem(request, response);
             case "add_bookitem" -> addBookItemOnly(request, response);
+            case "delete" -> deleteBookItem(request, response);
         }
     }
 

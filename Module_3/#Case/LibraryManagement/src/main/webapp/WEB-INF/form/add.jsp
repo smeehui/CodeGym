@@ -19,8 +19,15 @@
 <!-- End Sidebar-->
 
 <main id="main" class="main position-relative">
+    <c:set value="${requestScope['view']}" var="view"/>
     <div class="pagetitle">
-        <h1>Form Elements</h1>
+        <h1>
+            <c:choose>
+                <c:when test="${view=='user'}">Đăng ký người dùng</c:when>
+                <c:when test="${view=='book'}">Tạo mới sách</c:when>
+                <c:when test="${view=='bookItem'}">Tạo mới sách mượn</c:when>
+            </c:choose>
+        </h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -34,7 +41,6 @@
     <!-- End Page Title -->
 
     <section class="section">
-        <c:set value="${requestScope['view']}" var="view"/>
         <div class="row">
             <c:choose>
                 <c:when test="${view=='user'}">
@@ -131,7 +137,7 @@
                                         <label
                                                 class="col-sm-2 col-form-label"
                                                 for="inputNumber"
-                                        >Phone number</label
+                                        >Số điện thoại</label
                                         >
                                         <div class="col-sm-10">
                                             <input required

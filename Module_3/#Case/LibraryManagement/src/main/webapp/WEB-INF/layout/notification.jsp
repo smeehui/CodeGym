@@ -56,7 +56,14 @@
                         </p>
                     </c:when>
                     <c:when test="${action.equals('edit')}">
-                        <p>Sửa sách mượn thành công</p>
+                        <p>Chỉnh sửa
+                            <c:choose>
+                                <c:when test="${view=='user'}"> người dùng</c:when>
+                                <c:when test="${view=='book'}"> sách</c:when>
+                                <c:when test="${view=='bookItem'}"> sách</c:when>
+                            </c:choose>
+                            thành công
+                        </p>
                     </c:when>
                 </c:choose>
             </div>

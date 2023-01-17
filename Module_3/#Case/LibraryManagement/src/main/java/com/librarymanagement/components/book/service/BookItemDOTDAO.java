@@ -11,6 +11,8 @@ public class BookItemDOTDAO implements IAbstractService<BookItemDOT, Long> {
     private static final String jdbcURL = "jdbc:mysql://localhost:3306/libdb";
     private static final String jdbcUsername = "root";
     private static final String jdbcPassword = "Smee@99123";
+    private static final String SEARCH_BOOK_ITEM = "SELECT SQL_CALC_FOUND_ROWS bi.id,b.title,bi.bookId,bi.publishDate,bf.name AS format ,bi.publisher,bi.numberOfPages,bi.price,bi.quantity,bi.dateAdded,bi.dateAdded,bi.dateModified,bi.available,bi.deleted FROM bookitems bi JOIN bookitemformat bf on bf.id = bi.format JOIN books b on b.id = bi.bookId WHERE (bi.id LIKE ? OR b.title LIKE ? OR\n" +
+                                                   "bf.name LIKE ? OR  bi.publisher LIKE ? OR bi.numberOfPages LIKE ? OR bi.price LIKE ? OR bi.quantity LIKE ?)";
     private Map<Long,BookItemDOT> bookItemDOTMap;
     private static final String SELECT_ALL_BOOKITEM_DOT = "SELECT SQL_CALC_FOUND_ROWS bi.id,b.title,bi.bookId,bi.publishDate,bf.name AS format ,bi.publisher,bi.numberOfPages,bi.price,bi.quantity,bi.dateAdded,bi.dateAdded,bi.dateModified,bi.available,bi.deleted FROM bookitems bi JOIN bookitemformat bf on bf.id = bi.format JOIN books b on b.id = bi.bookId";
     private int gotRows = 0;
@@ -89,8 +91,10 @@ public class BookItemDOTDAO implements IAbstractService<BookItemDOT, Long> {
     }
 
     @Override
-    public Map<Long, BookItemDOT> search(String query, String s) {
-        return null;
+    public Map<Long, BookItemDOT> search(String query, String condition) {
+        String queryDB = SEARCH_BOOK_ITEM.replace("?", "'%"+query+"%'");
+        if (condition!=null) queryDB += condition.replace("deleted","bi.deleted");
+        return getBookItems(queryDB);
     }
 
     @Override

@@ -20,8 +20,15 @@
 <!-- End Sidebar-->
 
 <main id="main" class="main">
+    <c:set var="view" value="${requestScope['view']}"/>
     <div class="pagetitle">
-        <h1>Form Elements</h1>
+        <h1>
+            <c:choose>
+                <c:when test="${view=='user'}">Đăng ký người dùng</c:when>
+                <c:when test="${view=='book'}">Tạo mới sách</c:when>
+                <c:when test="${view=='bookItem'}">Tạo mới sách mượn</c:when>
+            </c:choose>
+        </h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -38,7 +45,6 @@
         <div class="row">
             <div class="col-xl-12">
                 <div class="card">
-                    <c:set var="view" value="${requestScope['view']}"/>
                     <c:choose>
                         <c:when test="${view=='user'}">
                             <c:set var="user" value="${requestScope['user']}"/>

@@ -20,7 +20,14 @@
 
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>General Tables</h1>
+        <c:set var="view" value="${requestScope['view']}"/>
+        <h1>
+            <c:choose>
+                <c:when test="${view=='user'}">Quản lý người dùng</c:when>
+                <c:when test="${view=='book'}">Quản lý sách</c:when>
+                <c:when test="${view=='bookItem'}">Quản lý sách mượn</c:when>
+            </c:choose>
+        </h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
@@ -37,7 +44,6 @@
         <div class="row">
             <jsp:include page="/WEB-INF/layout/filter.jsp"/>
             <div class="col-lg-12 position-relative" style="font-size: 0.8rem" id="info-table">
-                <c:set var="view" value="${requestScope['view']}"/>
                 <c:choose>
                     <c:when test="${view=='user'}">
                         <div class="card">
@@ -167,7 +173,6 @@
                                                             ></i>
                                                         </c:when>
                                                     </c:choose>
-
                                                 </div>
                                             </td>
                                         </tr>
@@ -202,7 +207,8 @@
                                     </thead>
                                     <tbody>
                                     <c:forEach var="bookItem" items="${requestScope['bookItems'].values()}">
-                                        <tr>
+                                        <tr
+                                                <c:if test="${bookItem.isDeleted()}">style="color: var(--bs-danger);opacity: 0.6"</c:if>>
                                             <td class="bItemId">${bookItem.getId()}</td>
                                             <c:set var="book"
                                                    value="${requestScope['books'].get(bookItem.getBookId())}"/>
@@ -222,11 +228,12 @@
                                             <fmt:parseDate value="${bookItem.getDateAdded()}"
                                                            pattern="yyyy-MM-dd'T'HH:mm" var="dateAdded"/>
                                             <td class="bItemQuantity text-end">${bookItem.getQuantity()}</td>
-                                            <td class="bItemDayAdded" data-dateadded="${dateAdded}"><fmt:formatDate value="${dateAdded}" pattern="yyyy-MM-dd HH:mm"/></td>
+                                            <td class="bItemDayAdded" data-dateadded="${dateAdded}"><fmt:formatDate
+                                                    value="${dateAdded}" pattern="yyyy-MM-dd HH:mm"/></td>
                                             <td class="bItemAvailable"
                                                 data-bitemavailable="${bookItem.isAvailable()}">${bookItem.isAvailable()?"Có sẵn":"Không có sẵn"}</td>
                                             <td>
-                                                <div class="container-fluid d-flex justify-content-between">
+                                                <div class="container-fluid d-flex justify-content-evenly h-100">
                                                     <button class="btn btn-primary btn-sm"
                                                             data-bs-toggle="modal"
                                                             data-bs-target="#bookItemModal"
@@ -235,20 +242,34 @@
                                                     >
                                                         <i class="bi bi-pencil-fill w-100" style="height: 30px"></i>
                                                     </button>
+                                                    <c:choose>
+                                                    <c:when test="${!bookItem.isDeleted()}">
                                                     <i
                                                             class="bi bi-x-circle-fill btn btn-sm btn-warning text-white"
-                                                            data-bs-toggle="modal" data-bs-target="#verticalycentered"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#verticalycentered"
                                                             data-name="${bookItem.getTitle()}"
                                                             data-id="${bookItem.getId()}"
-                                                            data-type="book"
+                                                            data-type="bookItem"
                                                             onclick="confirmDelete(event)"
                                                     ></i>
-                                                </div>
+                                                    </c:when>
+                                                    <c:when test="${bookItem.isDeleted()}">
+                                                    <i class="bi bi-arrow-repeat text-white  btn-sm btn btn-warning"
+                                                       data-bs-toggle="modal"
+                                                       data-bs-target="#verticalycentered"
+                                                       data-name="${bookItem.getTitle()}"
+                                                       data-id="${bookItem.getId()}"
+                                                       onclick="confirmRestore(event)"
+                                                       data-type="bookItem"
+                                                    ></i>
+                                                    </c:when>
+                                                    </c:choose>
                                             </td>
                                             <td class="bItemPublishedDate" hidden>
                                                 <fmt:parseDate value="${bookItem.getPublishedDate()}"
                                                                pattern="yyyy-MM-dd" var="dateAdded"/>
-                                                ${dateAdded}
+                                                    ${dateAdded}
                                             </td>
                                         </tr>
                                     </c:forEach>
