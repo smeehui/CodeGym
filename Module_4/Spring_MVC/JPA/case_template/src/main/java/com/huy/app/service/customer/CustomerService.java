@@ -22,6 +22,7 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public void save(Customer customer) {
+        customer.setBalance(0);
         customerRepository.save(customer);
     }
 

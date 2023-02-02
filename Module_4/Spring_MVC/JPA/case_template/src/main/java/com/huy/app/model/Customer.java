@@ -6,28 +6,38 @@ import javax.persistence.*;
 @Table(name = "customers")
 public class Customer {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String fullName;
     private String email;
     private String phone;
     private String address;
-
+    private double balance;
     public Customer() {
     }
 
-    public Customer(String id, String fullName, String email, String phone, String address) {
+    public Customer(Long id, String fullName, String email, String phone, String address, double balance) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.balance = balance;
     }
 
-    public String getId() {
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
