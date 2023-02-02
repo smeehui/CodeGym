@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Customer</title>
+    <th:block th:replace="/layout/head::head"/>
+</head>
+
+<body>
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <th:block th:replace="/layout/top_nav::top-nav"/>
+
+    <!-- end Topbar -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+
+    <th:block th:replace="layout/left_side::left-side"/>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="header-title">List Customer</h4>
+                            <div class="dataTables_wrapper dt-bootstrap4 no-footer" id="state-saving-datatable_wrapper">
+<!--                                <div class="row">-->
+<!--                                    <div class="col-sm-12 col-md-6">-->
+<!--                                        <div class="dataTables_length" id="state-saving-datatable_length">-->
+<!--                                            <label>Show <select aria-controls="state-saving-datatable"-->
+<!--                                                                class="custom-select custom-select-sm form-control form-control-sm"-->
+<!--                                                                name="state-saving-datatable_length">-->
+<!--                                                <option value="10">10</option>-->
+<!--                                                <option value="25">25</option>-->
+<!--                                                <option value="50">50</option>-->
+<!--                                                <option value="100">100</option>-->
+<!--                                            </select> entries</label>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-sm-12 col-md-6">-->
+<!--                                        <div class="dataTables_filter" id="state-saving-datatable_filter">-->
+<!--                                            <label>Search:<input aria-controls="state-saving-datatable" class="form-control form-control-sm"-->
+<!--                                                                 placeholder="" type="search">-->
+<!--                                            </label>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table aria-describedby="state-saving-datatable_info"
+                                               class="table activate-select dt-responsive nowrap dataTable no-footer dtr-inline collapsed"
+                                               id="state-saving-datatable" role="grid"
+                                               style="width: 1013px;">
+                                            <thead>
+                                            <tr role="row">
+                                                <th aria-controls="state-saving-datatable" aria-label="Name: activate to sort column descending"
+                                                    aria-sort="ascending" class="sorting_asc" colspan="1"
+                                                    rowspan="1" style="width: 155.4px;"
+                                                    tabindex="0">Name
+                                                </th>
+                                                <th aria-controls="state-saving-datatable" aria-label="Position: activate to sort column ascending" class="sorting"
+                                                    colspan="1" rowspan="1" style="width: 236.4px;"
+                                                    tabindex="0">Position
+                                                </th>
+                                                <th aria-controls="state-saving-datatable" aria-label="Office: activate to sort column ascending" class="sorting"
+                                                    colspan="1" rowspan="1" style="width: 113.4px;"
+                                                    tabindex="0">Office
+                                                </th>
+                                                <th aria-controls="state-saving-datatable" aria-label="Age: activate to sort column ascending" class="sorting"
+                                                    colspan="1" rowspan="1" style="width: 49.4px;"
+                                                    tabindex="0">Age
+                                                </th>
+                                                <th aria-controls="state-saving-datatable" aria-label="Start date: activate to sort column ascending" class="sorting"
+                                                    colspan="1" rowspan="1" style="width: 116.4px;"
+                                                    tabindex="0">Start
+                                                    date
+                                                </th>
+                                                <th aria-controls="state-saving-datatable" aria-label="Salary: activate to sort column ascending" class="sorting"
+                                                    colspan="1" rowspan="1" style="width: 80.4px; display: none;"
+                                                    tabindex="0">Salary
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr class="odd" role="row">
+                                                <td class="sorting_1" tabindex="0">Charde Marshall</td>
+                                                <td>Regional Director</td>
+                                                <td>San Francisco</td>
+                                                <td>36</td>
+                                                <td>2008/10/16</td>
+                                                <td style="display: none;">$470,600</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="sorting_1" tabindex="0">Colleen Hurst</td>
+                                                <td>Javascript Developer</td>
+                                                <td>San Francisco</td>
+                                                <td>39</td>
+                                                <td>2009/09/15</td>
+                                                <td style="display: none;">$205,500</td>
+                                            </tr>
+                                            <tr class="odd" role="row">
+                                                <td class="sorting_1" tabindex="0">Dai Rios</td>
+                                                <td>Personnel Lead</td>
+                                                <td>Edinburgh</td>
+                                                <td>35</td>
+                                                <td>2012/09/26</td>
+                                                <td style="display: none;">$217,500</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="sorting_1" tabindex="0">Donna Snider</td>
+                                                <td>Customer Support</td>
+                                                <td>New York</td>
+                                                <td>27</td>
+                                                <td>2011/01/25</td>
+                                                <td style="display: none;">$112,000</td>
+                                            </tr>
+                                            <tr class="odd" role="row">
+                                                <td class="sorting_1" tabindex="0">Doris Wilder</td>
+                                                <td>Sales Assistant</td>
+                                                <td>Sidney</td>
+                                                <td>23</td>
+                                                <td>2010/09/20</td>
+                                                <td style="display: none;">$85,600</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="sorting_1" tabindex="0">Finn Camacho</td>
+                                                <td>Support Engineer</td>
+                                                <td>San Francisco</td>
+                                                <td>47</td>
+                                                <td>2009/07/07</td>
+                                                <td style="display: none;">$87,500</td>
+                                            </tr>
+                                            <tr class="odd" role="row">
+                                                <td class="sorting_1" tabindex="0">Fiona Green</td>
+                                                <td>Chief Operating Officer (COO)</td>
+                                                <td>San Francisco</td>
+                                                <td>48</td>
+                                                <td>2010/03/11</td>
+                                                <td style="display: none;">$850,000</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="sorting_1" tabindex="0">Garrett Winters</td>
+                                                <td>Accountant</td>
+                                                <td>Tokyo</td>
+                                                <td>63</td>
+                                                <td>2011/07/25</td>
+                                                <td style="display: none;">$170,750</td>
+                                            </tr>
+                                            <tr class="odd" role="row">
+                                                <td class="sorting_1" tabindex="0">Gavin Cortez</td>
+                                                <td>Team Leader</td>
+                                                <td>San Francisco</td>
+                                                <td>22</td>
+                                                <td>2008/10/26</td>
+                                                <td style="display: none;">$235,500</td>
+                                            </tr>
+                                            <tr class="even" role="row">
+                                                <td class="sorting_1" tabindex="0">Gavin Joyce</td>
+                                                <td>Developer</td>
+                                                <td>Edinburgh</td>
+                                                <td>42</td>
+                                                <td>2010/12/22</td>
+                                                <td style="display: none;">$92,575</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col-sm-12 col-md-5">-->
+<!--                                        <div aria-live="polite" class="dataTables_info" id="state-saving-datatable_info"-->
+<!--                                             role="status">Showing 11 to 20 of 57 entries-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-sm-12 col-md-7">-->
+<!--                                        <div class="dataTables_paginate paging_simple_numbers"-->
+<!--                                             id="state-saving-datatable_paginate">-->
+<!--                                            <ul class="pagination pagination-rounded">-->
+<!--                                                <li class="paginate_button page-item previous"-->
+<!--                                                    id="state-saving-datatable_previous">-->
+<!--                                                    <a aria-controls="state-saving-datatable" class="page-link" data-dt-idx="0"-->
+<!--                                                       href="#" tabindex="0">-->
+<!--                                                        <i class="mdi mdi-chevron-left">-->
+<!--                                                        </i>-->
+<!--                                                    </a>-->
+<!--                                                </li>-->
+<!--                                                <li class="paginate_button page-item ">-->
+<!--                                                    <a aria-controls="state-saving-datatable" class="page-link" data-dt-idx="1"-->
+<!--                                                       href="#" tabindex="0">1</a>-->
+<!--                                                </li>-->
+<!--                                                <li class="paginate_button page-item active">-->
+<!--                                                    <a aria-controls="state-saving-datatable" class="page-link" data-dt-idx="2"-->
+<!--                                                       href="#" tabindex="0">2</a>-->
+<!--                                                </li>-->
+<!--                                                <li class="paginate_button page-item ">-->
+<!--                                                    <a aria-controls="state-saving-datatable" class="page-link" data-dt-idx="3"-->
+<!--                                                       href="#" tabindex="0">3</a>-->
+<!--                                                </li>-->
+<!--                                                <li class="paginate_button page-item ">-->
+<!--                                                    <a aria-controls="state-saving-datatable" class="page-link" data-dt-idx="4"-->
+<!--                                                       href="#" tabindex="0">4</a>-->
+<!--                                                </li>-->
+<!--                                                <li class="paginate_button page-item ">-->
+<!--                                                    <a aria-controls="state-saving-datatable" class="page-link" data-dt-idx="5"-->
+<!--                                                       href="#" tabindex="0">5</a>-->
+<!--                                                </li>-->
+<!--                                                <li class="paginate_button page-item ">-->
+<!--                                                    <a aria-controls="state-saving-datatable" class="page-link" data-dt-idx="6"-->
+<!--                                                       href="#" tabindex="0">6</a>-->
+<!--                                                </li>-->
+<!--                                                <li class="paginate_button page-item next"-->
+<!--                                                    id="state-saving-datatable_next">-->
+<!--                                                    <a aria-controls="state-saving-datatable" class="page-link" data-dt-idx="7"-->
+<!--                                                       href="#" tabindex="0">-->
+<!--                                                        <i class="mdi mdi-chevron-right">-->
+<!--                                                        </i>-->
+<!--                                                    </a>-->
+<!--                                                </li>-->
+<!--                                            </ul>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                            </div>
+                        </div> <!-- end card body-->
+                    </div> <!-- end card -->
+                </div>
+                <!-- end col-->
+            </div>
+
+
+        </div> <!-- content -->
+
+        <!-- Footer Start -->
+        <th:block th:replace="layout/footer::footer"/>
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<!-- Right Sidebar -->
+
+
+<!-- /Right-bar -->
+
+<th:block th:replace="layout/script::vendor"/>
+<th:block th:replace="layout/script::datatable"/>
+<th:block th:replace="layout/script::bootsrap"/>
+
+</body>
+</html>

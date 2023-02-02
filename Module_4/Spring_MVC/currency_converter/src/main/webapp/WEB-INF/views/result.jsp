@@ -11,13 +11,14 @@
     <title>Convert</title>
 </head>
 <body>
-<fieldset>
+<fieldset style="font-size: 1.3rem; font-family: 'Courier 10 Pitch'">
     <legend>Result</legend>
     <pre>
-        ${amount} ${from}
-        is equal ${result} ${to}
-        with the rate: 1 ${from} is equal ${rate} ${to}
+    ${amount} ${from}
+    is equal ${result} ${to}
+    with the rate: 1 ${from} is equal ${rate} ${to}
     </pre>
+    <a href="/">Back</a>
 </fieldset>
 </body>
 </html>
