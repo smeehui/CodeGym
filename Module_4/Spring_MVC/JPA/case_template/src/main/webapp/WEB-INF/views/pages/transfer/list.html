@@ -34,23 +34,25 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Balance</th>
-                                    <th>Address</th>
+                                    <th>Sender</th>
+                                    <th>Recipient</th>
+                                    <th>Fee rate (%)</th>
+                                    <th>Amount</th>
+                                    <th>Fee Amount</th>
+                                    <th>Total Amount</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr role="row"
                                     th:classappend="${state.odd}?'odd':'even'"
-                                    th:each="customer, state: ${customers}">
-                                    <td class="sorting_1" tabindex="0" th:text="${customer.id}"></td>
-                                    <td th:text="${customer.fullName}"></td>
-                                    <td th:text="${customer.email}"></td>
-                                    <td th:text="${customer.phone}"></td>
-                                    <td th:text="${customer.balance}"></td>
-                                    <td th:text="${customer.address}"></td>
+                                    th:each="transfer, state: ${transfers}">
+                                    <td class="sorting_1" tabindex="0" th:text="${transfer.id}"></td>
+                                    <td th:text="${transfer.sentCustomer}"></td>
+                                    <td th:text="${transfer.receivedCustomer}"></td>
+                                    <td th:text="${transfer.feeRate}"></td>
+                                    <td th:text="${transfer.amount}"></td>
+                                    <td th:text="${transfer.feeAmount}"></td>
+                                    <td th:text="${transfer.totalAmount}"></td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -1,10 +1,18 @@
 package com.huy.app.config;
 
 
-import com.huy.app.repository.CustomerRepository;
-import com.huy.app.repository.ICustomerRepository;
+import com.huy.app.repository.customer.CustomerRepository;
+import com.huy.app.repository.customer.ICustomerRepository;
+import com.huy.app.repository.transfer.ITransferDTORepository;
+import com.huy.app.repository.transfer.ITransferRepository;
+import com.huy.app.repository.transfer.TransferDTORepository;
+import com.huy.app.repository.transfer.TransferRepository;
 import com.huy.app.service.customer.CustomerService;
 import com.huy.app.service.customer.ICustomerService;
+import com.huy.app.service.transfer.ITransferDTOService;
+import com.huy.app.service.transfer.ITransferService;
+import com.huy.app.service.transfer.TransferDTOServiceService;
+import com.huy.app.service.transfer.TransferService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -110,7 +118,7 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
 
     public Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
         properties.setProperty("hibernate.show_sql", "true");
         return properties;
@@ -130,5 +138,19 @@ public class AppConfiguration implements WebMvcConfigurer, ApplicationContextAwa
     public ICustomerService customerService() {
         return new CustomerService();
     }
-
+    @Bean
+    public ITransferService transferService(){return new TransferService();
+    }
+    @Bean
+    public ITransferRepository transferRepository(){
+        return new TransferRepository();
+    }
+    @Bean
+    public ITransferDTORepository transferDTORepository(){
+        return new TransferDTORepository();
+    }
+    @Bean
+    public ITransferDTOService transferDTOService(){
+        return new TransferDTOServiceService();
+    }
 }

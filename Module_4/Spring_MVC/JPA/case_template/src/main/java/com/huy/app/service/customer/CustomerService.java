@@ -1,7 +1,7 @@
 package com.huy.app.service.customer;
 
 import com.huy.app.model.Customer;
-import com.huy.app.repository.ICustomerRepository;
+import com.huy.app.repository.customer.ICustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -23,6 +23,7 @@ public class CustomerService implements ICustomerService {
     @Override
     public void save(Customer customer) {
         customer.setBalance(0);
+
         customerRepository.save(customer);
     }
 

@@ -49,4 +49,37 @@
   <!-- Init js-->
   <script src="/assets/js/pages/form-wizard.init.js"></script>
 </th:block>
+<th:block th:fragment="progress">
+  <script>
+    function clickNavBtn(){
+      let tId = setTimeout(changeBtn, 500);
+    }
+    function changeBtn(){
+        let progress = document.querySelector(".progress-bar").style.width;
+        let nextBtn = document.querySelector(".next-btn");
+        if (progress!=='100%'){
+          nextBtn.children[0].innerText = "Next";
+          nextBtn.removeAttribute("type");
+          nextBtn.setAttribute("onclick", "clickNavBtn()");
+        }else {
+          nextBtn.children[0].innerText = "Submit";
+          nextBtn.setAttribute("type", "submit");
+          nextBtn.classList.remove("disabled");
+          nextBtn.setAttribute("onclick","submitForm()");
+        }
+    }
+    let submitForm = ()=>{
+      console.log(123)
+      document.querySelector("#create_form").submit();
+    }
+    let calculateTotal = () =>{
+      let amount = Number(document.querySelector("[name='amount']").value);
+      let fee = Number(document.querySelector("[name='feeRate']").value)/100;
+      let total = amount * fee + amount;
+      document.querySelector("[name='totalAmount']").value = total;
+    }
+    document.querySelector("[name='amount']").oninput = ()=>{calculateTotal()};
+    document.querySelector("[name='feeRate']").oninput = ()=>{calculateTotal()};
+  </script>
+</th:block>
 </html>
