@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Upvex - Responsive Admin Dashboard Template</title>
+    <th:block th:replace="/layout/head::head"/>
+</head>
+
+<body>
+<!-- Begin page -->
+<div id="wrapper">
+
+    <!-- Topbar Start -->
+    <th:block th:replace="/layout/top_nav::top-nav"/>
+
+    <!-- end Topbar -->
+
+    <!-- ========== Left Sidebar Start ========== -->
+
+    <th:block th:replace="layout/left_side::left-side"/>
+    <!-- Left Sidebar End -->
+
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="header-title mb-3"> Wizard With Form Validation</h4>
+
+                            <div id="rootwizard">
+                                <ul class="nav nav-pills bg-light nav-justified form-wizard-header mb-3">
+                                    <li class="nav-item" data-target-form="#accountForm">
+                                        <a class="nav-link rounded-0 pt-2 pb-2 active" data-toggle="tab" href="#first">
+                                            <i class="mdi mdi-account-circle mr-1"></i>
+                                            <span class="d-none d-sm-inline">Account</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" data-target-form="#profileForm">
+                                        <a class="nav-link rounded-0 pt-2 pb-2" data-toggle="tab" href="#second">
+                                            <i class="mdi mdi-face-profile mr-1"></i>
+                                            <span class="d-none d-sm-inline">Profile</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" data-target-form="#otherForm">
+                                        <a class="nav-link rounded-0 pt-2 pb-2" data-toggle="tab" href="#third">
+                                            <i class="mdi mdi-checkbox-marked-circle-outline mr-1"></i>
+                                            <span class="d-none d-sm-inline">Finish</span>
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="tab-content mb-0 b-0 pt-0">
+                                    <div class="progress mb-3" id="bar" style="height: 7px;">
+                                        <div class="bar progress-bar progress-bar-striped progress-bar-animated bg-success"
+                                             style="width: 33.3333%;"></div>
+                                    </div>
+
+                                    <div class="tab-pane active" id="first">
+                                        <form action="#" class="form-horizontal " id="accountForm" method="post">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-3 col-form-label" for="userName3">User
+                                                            name</label>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" id="userName3" name="userName3"
+                                                                   required="" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-3 col-form-label" for="password3">
+                                                            Password</label>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" id="password3" name="password3"
+                                                                   required="" type="password">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-3 col-form-label" for="confirm3">Re
+                                                            Password</label>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" id="confirm3" name="confirm3"
+                                                                   required="" type="password">
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- end col -->
+                                            </div> <!-- end row -->
+                                        </form>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="second">
+                                        <form action="#" class="form-horizontal" id="profileForm" method="post">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-3 col-form-label" for="name3"> First
+                                                            name</label>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" id="name3" name="name3"
+                                                                   required="" type="text">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-3 col-form-label" for="surname3"> Last
+                                                            name</label>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" id="surname3" name="surname3"
+                                                                   required="" type="text">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-3 col-form-label"
+                                                               for="email3">Email</label>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" id="email3" name="email3"
+                                                                   required="" type="email">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end col -->
+                                            </div>
+                                            <!-- end row -->
+                                        </form>
+                                    </div>
+
+                                    <div class="tab-pane fade" id="third">
+                                        <form action="#" class="form-horizontal" id="otherForm" method="post">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="text-center">
+                                                        <h2 class="mt-0">
+                                                            <i class="mdi mdi-check-all"></i>
+                                                        </h2>
+                                                        <h3 class="mt-0">Thank you !</h3>
+
+                                                        <p class="w-75 mb-2 mx-auto">Quisque nec turpis at urna dictum
+                                                            luctus. Suspendisse convallis dignissim eros at volutpat. In
+                                                            egestas mattis
+                                                            dui. Aliquam mattis dictum aliquet.</p>
+
+                                                        <div class="mb-3">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input class="custom-control-input" id="customCheck4"
+                                                                       required="" type="checkbox">
+                                                                <label class="custom-control-label" for="customCheck4">I
+                                                                    agree with the Terms and Conditions</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end col -->
+                                            </div>
+                                            <!-- end row -->
+                                        </form>
+                                    </div>
+
+                                    <ul class="list-inline wizard mb-0">
+                                        <li class="previous list-inline-item disabled"><a class="btn btn-light"
+                                                                                          href="javascript: void(0);">Previous</a>
+                                        </li>
+                                        <li class="next list-inline-item float-right"><a class="btn btn-light"
+                                                                                         href="javascript: void(0);">Next</a>
+                                        </li>
+                                    </ul>
+
+                                </div> <!-- tab-content -->
+                            </div> <!-- end #rootwizard-->
+
+                        </div> <!-- end card-body -->
+                    </div> <!-- end card-->
+                </div>
+            </div>
+
+        </div> <!-- content -->
+
+        <!-- Footer Start -->
+        <th:block th:replace="layout/footer::footer"/>
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+
+
+</div>
+<!-- END wrapper -->
+
+<!-- Right Sidebar -->
+
+
+<!-- /Right-bar -->
+
+<th:block th:replace="layout/script::vendor"/>
+<th:block th:replace="layout/script::form-wizard"/>
+<th:block th:replace="layout/script::bootsrap"/>
+</body>
+</html>

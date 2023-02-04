@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'com.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.9.1'
+}
+
+sourceCompatibility = "14"
+targetCompatibility = "14"
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+apply plugin: 'maven-publish'
+dependencies {
+    implementation 'org.eclipse.jetty:apache-jstl:11.0.0'
+    implementation 'mysql:mysql-connector-java:8.0.30'
+    compileOnly('jakarta.servlet:jakarta.servlet-api:6.0.0')
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}

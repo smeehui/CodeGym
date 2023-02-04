@@ -1,0 +1,31 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.parent{
+    display: flex;
+    color: white;
+    background-color: black;
+    list-style-type: none;
+    cursor: pointer;
+}
+.parent li{
+    width: 120px;
+    position: relative;
+    padding: 5px 0 ;
+}
+.parent li:hover{
+    background: red;
+}
+.parent li:hover>.child{
+    display: block;
+}
+.child {
+    display: none;
+    position: absolute;
+    top: 100%;
+    list-style-type: none;
+    background-color: black;
+    color: white;
+}

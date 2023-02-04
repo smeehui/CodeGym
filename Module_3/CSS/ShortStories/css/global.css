@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+table{
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+tbody tr{
+    display: block;
+    padding: 10px 0;
+}
+tbody tr td:first-child{
+    text-align: center;
+    width: 50px;
+}
+tbody tr:nth-child(odd){
+    background-color: aliceblue;
+}
+a{
+    text-decoration: none;
+}
