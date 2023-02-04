@@ -8,6 +8,11 @@ version '1.0-SNAPSHOT'
 
 repositories {
     jcenter()
+    mavenCentral()
+    maven {
+        url 'https://repo.clojars.org'
+        name 'Clojars'
+    }
 }
 
 ext {
@@ -22,6 +27,8 @@ tasks.withType(JavaCompile) {
 }
 
 dependencies {
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.0.Final'
     compileOnly('javax.servlet:javax.servlet-api:4.0.1')
     implementation group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.15.RELEASE'
     implementation group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '3.0.0'

@@ -36,10 +36,10 @@
                                     <th>ID</th>
                                     <th>Sender</th>
                                     <th>Recipient</th>
-                                    <th>Fee rate (%)</th>
-                                    <th>Amount</th>
-                                    <th>Fee Amount</th>
-                                    <th>Total Amount</th>
+                                    <th class="text-right">Fee rate (%)</th>
+                                    <th class="text-right">Amount</th>
+                                    <th class="text-right">Fee Amount</th>
+                                    <th class="text-right">Total Amount</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -49,10 +49,10 @@
                                     <td class="sorting_1" tabindex="0" th:text="${transfer.id}"></td>
                                     <td th:text="${transfer.sentCustomer}"></td>
                                     <td th:text="${transfer.receivedCustomer}"></td>
-                                    <td th:text="${transfer.feeRate}"></td>
-                                    <td th:text="${transfer.amount}"></td>
-                                    <td th:text="${transfer.feeAmount}"></td>
-                                    <td th:text="${transfer.totalAmount}"></td>
+                                    <td  class="text-right" th:text="${transfer.feeRate + '%'}"></td>
+                                    <td class="text-right" th:text="${#numbers.formatDecimal(transfer.amount,6,'COMMA',0,'POINT')}+' VND'"></td>
+                                    <td class="text-right" th:text="${#numbers.formatDecimal(transfer.feeAmount,6,'COMMA',0,'POINT')}+' VND'"></td>
+                                    <td class="text-right" th:text="${#numbers.formatDecimal(transfer.totalAmount,6,'COMMA',0,'POINT')}+' VND'"></td>
                                 </tr>
                                 </tbody>
                             </table>

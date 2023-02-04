@@ -1,5 +1,8 @@
 package com.huy.app.model;
 
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Range;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,14 +14,18 @@ public class Transfer {
 
     @ManyToOne()
     @PrimaryKeyJoinColumn(name = "senderId", foreignKey = @ForeignKey(name = "fk_sender_customer"))
+    @NotNull(message = "The sender is not valid")
     private Customer sentCustomer;
 
     @ManyToOne()
     @PrimaryKeyJoinColumn(name = "recipientId", foreignKey = @ForeignKey(name = "fk_recipient_customer"))
+    @NotNull(message = "The recipient is not valid")
     private Customer receivedCustomer;
-
-
+    @NotNull(message = "The fee rate is not valid")
+    @Range(min = 0, max = 50,message = "Rate must be between 0 and 50%")
     private double feeRate;
+    @NotNull(message = "The amount is not valid")
+    @Range(min = 10000,max = 1000000000, message = "Transfer amount must be from 10000 to 1 billion")
     private double amount;
     private double feeAmount;
     private double totalAmount;

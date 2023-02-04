@@ -1,6 +1,8 @@
 package com.huy.app.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "customers")
@@ -8,9 +10,14 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotEmpty(message = "Full name can not be empty")
     private String fullName;
+    @NotEmpty(message = "Email can not be empty")
+    @Email(message = "Email is not valid")
     private String email;
+    @NotEmpty(message = "Phone can not be empty")
     private String phone;
+    @NotEmpty(message = "Address can not be empty")
     private String address;
     private double balance;
     public Customer() {

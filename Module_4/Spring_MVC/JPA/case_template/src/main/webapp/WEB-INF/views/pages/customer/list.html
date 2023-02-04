@@ -39,6 +39,7 @@
                                     <th>Phone</th>
                                     <th>Balance</th>
                                     <th>Address</th>
+                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -51,6 +52,9 @@
                                     <td th:text="${customer.phone}"></td>
                                     <td th:text="${customer.balance}"></td>
                                     <td th:text="${customer.address}"></td>
+                                    <td class="d-flex">
+                                        <a th:href="@{edit/{id}(id=${customer.id})}" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
