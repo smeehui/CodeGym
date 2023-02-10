@@ -14,7 +14,7 @@ $("#fSubmit").click(createNewCustomer);
 
 function createNewCustomer(e) {
     e.preventDefault();
-    let id = customers.length + 1;
+    let id = generateId();
     let fullName = $("#inputName").val();
     let email = $("#inputEmail").val();
     let phone = $("#inputPhone").val();
@@ -23,15 +23,19 @@ function createNewCustomer(e) {
     customers.unshift(customer);
     appendToTable(customer);
 }
+function generateId() {
+    return "id" + Math.random().toString(16).slice(2);
+}
 
 function appendToTable(customer) {
     let tr = createTableRow(customer);
     $("#tbody").prepend(tr);
+    addQueue();
 }
 function createTableRow(customer) {
     return `
    <tr class="c${customer.id}">
-   <td>${customer.id}</td>
+   <td class="queue"></td>
    <td>${customer.name}</td>
    <td>${customer.email}</td>
    <td>${customer.phone}</td>
@@ -56,6 +60,12 @@ function createTableRow(customer) {
 
    `;
 }
+function addQueue() {
+    $(".queue").each(function (e) {
+        console.log(e);
+        this.innerText = e + 1;
+    });
+}
 
 function editCustomer(id) {
     let customer = customers.filter((c) => c.id == id)[0];
@@ -63,7 +73,7 @@ function editCustomer(id) {
     $("#editEmail").val(customer.email);
     $("#editPhone").val(customer.phone);
     $("#editAddress").val(customer.address);
-    $("#saveCustomer").attr("data-customerid", id);
+    $("#saveCustomerBtn").attr("data-customerid", id);
     //  tr.replaceWith(createTableRow(customer));
 }
 
@@ -86,6 +96,7 @@ function saveCustomer(e) {
     });
     let tr = $(`.c${id}`);
     tr.replaceWith(createTableRow(customer));
+    addQueue();
 }
 function appendInfoToDeleteModal(id) {
     let customer = customers.filter((c) => c.id == id)[0];
@@ -102,4 +113,5 @@ function deleteCustomer(e) {
     let id = e.target.dataset.customerid;
     customers = customers.filter((c) => c.id != id);
     $(`.c${id}`).remove();
+    addQueue();
 }
