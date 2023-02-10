@@ -82,4 +82,22 @@
     document.querySelector("[name='feeRate']").oninput = ()=>{calculateTotal()};
   </script>
 </th:block>
+<th:block th:fragment="toast-trigger">
+    <script>
+      let showToast = () => {
+        let toast = document.querySelectorAll(".toast");
+        toast.forEach(el => {
+          let toastEl = new bootstrap.Toast(el, {
+            animation: true,
+            autohide: true,
+            delay: 2000
+          })
+          toastEl.show();
+        })
+      }
+      window.onload = ()=>{
+        showToast();
+      }
+    </script>
+</th:block>
 </html>

@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -49,16 +50,16 @@ public class CustomerController {
         return modelAndView;
     }
     @PostMapping("/create")
-    public String createNewCustomer(@ModelAttribute @Validated Customer customer, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView("pages/customer/create");
-        if (bindingResult.hasFieldErrors()) {
+    public String createNewCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult,Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("customer", customer);
             return "pages/customer/create";
         }
        else {
             customerService.save(customer);
-            modelAndView.addObject("message", "New customer created successfully");
+            model.addAttribute("message", "New customer created successfully");
+            return "redirect:/customer/create";
         }
-        return "redirect:/customer/create";
     }
     @PostMapping("/edit/{id}")
     public String updateCustomer(@PathVariable String id,@ModelAttribute Customer customer){
