@@ -22,17 +22,18 @@ function init() {
         },
 
         createNewCustomer: function (e) {
+            let _this = app;
             e.preventDefault();
-            let id = app.generateId();
+            let id = _this.generateId();
             let fullName = $("#inputName").val();
             let email = $("#inputEmail").val();
             let phone = $("#inputPhone").val();
             let address = $("#inputAddress").val();
             let customer = new Customer(id, fullName, email, phone, address);
-            app.customers.unshift(customer);
-            app.appendToTable(customer);
-            app.addQueue();
-            app.resetCreateForm();
+            _this.customers.unshift(customer);
+            _this.appendToTable(customer);
+            _this.addQueue();
+            _this.resetCreateForm();
         },
 
         resetCreateForm: function () {
@@ -60,27 +61,31 @@ function init() {
         createTableRow: function (customer) {
             return `
                     <tr class="c${customer.id}">
-                    <td class="queue"></td>
-                    <td>${customer.name}</td>
-                    <td>${customer.email}</td>
-                    <td>${customer.phone}</td>
-                    <td>${customer.address}</td>
-                    <td><button 
-                            class="btn btn-sm btn-outline-warning"
-                            type="button"
-                            class="btn btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editCustomerModal"
-                            data-customerID=${customer.id}
-                            onclick="app.setCurrentCustomer(this.dataset.customerid)"
-                            >Edit</button></td>
-                    <td><button 
-                            class="btn btn-sm btn-outline-danger"
-                            data-bs-toggle="modal"
-                            data-bs-target="#deleteCustomerModal"
-                            data-customerID=${customer.id}
-                            onclick="app.setCurrentCustomer(this.dataset.customerid)"
-                            >Delete</button></td>
+                        <td class="queue"></td>
+                        <td>${customer.name}</td>
+                        <td>${customer.email}</td>
+                        <td>${customer.phone}</td>
+                        <td>${customer.address}</td>
+                        <td class = "text-center">
+                            <button 
+                                class="btn btn-sm btn-outline-warning mx-1"
+                                type="button"
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editCustomerModal"
+                                data-customerID=${customer.id}
+                                onclick="app.setCurrentCustomer(this.dataset.customerid)"
+                                >Edit
+                            </button>
+                            <button 
+                                class="btn btn-sm btn-outline-danger"
+                                data-bs-toggle="modal"
+                                data-bs-target="#deleteCustomerModal"
+                                data-customerID=${customer.id}
+                                onclick="app.setCurrentCustomer(this.dataset.customerid)"
+                                >Delete
+                            </button>
+                        </td>
                     </tr>
     
                     `;
@@ -107,7 +112,8 @@ function init() {
         },
 
         saveCustomer: function () {
-            let customer = app.currentCustomer;
+            let _this = app;
+            let customer = _this.currentCustomer;
             let id = customer.id;
             let fullName = $("#editName").val();
             let email = $("#editEmail").val();
@@ -119,12 +125,12 @@ function init() {
             if (phone.length > 0) customer.phone = phone;
             if (address.length > 0) customer.address = address;
 
-            app.customers.forEach((c, i) => {
-                if (c.id == customer.id) app.customers[i] = customer;
+            _this.customers.forEach((c, i) => {
+                if (c.id == customer.id) _this.customers[i] = customer;
             });
             let tr = $(`.c${id}`);
-            tr.replaceWith(app.createTableRow(customer));
-            app.addQueue();
+            tr.replaceWith(_this.createTableRow(customer));
+            _this.addQueue();
         },
 
         createDeleteBtnListener: function () {
@@ -161,5 +167,7 @@ function init() {
         },
     });
 }
-let App = init();
-App.start();
+window.onload = () => {
+    let App = init();
+    App.start();
+};
