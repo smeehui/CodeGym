@@ -29,62 +29,85 @@
         ></script>
     </head>
     <body>
-        <div class="container">
-            <h1 class="h1">Customer information</h1>
-            <form>
-                <div class="mb-3 row">
-                    <div class="col-lg-6">
-                        <label for="inputName" class="form-label"
-                            >Full name</label
-                        >
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="inputName"
-                            aria-describedby="emailHelp"
-                        />
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="inputEmail" class="form-label">Email</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="inputEmail"
-                            aria-describedby="emailHelp"
-                        />
-                    </div>
+       
+        <div class="container my-2">
+            <div class="header navbar navbar-primary bg-primary rounded">
+                <div class="col-lg-2 offset-lg-10">
+                    <button
+                        class="btn btn-sm btn-success"
+                        type="button"
+                        id="showCreateCustomerBtn"
+                    >
+                        New customer
+                    </button>
                 </div>
+            </div>
+            <div class="collapse" id="newCustomerCollapse">
+                <p class="h2 col-lg-6">Customer information</p>
+                <div class="alert alert-danger d-none d-flex flex-column"></div>
+                <div class="card card-body">
+                    <form id="newCustomerForm">
+                        <div class="mb-3 row">
+                            <div class="col-lg-6">
+                                <label for="inputName" class="form-label"
+                                    >Full name</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control text-capitalize"
+                                    id="inputName"
+                                    name="fullName"
+                                />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="inputEmail" class="form-label"
+                                    >Email</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="inputEmail"
+                                    name="email"
+                                />
+                            </div>
+                        </div>
 
-                <div class="mb-3 row">
-                    <div class="col-lg-6">
-                        <label for="inputPhone" class="form-label">Phone</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="inputPhone"
-                        />
-                    </div>
-                    <div class="col-lg-6">
-                        <label for="inputAddress" class="form-label"
-                            >Address</label
+                        <div class="mb-3 row">
+                            <div class="col-lg-6">
+                                <label for="inputPhone" class="form-label"
+                                    >Phone</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="inputPhone"
+                                    name="phone"
+                                />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="inputAddress" class="form-label"
+                                    >Address</label
+                                >
+                                <input
+                                    type="text"
+                                    class="form-control text-capitalize "
+                                    id="inputAddress"
+                                    name="address"
+                                />
+                            </div>
+                        </div>
+
+                        <button
+                            type="button"
+                            id="fSubmit"
+                            class="btn btn-outline-primary px-5"
                         >
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="inputAddress"
-                            aria-describedby="emailHelp"
-                        />
-                    </div>
+                            Create
+                        </button>
+                    </form>
                 </div>
+            </div>
 
-                <button
-                    type="submit"
-                    id="fSubmit"
-                    class="btn btn-outline-primary px-5"
-                >
-                    Create
-                </button>
-            </form>
             <table class="table">
                 <thead>
                     <tr>
@@ -108,7 +131,10 @@
             aria-labelledby="editCustomerModalLabel"
             aria-hidden="true"
         >
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div
+                class="modal-dialog modal-lg modal-dialog-centered"
+                role="document"
+            >
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editCustomerModalLabel">
@@ -149,7 +175,7 @@
                                     />
                                 </div>
                             </div>
-  
+
                             <div class="mb-3 row">
                                 <div class="col-lg-6">
                                     <label for="editPhone" class="form-label"
@@ -182,7 +208,12 @@
                             >
                                 Close
                             </button>
-                            <button id="saveCustomerBtn" type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                            <button
+                                id="saveCustomerBtn"
+                                type="button"
+                                class="btn btn-primary"
+                                data-bs-dismiss="modal"
+                            >
                                 Save changes
                             </button>
                         </div>
@@ -198,11 +229,14 @@
             aria-labelledby="deleteCustomerModalLabel"
             aria-hidden="true"
         >
-            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div
+                class="modal-dialog modal-lg modal-dialog-centered"
+                role="document"
+            >
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="deleteCustomerModalLabel">
-                           Are you sure want to delete?
+                            Are you sure want to delete?
                         </h5>
                         <button
                             type="button"
@@ -215,33 +249,39 @@
                     </div>
                     <form>
                         <div class="modal-body">
-                           <div class="mb-3 row">
-                              <div class="col-lg-6">
-                                  <h3>Full name:</h3>
-                                  <h4 id="delCusName" class="border border-1 text-bolder rounded-1 p-2"></h4>
-                              </div>
-                              <div class="col-lg-6">
-                                 <h3
-                                      >Email:</h3
-                                  >
-                                  <h4 id="delCusEmail" class="border border-1 text-bolder rounded-1 p-2"></h4>
-                              </div>
-                          </div>
+                            <div class="mb-3 row">
+                                <div class="col-lg-6">
+                                    <h3>Full name:</h3>
+                                    <h4
+                                        id="delCusName"
+                                        class="border border-1 text-bolder rounded-1 p-2"
+                                    ></h4>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h3>Email:</h3>
+                                    <h4
+                                        id="delCusEmail"
+                                        class="border border-1 text-bolder rounded-1 p-2"
+                                    ></h4>
+                                </div>
+                            </div>
 
-                          <div class="mb-3 row">
-                              <div class="col-lg-6">
-                                  <h3
-                                      >Phone:</h3
-                                  >
-                                  <h4 id="delCusPhone" class="border border-1 text-bolder rounded-1 p-2"></h4>
-                              </div>
-                              <div class="col-lg-6">
-                                  <h3
-                                      >Address:</h3
-                                  >
-                                  <h4 id="delCusAddress" class="border border-1 text-bolder rounded-1 p-2"></h4>
-                              </div>
-                          </div>
+                            <div class="mb-3 row">
+                                <div class="col-lg-6">
+                                    <h3>Phone:</h3>
+                                    <h4
+                                        id="delCusPhone"
+                                        class="border border-1 text-bolder rounded-1 p-2"
+                                    ></h4>
+                                </div>
+                                <div class="col-lg-6">
+                                    <h3>Address:</h3>
+                                    <h4
+                                        id="delCusAddress"
+                                        class="border border-1 text-bolder rounded-1 p-2"
+                                    ></h4>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer text-center">
                             <button
@@ -251,7 +291,12 @@
                             >
                                 Cancel
                             </button>
-                            <button id="deleteCustomerBtn" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                            <button
+                                id="deleteCustomerBtn"
+                                type="button"
+                                class="btn btn-danger"
+                                data-bs-dismiss="modal"
+                            >
                                 Delete
                             </button>
                         </div>
@@ -259,6 +304,7 @@
                 </div>
             </div>
         </div>
-      </body>
-    <script src="./app.js"></script>
+    </body>
+    <script src="./assets/jquery/jquery.validate.min.js"></script>
+    <script src="./assets/js/app.js"></script>
 </html>
