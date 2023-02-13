@@ -87,7 +87,6 @@ function init() {
                             </button>
                         </td>
                     </tr>
-    
                     `;
         },
 
