@@ -38,7 +38,7 @@ public class UserMapper {
         user.setFullName(dto.getFullName());
         user.setPassword(dto.getPassword());
         user.setAge(Integer.parseInt(dto.getAge()));
-        user.setRoles(dto.getRole().stream().map(roleDTO -> RoleMapper.getInstance().toEntity(roleDTO)).collect(Collectors.toList()));
+        user.setRoles(dto.getRoles().stream().map(roleDTO -> RoleMapper.getInstance().toEntity(roleDTO)).collect(Collectors.toList()));
         return user;
     }
 
