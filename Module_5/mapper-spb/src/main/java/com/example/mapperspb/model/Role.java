@@ -22,7 +22,7 @@ public class Role {
     public Role() {
     }
 
-    @ManyToMany(mappedBy = "roles")
+    @ManyToMany(mappedBy = "roles",targetEntity = User.class)
     private List<User> users;
 
     @Override

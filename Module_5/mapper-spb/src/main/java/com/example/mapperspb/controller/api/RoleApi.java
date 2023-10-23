@@ -17,7 +17,6 @@ public class RoleApi {
     public RoleApi(RoleService roleService) {
         this.roleService = roleService;
     }
-
     @PostMapping
     public ResponseEntity<?> createRole(@RequestBody RoleDTO roleDTO){
         return new ResponseEntity<>(roleService.save(roleDTO),HttpStatus.OK);
